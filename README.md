@@ -33,6 +33,8 @@ $ git add .
 
 $ git commit -m "Add summary of commit" -m "This is a message to add more context."
 
+$ git push -u origin main
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
