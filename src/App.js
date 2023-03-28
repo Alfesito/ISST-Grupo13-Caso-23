@@ -68,7 +68,6 @@ function App() {
         <Route path="/products/:productId" element={<Producto theproducts={products}/> }/>
         <Route path="*" element={<NotFound />} />
 
-        
       </Routes>}
       
     </div>
