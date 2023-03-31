@@ -4,6 +4,7 @@ import Lista from "./Lista";
 
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function SearchPage(props) {
   const productos = props.theproducts;
@@ -61,6 +62,7 @@ function SearchPage(props) {
 
   return (
     <div>
+    <Link to={"/"}><Button variant="info">Volver a versión nueva</Button></Link>
       <div id="formulario">
         <h2 id="catálogo">Aquí irá un navbar</h2>
         <Form className="form-inline">
@@ -99,7 +101,8 @@ function SearchPage(props) {
       <div id="productosresultados">{<Lista theproducts={datos} />}</div>
      
     </div>
-  );
+    
+  )
 }
 
 export default SearchPage;

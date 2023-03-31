@@ -12,6 +12,12 @@ import Producto from "./componentes/Producto";
 import NotFound from "./componentes/NotFound";
 import CONFIG from "./config/config";
 
+import Naavbar from "./componentes/Naavbar";
+import Prueba from "./componentes/Prueba";
+import LandingPage from "./componentes/LandingPage";
+import LogIn from "./componentes/LogIn";
+import SignIn from "./componentes/SignIn";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
@@ -61,14 +67,29 @@ function App() {
       
       <Header />
        
-      {loading ? <Spiner /> : <Routes>
-      
-        <Route path="/" element={<SearchPage theproducts={products} />} />
+      {/* {loading ? <Spiner /> : <Routes> 
+        <Route path="/" element={<Naavbar/>}></Route>
+        <Route path="/prueba" element={<Prueba/>} ></Route>
+
+        <Route path="/searchpage/" element={<SearchPage theproducts={products} />} />
 
         <Route path="/products/:productId" element={<Producto theproducts={products}/> }/>
         <Route path="*" element={<NotFound />} />
 
-      </Routes>}
+      </Routes>} */}
+        <Routes>
+          <Route path="/" element={<LandingPage/>}></Route>
+          <Route path="/navbar" element={<Naavbar/>}></Route>
+          <Route path="/login" element={<LogIn/>}></Route>
+          <Route path="/signin" element={<SignIn/>}></Route>
+          <Route path="/prueba" element={<Prueba/>} ></Route>
+
+          <Route path="/searchpage/" element={<SearchPage theproducts={products} />} />
+
+          <Route path="/products/:productId" element={<Producto theproducts={products}/> }/>
+          <Route path="*" element={<NotFound />} />
+
+      </Routes>
       
     </div>
 
