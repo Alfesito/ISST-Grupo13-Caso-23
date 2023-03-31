@@ -6,7 +6,7 @@ export default function Prueba() {
   return (
     <div>
       Prueba
-      <Link to="/">
+      <Link to="/navbar">
         <Button id="volver" variant="danger">
           Volver
         </Button>

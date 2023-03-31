@@ -6,7 +6,7 @@ export default function LogIn() {
   return (
     <div>
       LogIn
-      <Link to="/">
+      <Link to="/navbar">
         <Button id="volver" variant="danger">
           Volver
         </Button>
