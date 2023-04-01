@@ -10,7 +10,7 @@ import { mockdata } from "./constants/products";
 import { Routes, Route } from "react-router-dom";
 import Producto from "./componentes/Producto";
 import NotFound from "./componentes/NotFound";
-import CONFIG from "./config/config";
+import API from "./constants/data";
 
 import Naavbar from "./componentes/Naavbar";
 import Prueba from "./componentes/Prueba";
@@ -25,11 +25,11 @@ function App() {
 
   const callServer = async ()=>{
 
-    if(CONFIG.use_server)    {
+    if(true)    {
 
       try {
         const req= await fetch(
-            CONFIG.server_url
+            API.URL_search+'?app_id='+API.ID_search+'&app_key='+API.KEY_search
         )
         const res= await req.json();
         setProducts(res.products)
