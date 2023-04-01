@@ -6,26 +6,21 @@ import Row from "react-bootstrap/Row";
 import { Link} from "react-router-dom";
 
 function Lista(props) {
-
-
-
-
-
   return (
     <div>
       <Row lg={4}>
         {props.theproducts.map((item) => {
-          let id = Number(item.id) - 1;
+          let id = item.food.foodId
           return (
             <Card
               className="unproducto"
-              key={item.id}
+              key={item.food.foodId}
               style={{ width: "20rem" }}
             >
-              <Card.Img variant="top" src={item.images[0]} />
+              <Card.Img variant="top" src={item.food.image} />
               <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-                <Card.Text>{item.description}</Card.Text>
+                <Card.Title>{item.food.label}</Card.Title>
+                <Card.Text>{item.food.knownAs}</Card.Text>
 
                 <Link to={"/products/" + id}>
                   <Button variant="info">Ver</Button>

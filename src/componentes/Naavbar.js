@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
@@ -6,15 +7,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { Link } from 'react-router-dom';
+import { useState } from "react";
 
-function Naavbar() {
+import SearchPage from './SearchPage';
+
+function Naavbar(props) {
+  const [datos, setDatos] = useState(props.theproducts);
   return (
+    <>
     <Navbar bg="light" expand="lg">
       <Container fluid>
-      <Link to={"/searchpage"}>
-      <Navbar.Brand>Volver a lo de antes</Navbar.Brand>
-      </Link>
-        
+
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -46,11 +49,13 @@ function Naavbar() {
         <Link to ={ "/prueba"}>
         <Button variant="outline-danger">Cerrar Sesión</Button>
         </Link>
-
-       
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <div>
+      <SearchPage theproducts={datos}/>
+    </div>
+    </>
   );
 }
 

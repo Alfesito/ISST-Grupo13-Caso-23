@@ -1,3 +1,4 @@
+import * as React from 'react';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./componentes/Header";
@@ -25,7 +26,7 @@ function App() {
 
   const callServer = async ()=>{
 
-    if(true)    {
+    if(false)    {
 
       try {
         const req= await fetch(
@@ -41,8 +42,7 @@ function App() {
     }
     else{
       console.log("server-false")
-
-      setProducts(mockdata.products)
+      setProducts(mockdata.hints)
     }
   }
 
@@ -79,7 +79,7 @@ function App() {
       </Routes>} */}
         <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/navbar" element={<Naavbar/>}></Route>
+          <Route path="/navbar" element={<Naavbar theproducts={products}/>}></Route>
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/signin" element={<SignIn/>}></Route>
           <Route path="/prueba" element={<Prueba/>} ></Route>
