@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Lista from "./Lista";
+import API from "../constants/data";
 
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
@@ -11,13 +12,14 @@ function SearchPage(props) {
   const [filtro, setFiltro] = useState("");
   
   const filtrar = () => {
-    let nombre = filtro.toUpperCase().replace(/\s/g, "");
-
-    let filtrados = props.theproducts.filter((item) => {
-      return item.food.label.toUpperCase().replace(/\s/g, "").includes(nombre);
-    });
-
-    setDatos(filtrados);
+    if (!API.API_connection) {
+      let nombre = filtro.toUpperCase().replace(/\s/g, "");
+      let filtrados = props.theproducts.filter((item) => {
+        return item.food.label.toUpperCase().replace(/\s/g, "").includes(nombre);
+      });
+      setDatos(filtrados);
+    }
+    
   };
 
 

@@ -1,4 +1,5 @@
 const API = {
+    API_connection : true,
     // API para buscar comida
     // Doc: https://developer.edamam.com/food-database-api-docs
     // Example of URL GET from API:

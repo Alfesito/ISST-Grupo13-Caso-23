@@ -26,14 +26,14 @@ function App() {
 
   const callServer = async ()=>{
 
-    if(false)    {
+    if(API.API_connection){
 
       try {
         const req= await fetch(
             API.URL_search+'?app_id='+API.ID_search+'&app_key='+API.KEY_search
         )
         const res= await req.json();
-        setProducts(res.products)
+        setProducts(res.hints)
         console.log("server-true")
       } catch (error) {
         console.log(error);
