@@ -22,15 +22,15 @@ import SignIn from "./componentes/SignIn";
 function App() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState('');
 
   const callServer = async ()=>{
 
     if(API.API_connection){
-
       try {
+        setProducts([])
         const req= await fetch(
-            API.URL_search+'?app_id='+API.ID_search+'&app_key='+API.KEY_search
+            API.URL_search+'?app_id='+API.ID_search+'&app_key='+API.KEY_search+'&ingr='+searchTerm
         )
         const res= await req.json();
         setProducts(res.hints)
@@ -38,7 +38,6 @@ function App() {
       } catch (error) {
         console.log(error);
       }
-
     }
     else{
       console.log("server-false")
@@ -46,8 +45,13 @@ function App() {
     }
   }
 
+  const handleInputChange = (value) => {
+    setSearchTerm(value);
+  };
 
-  
+  const handleButtonClick = () => {
+    callServer();
+  };
 
   useEffect(() => {
     async function recogeDatos() {
@@ -79,7 +83,9 @@ function App() {
       </Routes>} */}
         <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/navbar" element={<Naavbar theproducts={products}/>}></Route>
+          <Route path="/navbar" element={
+            <Naavbar theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick}/>}>  
+          </Route>
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/signin" element={<SignIn/>}></Route>
           <Route path="/prueba" element={<Prueba/>} ></Route>

@@ -12,7 +12,6 @@ import { useState } from "react";
 import SearchPage from './SearchPage';
 
 function Naavbar(props) {
-  const [datos, setDatos] = useState(props.theproducts);
   return (
     <>
     <Navbar bg="light" expand="lg">
@@ -53,7 +52,7 @@ function Naavbar(props) {
       </Container>
     </Navbar>
     <div>
-      <SearchPage theproducts={datos}/>
+      <SearchPage theproducts={props.theproducts} onInputChange={props.onInputChange} onButtonClick={props.onButtonClick}/>
     </div>
     </>
   );
