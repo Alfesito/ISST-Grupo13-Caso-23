@@ -319,4 +319,12 @@ body {
 clear: both;
 }
 
+.productobuscado {
+  display: flex;
+  glyph-orientation-horizontal: center;
+  justify-content: center;
+  width: 18rem;
+  margin: 3%;
+}
+
 /* End Landing Page */

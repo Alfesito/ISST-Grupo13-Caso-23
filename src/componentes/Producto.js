@@ -10,7 +10,7 @@ function Producto(props) {
   let id = props.theproducts.findIndex((el) => el.food.foodId === productId)
   let item = props.theproducts[id]
   console.log(item)
- 
+
   return (
     <div>
       <div className="containerr">
@@ -30,14 +30,14 @@ function Producto(props) {
               <h1 id="titulo">{item.food.label}</h1>
 
               <p className="price">
-                ENERC_KCAL: {item.food.nutrients.ENERC_KCAL},
-                PROCNT: {item.food.nutrients.PROCNT},
-                FAT: {item.food.nutrients.FAT},
-                CHOCDF: {item.food.nutrients.CHOCDF},
-                FIBTG: {item.food.nutrients.FIBTG}
+                ENERC_KCAL: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.ENERC_KCAL*props.theparsed[0].quantity)/100 : item.food.nutrients.ENERC_KCAL},
+                PROCNT: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.PROCNT*props.theparsed[0].quantity)/100 : item.food.nutrients.PROCNT},
+                FAT: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.FAT*props.theparsed[0].quantity)/100 : item.food.nutrients.FAT},
+                CHOCDF: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.CHOCDF*props.theparsed[0].quantity)/100 : item.food.nutrients.CHOCDF},
+                FIBTG: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.FIBTG*props.theparsed[0].quantity)/100 : item.food.nutrients.FIBTG}
               </p>
 
-              <p className="description">Category: {item.food.category} </p>
+              <p className="description">Categoría: {item.food.category} </p>
 
               <br />
 

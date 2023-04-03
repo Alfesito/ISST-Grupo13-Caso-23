@@ -50,7 +50,7 @@ function SearchPage(props) {
           </Button>
         </Form>
       </div>
-      <div id="productosresultados">{<Lista theproducts={props.theproducts} />}</div>
+      <div id="productosresultados">{<Lista theproducts={props.theproducts} theparsed={props.theparsed}/>}</div>
     </div>
     
   )

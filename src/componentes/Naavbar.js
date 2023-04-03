@@ -11,7 +11,7 @@ import { useState } from "react";
 
 import SearchPage from './SearchPage';
 
-function Naavbar(props) {
+function Naavbar() {
   return (
     <>
     <Navbar bg="light" expand="lg">
@@ -25,7 +25,7 @@ function Naavbar(props) {
             navbarScroll
           >
             <Nav.Link href="/navbar">Hoy</Nav.Link>
-            <Nav.Link  href="/navbar">Alimentación</Nav.Link>
+            <Nav.Link  href="/alimentacion">Alimentación</Nav.Link>
             <Nav.Link  href="/navbar">Historial</Nav.Link>
             <Nav.Link  href="/navbar">Recomendaciones</Nav.Link>
 
@@ -51,9 +51,6 @@ function Naavbar(props) {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <div>
-      <SearchPage theproducts={props.theproducts} onInputChange={props.onInputChange} onButtonClick={props.onButtonClick}/>
-    </div>
     </>
   );
 }

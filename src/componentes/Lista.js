@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
@@ -6,10 +6,34 @@ import Row from "react-bootstrap/Row";
 import { Link} from "react-router-dom";
 
 function Lista(props) {
+
   return (
     <div>
+      <Row lg={1}>
+      {props.theparsed && props.theparsed.map((item) => {
+          let id = item.food.foodId
+          return (
+            <Card
+              className="productobuscado"
+              key={item.food.foodId}
+              style={{ width: "20rem" }}
+            >
+              <Card.Img variant="top" src={item.food.image} />
+              <Card.Body>
+                <Card.Title>{item.food.label}</Card.Title>
+                <Card.Text>{item.quantity ? item.quantity+'g' : '100g'}</Card.Text>
+
+                <Link to={"/products/" + id}>
+                  <Button variant="info">Ver</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          );
+        })}
+      </Row>
+      <div className="unproducto">Relacionado:</div>
       <Row lg={4}>
-        {props.theproducts.map((item) => {
+        {props.theproducts && props.theproducts.map((item) => {
           let id = item.food.foodId
           return (
             <Card
@@ -20,7 +44,7 @@ function Lista(props) {
               <Card.Img variant="top" src={item.food.image} />
               <Card.Body>
                 <Card.Title>{item.food.label}</Card.Title>
-                <Card.Text>{item.food.knownAs}</Card.Text>
+                <Card.Text>{item.food.category}</Card.Text>
 
                 <Link to={"/products/" + id}>
                   <Button variant="info">Ver</Button>

@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./componentes/Header";
 import Spiner from "./componentes/Spiner";
-import SearchPage from "./componentes/SearchPage";
+import Alimentacion from "./componentes/Alimentacion";
 import { useState } from "react";
 import { useEffect } from "react";
 import { mockdata } from "./constants/products";
@@ -23,18 +23,28 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [parsed, setParsed] = useState([])
 
   const callServer = async ()=>{
 
     if(API.API_connection){
       try {
         setProducts([])
+        setParsed([])
         const req= await fetch(
             API.URL_search+'?app_id='+API.ID_search+'&app_key='+API.KEY_search+'&ingr='+searchTerm
         )
         const res= await req.json();
-        setProducts(res.hints)
-        console.log("server-true")
+        setParsed(res.parsed)
+        // Elimina el primer objeto de res.hints ya que se repite con res.parsed
+        if(res.text !== ""){
+          const obj = res.hints
+          const firstPropName = Object.keys(obj)[0];
+          delete obj[firstPropName];
+          setProducts(obj)
+        }else{
+          setProducts(res.hints)
+        }
       } catch (error) {
         console.log(error);
       }
@@ -84,15 +94,15 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
           <Route path="/navbar" element={
-            <Naavbar theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick}/>}>  
+            <Naavbar theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}>  
           </Route>
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/signin" element={<SignIn/>}></Route>
           <Route path="/prueba" element={<Prueba/>} ></Route>
+          <Route path="/alimentacion" element={<Alimentacion theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}></Route>
 
-          <Route path="/searchpage/" element={<SearchPage theproducts={products} />} />
 
-          <Route path="/products/:productId" element={<Producto theproducts={products}/> }/>
+          <Route path="/products/:productId" element={<Producto theproducts={products} theparsed={parsed}/> }/>
           <Route path="*" element={<NotFound />} />
 
       </Routes>
