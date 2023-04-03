@@ -6,7 +6,7 @@ function Alimentacion(props) {
     return (
       <div>
         <Naavbar/>
-        <SearchPage theproducts={props.theproducts} onInputChange={props.onInputChange} onButtonClick={props.onButtonClick}></SearchPage>
+        <SearchPage theproducts={props.theproducts} onInputChange={props.onInputChange} onButtonClick={props.onButtonClick} theparsed={props.theparsed}></SearchPage>
       </div>
     )
   }

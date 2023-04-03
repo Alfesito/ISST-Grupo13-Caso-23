@@ -31,7 +31,7 @@ function Lista(props) {
           );
         })}
       </Row>
-      <div className="unproducto">Relacionado:</div>
+      <div className="unproducto"> {props.theproducts.length > 0 && props.theparsed.length !== 0 ? 'Relacionado:' : ''}</div>
       <Row lg={4}>
         {props.theproducts && props.theproducts.map((item) => {
           let id = item.food.foodId

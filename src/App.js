@@ -36,15 +36,16 @@ function App() {
         )
         const res= await req.json();
         setParsed(res.parsed)
-        // Elimina el primer objeto de res.hints ya que se repite con res.parsed
-        if(res.text !== ""){
-          const obj = res.hints
-          const firstPropName = Object.keys(obj)[0];
-          delete obj[firstPropName];
-          setProducts(obj)
-        }else{
-          setProducts(res.hints)
-        }
+        setProducts(res.hints)
+        //Elimina el primer objeto de res.hints ya que se repite con res.parsed
+        // if(res.text !== ""){
+        //   const obj = await res.hints
+        //   const firstPropName = await Object.keys(obj)[0];
+        //   await delete obj[firstPropName];
+        //   setProducts(obj)
+        // }else{
+        //   setProducts(res.hints)
+        // }
       } catch (error) {
         console.log(error);
       }
@@ -71,7 +72,6 @@ function App() {
         setLoading(false);
       }, 2000);
     }
-
     recogeDatos();
   }, []);
 
@@ -93,14 +93,11 @@ function App() {
       </Routes>} */}
         <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
-          <Route path="/navbar" element={
-            <Naavbar theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}>  
-          </Route>
+          <Route path="/navbar" element={<Naavbar/>}></Route>
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/signin" element={<SignIn/>}></Route>
           <Route path="/prueba" element={<Prueba/>} ></Route>
           <Route path="/alimentacion" element={<Alimentacion theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}></Route>
-
 
           <Route path="/products/:productId" element={<Producto theproducts={products} theparsed={parsed}/> }/>
           <Route path="*" element={<NotFound />} />

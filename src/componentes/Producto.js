@@ -6,10 +6,10 @@ function Producto(props) {
   let { productId } = useParams();
   console.log("🚀 ~ file: Producto.js ~ line 7 ~ Producto ~ productId", productId)
   
-  //let item = props.theproducts[Number(productId)]
   let id = props.theproducts.findIndex((el) => el.food.foodId === productId)
   let item = props.theproducts[id]
-  console.log(item)
+  let qu = props.theparsed.length > 0 && props.theparsed[0].quantity ? props.theparsed[0].quantity : 100
+  console.log(item.food.nutrients.ENERC_KCAL)
 
   return (
     <div>
@@ -30,18 +30,18 @@ function Producto(props) {
               <h1 id="titulo">{item.food.label}</h1>
 
               <p className="price">
-                ENERC_KCAL: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.ENERC_KCAL*props.theparsed[0].quantity)/100 : item.food.nutrients.ENERC_KCAL},
-                PROCNT: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.PROCNT*props.theparsed[0].quantity)/100 : item.food.nutrients.PROCNT},
-                FAT: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.FAT*props.theparsed[0].quantity)/100 : item.food.nutrients.FAT},
-                CHOCDF: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.CHOCDF*props.theparsed[0].quantity)/100 : item.food.nutrients.CHOCDF},
-                FIBTG: {props.theparsed[0].food.foodId == item.food.foodId ? (item.food.nutrients.FIBTG*props.theparsed[0].quantity)/100 : item.food.nutrients.FIBTG}
+                ENERC_KCAL: {(item.food.nutrients.ENERC_KCAL*qu)/100},
+                PROCNT: {(item.food.nutrients.PROCNT*qu)/100},
+                FAT: {(item.food.nutrients.FAT*qu)/100},
+                CHOCDF: {(item.food.nutrients.CHOCDF*qu)/100},
+                FIBTG: {(item.food.nutrients.FIBTG*qu)/100}
               </p>
 
               <p className="description">Categoría: {item.food.category} </p>
 
               <br />
 
-              <Link to="/navbar">
+              <Link to="/alimentacion">
                 <button className="hola" id="volver">
                   Volver
                 </button>
