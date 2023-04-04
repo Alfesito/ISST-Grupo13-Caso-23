@@ -2,7 +2,6 @@ import * as React from 'react';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./componentes/Header";
-import Spiner from "./componentes/Spiner";
 import Alimentacion from "./componentes/Alimentacion";
 import { useState } from "react";
 import { useEffect } from "react";

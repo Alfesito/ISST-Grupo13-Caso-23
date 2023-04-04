@@ -8,8 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { Link } from 'react-router-dom';
-import { useState } from "react";
-import SearchPage from './SearchPage';
+
 
 function Naavbar() {
   return (

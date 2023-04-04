@@ -6,40 +6,64 @@ import { Form } from "react-bootstrap";
 export default function LogIn() {
   return (
     <div>
-      
-      <h1>Introduzca sus credenciales</h1>
+      <div class="wrapper fadeInDown">
+        <div id="formContent">
+          {/* Tabs Titles */}
+          <h2 class="active"> Log in</h2>
 
-      <div id="user">
-       User: <Form className="form-inline">
-          <input
-            type="text"
-            placeholder="Escriba su usuario"
-            id="filtro"
-            //onChange={handleInputChange}
-          ></input>
-        </Form>
+          {/* Icon */}
+          <div class="fadeIn first">
+            <img
+              src="http://danielzawadzki.com/codepen/01/icon.svg"
+              id="icon"
+              alt="User Icon"
+            />
+          </div>
+
+          {/* Login Form */}
+          <form>
+            <input
+              type="text"
+              id="login"
+              class="fadeIn second"
+              name="login"
+              placeholder="login"
+            ></input>
+            <input
+              type="text"
+              id="password"
+              class="fadeIn third"
+              name="login"
+              placeholder="password"
+            ></input>
+            <Link to="/navbar">
+              {" "}
+              <input type="submit" class="fadeIn fourth" value="Log In"></input>
+            </Link>
+          </form>
+
+          {/* Remind Passowrd  */}
+          <div id="formFooter">
+            <a class="underlineHover" href="#">
+              Forgot Password?
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div id="password">
-       Password: <Form className="form-inline">
-          <input
-            type="text"
-            placeholder="Escriba su contraseña"
-            id="filtro"
-            //onChange={handleInputChange}
-          ></input>
-        </Form>
+      <Link to="/navbar">
+        <Button id="entrar" variant="outline-success">
+          {" "}
+          Iniciar sesión{" "}
+        </Button>{" "}
+      </Link>
 
-      <div>
-        <Link to="/navbar">
-        <Button id="entrar" variant="outline-success"> Iniciar sesión </Button> </Link>
-      </div>
-
-  </div>
-
-
-  <Link to="/navbar">
-        <Button id="volver" variant="danger"> Volver </Button> </Link>
+      <Link to="/navbar">
+        <Button id="volver" variant="danger">
+          {" "}
+          Volver{" "}
+        </Button>{" "}
+      </Link>
     </div>
   );
 }
