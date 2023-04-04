@@ -2,13 +2,13 @@ import * as React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { Link } from 'react-router-dom';
 import { useState } from "react";
-
 import SearchPage from './SearchPage';
 
 function Naavbar() {
@@ -29,29 +29,43 @@ function Naavbar() {
             <Nav.Link  href="/navbar">Historial</Nav.Link>
             <Nav.Link  href="/navbar">Recomendaciones</Nav.Link>
 
-            <NavDropdown title="Agradecimientos" id="navbarScrollingDropdown">
-              <NavDropdown.Item  href="/prueba">Ana</NavDropdown.Item>
-              <NavDropdown.Item  href="/prueba">Fer</NavDropdown.Item>
-              <NavDropdown.Item  href="/prueba">Alfesito</NavDropdown.Item>
+            
+            
+
+            <NavDropdown title="Créditos" id="navbarScrollingDropdown">
+              <NavDropdown.Item  href="/prueba">Ana Clara</NavDropdown.Item>
+              <NavDropdown.Item  href="/prueba">Fernando</NavDropdown.Item>
+              <NavDropdown.Item  href="/prueba">Andrés</NavDropdown.Item>
               <NavDropdown.Item  href="/prueba">Alberto</NavDropdown.Item>
-              <NavDropdown.Item  href="/prueba">Guille</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="https://www.youtube.com/watch?v=_T20N4Sqcss">
-                Fernando alonso, este finde 33
-              </NavDropdown.Item>
+              <NavDropdown.Item  href="/prueba">Guillermo</NavDropdown.Item>
             </NavDropdown>
+
+
            
           </Nav>
-        <Link to ={ "/prueba"}>
+        
+        <Link to ={ "/perfil"}>
         <Button variant="outline-success">Perfil</Button>
         </Link>
-        <Link to ={ "/prueba"}>
+        
+        <Link to ={ "/login"}>
         <Button variant="outline-danger">Cerrar Sesión</Button>
         </Link>
+        
         </Navbar.Collapse>
       </Container>
     </Navbar>
+   
+   
+    
+    <div>
+      <Link to="/">
+        <Button id="volver" variant="info"> Página Principal </Button> </Link>
+      </div>
+  
     </>
+
+    
   );
 }
 

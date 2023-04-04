@@ -18,6 +18,7 @@ import Prueba from "./componentes/Prueba";
 import LandingPage from "./componentes/LandingPage";
 import LogIn from "./componentes/LogIn";
 import SignIn from "./componentes/SignIn";
+import Perfil from "./componentes/Perfil";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -97,6 +98,11 @@ function App() {
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/signin" element={<SignIn/>}></Route>
           <Route path="/prueba" element={<Prueba/>} ></Route>
+        
+          <Route path="/perfil" element={<Perfil/>} ></Route>
+          
+
+
           <Route path="/alimentacion" element={<Alimentacion theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}></Route>
 
           <Route path="/products/:productId" element={<Producto theproducts={products} theparsed={parsed}/> }/>
