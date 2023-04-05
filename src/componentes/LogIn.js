@@ -16,7 +16,7 @@ export default function LogIn() {
             <img
               src="http://danielzawadzki.com/codepen/01/icon.svg"
               id="icon"
-              alt="User Icon"
+              alt="img que queramos"
             />
           </div>
 

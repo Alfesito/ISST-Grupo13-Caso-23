@@ -52,8 +52,10 @@ function Recipe(props) {
 
                 {item.recipe && item.recipe.url && item.recipe.source && ( //REVISAR SI SON NECESARIAS ESTAS CONDICIONES
                   <p className="description">
-                    Fuente: <a href={item.recipe.url}>{item.recipe.source}</a>
-                  </p>
+                  Fuente: <a href={item.recipe.url} target="_blank" rel="noopener noreferrer">{item.recipe.source}</a>
+                </p>
+                
+                  
                 )}
 
 
