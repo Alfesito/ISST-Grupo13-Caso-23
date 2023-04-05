@@ -29,12 +29,20 @@ function Recipe(props) {
               <h1 id="titulo">{item.recipe.label}</h1>
 
                 <p className="price">
-                {item.recipe.ingredientLines && item.recipe.ingredientLines.map((item) => {
-                    return item+';';
-                })}
-              </p>
+                {item.recipe.ingredientLines && 
+                  <ul>
+                    {item.recipe.ingredientLines.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>}
+                </p>
 
-              <p className="description">Fuente: {item.recipe.source} </p>
+                {item.recipe && item.recipe.url && item.recipe.source && ( //REVISAR SI SON NECESARIAS ESTAS CONDICIONES
+                  <p className="description">
+                    Fuente: <a href={item.recipe.url}>{item.recipe.source}</a>
+                  </p>
+                )}
+
 
               <br />
 
