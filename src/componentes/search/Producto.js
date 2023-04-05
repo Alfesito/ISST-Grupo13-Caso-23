@@ -28,16 +28,22 @@ function Producto(props) {
             </div>
 
             <div className="product-info">
-              <h1 id="titulo">{item.food.label}</h1>
+            <h1 id="titulo">{item.food.label}</h1>
 
               <p className="price">
-                ENERC_KCAL: {(item.food.nutrients.ENERC_KCAL*qu)/100},
-                PROCNT: {(item.food.nutrients.PROCNT*qu)/100},
-                FAT: {(item.food.nutrients.FAT*qu)/100},
-                CHOCDF: {(item.food.nutrients.CHOCDF*qu)/100},
-                FIBTG: {(item.food.nutrients.FIBTG*qu)/100}
-              </p>
-              <p className="description">Categoría: {item.food.category} </p>
+                Nutritional value: <br/>
+                </p>
+                <div className="nutrValue">
+                  <ul>
+                    <li>Energy: {(item.food.nutrients.ENERC_KCAL*qu)/100} kcal,<br/></li>
+                    <li>Protein: {(item.food.nutrients.PROCNT*qu)/100} g,<br/></li>
+                    <li>Fat: {(item.food.nutrients.FAT*qu)/100} g,<br/></li>
+                    <li>Carbohydrate: {(item.food.nutrients.CHOCDF*qu)/100} g,<br/></li>
+                    <li>Fiber: {(item.food.nutrients.FIBTG*qu)/100} g<br/><br/></li> 
+                </ul>
+              </div>
+
+              <p className="description">Category: {item.food.category} </p>
               <br />
               <Link to="/alimentacion">
                 <Button variant="info">Volver</Button>
