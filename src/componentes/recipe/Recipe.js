@@ -41,14 +41,14 @@ function Recipe(props) {
 
 
                 <p className="price">
-                Valor nutricional: <br/>
+                Valor nutricional <br/>
                 </p>
                 <div className="nutrValue">
-                  <ul>
-                    <li>Energía: {Math.round(item.recipe.calories)} kcal,<br/></li>
-                    <li>Proteína: {Math.round(item.recipe.totalNutrients.PROCNT.quantity)} g,<br/></li> 
-                    <li>Grasa: {Math.round(item.recipe.totalNutrients.FAT.quantity)} g,<br/></li>
-                    <li>Carbohidratos: {Math.round(item.recipe.totalNutrients.ENERC_KCAL.quantity)} g,<br/></li>
+                <ul>
+                    <li>Energía: {Math.round(item.recipe.calories)} kcal<br/></li>
+                    <li>Proteína: {Math.round(item.recipe.totalNutrients.PROCNT.quantity)} g<br/></li> 
+                    <li>Grasa: {Math.round(item.recipe.totalNutrients.FAT.quantity)} g<br/></li>
+                    <li>Carbohidratos: {Math.round(item.recipe.totalNutrients.ENERC_KCAL.quantity)} g<br/></li>
                     <li>Fibra: {Math.round(item.recipe.totalNutrients.ENERC_KCAL.quantity)} g<br/><br/></li>
                 </ul>
               </div>

@@ -31,19 +31,19 @@ function Producto(props) {
             <h1 id="titulo">{item.food.label}</h1>
 
               <p className="price">
-                Nutritional value: <br/>
+              Valor nutricional <br/>
                 </p>
                 <div className="nutrValue">
                   <ul>
-                    <li>Energy: {(item.food.nutrients.ENERC_KCAL*qu)/100} kcal,<br/></li>
-                    <li>Protein: {(item.food.nutrients.PROCNT*qu)/100} g,<br/></li>
-                    <li>Fat: {(item.food.nutrients.FAT*qu)/100} g,<br/></li>
-                    <li>Carbohydrate: {(item.food.nutrients.CHOCDF*qu)/100} g,<br/></li>
-                    <li>Fiber: {(item.food.nutrients.FIBTG*qu)/100} g<br/><br/></li> 
+                    <li>Energía: {(item.food.nutrients.ENERC_KCAL*qu)/100} kcal<br/></li>
+                    <li>Proteína: {(item.food.nutrients.PROCNT*qu)/100} g,¡<br/></li>
+                    <li>Grasa: {(item.food.nutrients.FAT*qu)/100} g<br/></li>
+                    <li>Carbohidratos: {(item.food.nutrients.CHOCDF*qu)/100} g<br/></li>
+                    <li>Fibra: {(item.food.nutrients.FIBTG*qu)/100} g<br/><br/></li> 
                 </ul>
               </div>
 
-              <p className="description">Category: {item.food.category} </p>
+              <p className="description">Categoría: {item.food.category} </p>
               <br />
               <Link to="/alimentacion">
                 <Button variant="info">Volver</Button>
