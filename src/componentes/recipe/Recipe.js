@@ -32,7 +32,7 @@ function Recipe(props) {
                 {item.recipe.ingredientLines &&
                   <div className="ingredients">
                     <ul>
-                      {item.recipe.ingredientLines.map((item) => (
+                      {item.recipe.ingredientLines.slice(1).map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
