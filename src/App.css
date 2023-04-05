@@ -28,6 +28,11 @@
   width: 18rem;
   margin: 3%;
 }
+
+.selectorRecetas {
+  margin: 3%;
+}
+
 #filtro {
   margin: 1%;
 }

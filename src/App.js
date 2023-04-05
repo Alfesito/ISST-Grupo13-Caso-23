@@ -75,16 +75,16 @@ function App() {
     if(API.API_connection){
       try {
         const busqueda = searchTerm !== '' ? searchTerm : 'rice'
-        const dieta = diet !== '' ? '&diet=' + diet : null
-        const salud = health !== '' ? '&health=' + health : null
-        const cocina = cuisine !== '' ? '&cuisineType=' + cuisine : null
+        const dieta = diet !== '' ? '&diet=' + diet : ""
+        const salud = health !== '' ? '&health=' + health : ""
+        const cocina = cuisine !== '' ? '&cuisineType=' + cuisine : ""
         const req= await fetch(
           // 'https://api.edamam.com/api/recipes/v2?type=public&q=rice&app_id=d37da41f&app_key=1f068730881ead6d9950d93dd720ab2c&diet=balanced&health=egg-free&cuisineType=Asian'
-          API.URL_recipe+'?type=public&q='+busqueda+'&app_id='+API.ID_recipe+'&app_key='+API.KEY_recipe
+          API.URL_recipe+'?type=public&q='+busqueda+'&app_id='+API.ID_recipe+'&app_key='+API.KEY_recipe+dieta+salud+cocina
           )
         const res= await req.json();
         setRecipe(res.hits)        
-        console.log(recipe)
+        console.log(API.URL_recipe+'?type=public&q='+busqueda+'&app_id='+API.ID_recipe+'&app_key='+API.KEY_recipe+dieta+salud+cocina)
       } catch (error) {
         console.log(error);
       }
@@ -93,6 +93,18 @@ function App() {
       setRecipe(mockdatarecipe.hits)
     }
   }
+
+  const handleSelectChangeDiet = (value) => {
+    setDiet(value);
+  };
+
+  const handleSelectChangeHealth = (value) => {
+    setHealth(value);
+  };
+
+  const handleSelectChangeCuisine = (value) => {
+    setCuisine(value);
+  };
 
   useEffect(() => {
     async function recogeDatos() {
@@ -116,7 +128,7 @@ function App() {
           <Route path="/prueba" element={<Prueba/>} ></Route>
           <Route path="/perfil" element={<Perfil/>} ></Route>
           <Route path="/alimentacion" element={<Alimentacion theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}></Route>
-          <Route path="/recomendaciones" element={<Recomendaciones theproducts={recipe} onInputChange={handleInputChange} onButtonClick={handleButtonClick}/>}></Route>
+          <Route path="/recomendaciones" element={<Recomendaciones theproducts={recipe} onInputChange={handleInputChange} onButtonClick={handleButtonClick} onSelectChangeDiet={handleSelectChangeDiet} onSelectChangeHealth={handleSelectChangeHealth} onSelectChangeCuisine={handleSelectChangeCuisine}/>}></Route>
           <Route path="/products/:productId" element={<Producto theproducts={products} theparsed={parsed}/> }/>
           <Route path="/recipe/:recipeId" element={<Recipe theproducts={recipe}/> }/>
           <Route path="*" element={<NotFound />} />

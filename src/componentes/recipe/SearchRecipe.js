@@ -21,14 +21,22 @@ function SearchRecipe(props){
         props.onInputChange(filtrados);
       }
     };
-
-    const filtrarSelect = () => {
-
-    }
   
     const handleInputChange = (event) => {
       setFiltro(event.target.value);
       props.onInputChange(event.target.value);
+    };
+
+    const handleSeleccionDiet = (event) => {
+      props.onSelectChangeDiet(event.target.value);
+    };
+
+    const handleSeleccionHealth = (event) => {
+      props.onSelectChangeHealth(event.target.value);
+    };
+
+    const handleSeleccionCuisine = (event) => {
+      props.onSelectChangeCuisine(event.target.value);
     };
   
     return (
@@ -49,8 +57,9 @@ function SearchRecipe(props){
             >
               Buscar
             </Button>
-            <select multiple>
-              {/* <option value="">Dieta</option> */}
+            <div>
+            <select className="selectorRecetas" onChange={handleSeleccionDiet}>
+              <option value="">Dieta</option>
               <option value="balanced">Equilibrado</option>
               <option value="high-fiber">Alto en fibra</option>
               <option value="high-protein">Alto en proteínas</option>
@@ -58,8 +67,8 @@ function SearchRecipe(props){
               <option value="low-fat">Bajo en grasas</option>
               <option value="low-sodium">Bajo en sodio</option>
             </select>
-            <select multiple>
-              {/* <option value="">Salud</option> */}
+            <select className="selectorRecetas" onChange={handleSeleccionHealth}>
+              <option value="">Salud</option>
               <option value="alcohol-free">Sin alcohol</option>
               <option value="celery-free">Sin apio</option>
               <option value="crustacean-free">Sin crustáceos</option>
@@ -78,8 +87,8 @@ function SearchRecipe(props){
               <option value="vegan">Vegano</option>
               <option value="vegetarian">Vegetariano</option>
             </select>
-            <select multiple>
-              {/* <option value="cuisineType">Tipo de Cocina</option> */}
+            <select className="selectorRecetas" onChange={handleSeleccionCuisine}>
+              <option value="cuisineType">Tipo de Cocina</option>
               <option value="American">Americana</option>
               <option value="Asian">Asiática</option>
               <option value="British">Británica</option>
@@ -99,6 +108,7 @@ function SearchRecipe(props){
               <option value="South American">Sudamericana</option>
               <option value="South East Asian">Sudeste Asiático</option>
             </select>
+            </div>
           </Form>
           
         </div>
