@@ -2,13 +2,14 @@ import * as React from 'react';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./componentes/Header";
-import Alimentacion from "./componentes/Alimentacion";
+import Alimentacion from "./componentes/search/Alimentacion";
 import { useState } from "react";
 import { useEffect } from "react";
 import { mockdata } from "./constants/products";
+import { mockdatarecipe } from './constants/recipe';
 
 import { Routes, Route } from "react-router-dom";
-import Producto from "./componentes/Producto";
+import Producto from "./componentes/search/Producto";
 import NotFound from "./componentes/NotFound";
 import API from "./constants/data";
 
@@ -18,15 +19,17 @@ import LandingPage from "./componentes/LandingPage";
 import LogIn from "./componentes/LogIn";
 import SignIn from "./componentes/SignIn";
 import Perfil from "./componentes/Perfil";
+import Recipe from './componentes/recipe/Recipe';
+import Recomendaciones from './componentes/recipe/Recomendaciones';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [parsed, setParsed] = useState([])
+  const [parsed, setParsed] = useState([]);
+  const [recipe, setRecipe] = useState([]);
 
-  const callServer = async ()=>{
-
+  const searchAPI = async ()=>{
     if(API.API_connection){
       try {
         setProducts([])
@@ -61,13 +64,40 @@ function App() {
   };
 
   const handleButtonClick = () => {
-    callServer();
+    searchAPI();
+    recipeAPI();
   };
+
+  const [diet, setDiet] = useState('');
+  const [health, setHealth] = useState('');
+  const [cuisine, setCuisine] = useState('');
+  const recipeAPI = async ()=>{
+    if(API.API_connection){
+      try {
+        const busqueda = searchTerm !== '' ? searchTerm : 'rice'
+        const dieta = diet !== '' ? '&diet=' + diet : null
+        const salud = health !== '' ? '&health=' + health : null
+        const cocina = cuisine !== '' ? '&cuisineType=' + cuisine : null
+        const req= await fetch(
+          // 'https://api.edamam.com/api/recipes/v2?type=public&q=rice&app_id=d37da41f&app_key=1f068730881ead6d9950d93dd720ab2c&diet=balanced&health=egg-free&cuisineType=Asian'
+          API.URL_recipe+'?type=public&q='+busqueda+'&app_id='+API.ID_recipe+'&app_key='+API.KEY_recipe
+          )
+        const res= await req.json();
+        setRecipe(res.hits)        
+        console.log(recipe)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    else{
+      setRecipe(mockdatarecipe.hits)
+    }
+  }
 
   useEffect(() => {
     async function recogeDatos() {
-      await callServer();
-
+      await searchAPI();
+      await recipeAPI();
       setTimeout(() => {
         setLoading(false);
       }, 2000);
@@ -76,37 +106,20 @@ function App() {
   }, []);
 
   return (
-
     <div className="App">
-      
       <Header />
-       
-      {/* {loading ? <Spiner /> : <Routes> 
-        <Route path="/" element={<Naavbar/>}></Route>
-        <Route path="/prueba" element={<Prueba/>} ></Route>
-
-        <Route path="/searchpage/" element={<SearchPage theproducts={products} />} />
-
-        <Route path="/products/:productId" element={<Producto theproducts={products}/> }/>
-        <Route path="*" element={<NotFound />} />
-
-      </Routes>} */}
         <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
           <Route path="/navbar" element={<Naavbar/>}></Route>
           <Route path="/login" element={<LogIn/>}></Route>
           <Route path="/signin" element={<SignIn/>}></Route>
           <Route path="/prueba" element={<Prueba/>} ></Route>
-        
           <Route path="/perfil" element={<Perfil/>} ></Route>
-          
-
-
           <Route path="/alimentacion" element={<Alimentacion theproducts={products} onInputChange={handleInputChange} onButtonClick={handleButtonClick} theparsed={parsed}/>}></Route>
-
+          <Route path="/recomendaciones" element={<Recomendaciones theproducts={recipe} onInputChange={handleInputChange} onButtonClick={handleButtonClick}/>}></Route>
           <Route path="/products/:productId" element={<Producto theproducts={products} theparsed={parsed}/> }/>
+          <Route path="/recipe/:recipeId" element={<Recipe theproducts={recipe}/> }/>
           <Route path="*" element={<NotFound />} />
-
       </Routes>
       
     </div>

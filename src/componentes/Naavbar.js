@@ -26,7 +26,7 @@ function Naavbar() {
             <Nav.Link href="/navbar">Hoy</Nav.Link>
             <Nav.Link  href="/alimentacion">Alimentación</Nav.Link>
             <Nav.Link  href="/navbar">Historial</Nav.Link>
-            <Nav.Link  href="/navbar">Recomendaciones</Nav.Link>
+            <Nav.Link  href="/recomendaciones">Recomendaciones</Nav.Link>
 
             
             
