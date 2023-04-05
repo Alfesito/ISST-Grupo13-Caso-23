@@ -41,3 +41,9 @@ $ git push -u origin main
 2º npm install
 3º npm install react-bootstrap bootstrap
 4º npm install react-router-dom
+
+## PARA ANA CLARA y FER -- añadir en package.json
+"scripts": {
+    "start": "react-scripts **--openssl-legacy-provider** start",
+
+--openssl-legacy-provider
