@@ -5,14 +5,13 @@ import Button from "react-bootstrap/Button";
 
 import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
-import Swal from "sweetalert2";
 
 function Producto(props) {
   let { productId } = useParams();
-  console.log(
-    "🚀 ~ file: Producto.js ~ line 7 ~ Producto ~ productId",
-    productId
-  );
+  // console.log(
+  //   "🚀 ~ file: Producto.js ~ line 7 ~ Producto ~ productId",
+  //   productId
+  // );
 
   let id = props.theproducts.findIndex((el) => el.food.foodId === productId);
   let item = props.theproducts[id];
@@ -20,26 +19,13 @@ function Producto(props) {
     props.theparsed.length > 0 && props.theparsed[0].quantity
       ? props.theparsed[0].quantity
       : 100;
-  console.log(item.food.nutrients.ENERC_KCAL);
 
   const { alergia } = useContext(MyContext);
+  const {handleAlergiaProd}= useContext(MyContext);
 
-  const handleAlergia = () => {
-    Swal.fire({
-      title: "Este alimento tiene tu alergia",
-      text: "¿Quieres seguir añadiendo este alimento?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si,añadir",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Cancelar", "success");
-      }
-    });
-  };
-
+  const handleAñadir = (product,alergia) => {
+    handleAlergiaProd(product,alergia)
+  }
   return (
     <div>
       <div className="containerr">
@@ -84,7 +70,11 @@ function Producto(props) {
               <Link to="/alimentacion">
                 <Button variant="info">Volver</Button>
               </Link>
-              <Button variant="success" onClick={handleAlergia} style={{ float: "right" }}>
+              <Button
+                variant="success"
+                onClick={()=>handleAñadir(item.food.label,alergia)}
+                style={{ float: "right" }}
+              >
                 Añadir
               </Button>
             </div>
