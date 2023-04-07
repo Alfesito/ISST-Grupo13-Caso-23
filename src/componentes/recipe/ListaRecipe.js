@@ -5,7 +5,35 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Link} from "react-router-dom";
 
+import { useContext } from "react";
+import { MyContext } from "../../context/MyContext";
+import Swal from 'sweetalert2'
+
+
 function ListaRecipe(props){
+const{alergia}=useContext(MyContext)
+
+  const handleAlergia=()=>{
+    Swal.fire({
+      title: 'Este alimento tiene tu alergia',
+        text: '¿Quieres seguir añadiendo este alimento?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si,añadir'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Cancelar',
+          'success'
+        )
+      }
+    })
+  }
+  
+
+
     return (
         <div>
           <Row lg={4}>
@@ -25,7 +53,7 @@ function ListaRecipe(props){
                     <Link to={"/recipe/" + id}>
                       <Button variant="info">Ver</Button>
                     </Link>
-                    <Button variant="success" style={{ float: "right"}}>Añadir</Button>
+                    <Button variant="success" onClick={handleAlergia} style={{ float: "right"}}>Añadir</Button>
                   </Card.Body>
                 </Card>
               );

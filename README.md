@@ -38,9 +38,14 @@ $ git push -u origin main
 # Getting Started with Create React App
 
 1º cd directoty
+
 2º npm install
+
 3º npm install react-bootstrap bootstrap
+
 4º npm install react-router-dom
+
+5º npm install sweetalert2
 
 ## PARA ANA CLARA y FER -- añadir en package.json
 "scripts": {

@@ -23,10 +23,10 @@ function Naavbar() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/navbar">Hoy</Nav.Link>
-              <Nav.Link href="/alimentacion">Alimentación</Nav.Link>
-              <Nav.Link href="/navbar">Historial</Nav.Link>
-              <Nav.Link href="/recomendaciones">Recomendaciones</Nav.Link>
+               <Nav.Link as={Link} to="/navbar">Hoy</Nav.Link>
+              <Nav.Link as={Link} to="/alimentacion">Alimentación</Nav.Link>
+              <Nav.Link as={Link} to="/navbar">Historial</Nav.Link>
+              <Nav.Link as={Link} to="/recomendaciones">Recomendaciones</Nav.Link>
 
               <NavDropdown title="Créditos" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="/prueba">Ana Clara</NavDropdown.Item>

@@ -3,12 +3,36 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
+import { useContext } from "react";
+import { MyContext } from "../../context/MyContext";
+import Swal from "sweetalert2";
+
 function Recipe(props) {
   let { recipeId } = useParams();
   console.log("🚀 ~ file: Producto.js ~ line 7 ~ Producto ~ productId", recipeId)
   
   let id = props.theproducts && props.theproducts.findIndex((el) => el.recipe.label === recipeId)
   let item = props.theproducts[id]
+
+
+
+  const { alergia } = useContext(MyContext);
+
+  const handleAlergia = () => {
+    Swal.fire({
+      title: "Este alimento tiene tu alergia",
+      text: "¿Quieres seguir añadiendo este alimento?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si,añadir",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Cancelar", "success");
+      }
+    });
+  };
 
   return (
     <div>
@@ -70,7 +94,7 @@ function Recipe(props) {
               <Link to="/recomendaciones">
                 <Button variant="info">Volver</Button>
               </Link>
-              <Button variant="success" style={{ float: "right"}}>Añadir</Button>
+              <Button variant="success" onClick={handleAlergia} style={{ float: "right"}}>Añadir</Button>
             </div>
           </div>
         </div>
