@@ -5,12 +5,17 @@ import Swal from "sweetalert2";
 export const MyContext = createContext();
 
 export default function ContextProvider({ children }) {
-  const [alergia, setAlergia] = useState(null);
+  const [alergia, setAlergia] = useState("");
+
+  const [health, setHealth] = useState("");
+  
+
 
   const handleAlergiaProd = (product) => {
+    console.log(typeof (alergia))
     if (product.toLowerCase().includes(alergia)) {
       Swal.fire({
-        title: "Este producto contiene tu alergia",
+        title: "Este producto contiene " + alergia,
         text: "¿Quieres continuar?",
         icon: "warning",
         showCancelButton: true,
@@ -22,31 +27,57 @@ export default function ContextProvider({ children }) {
           Swal.fire("Confirmado", "Producto añadido", "success");
         }
       });
+    }
+    else{
+      Swal.fire("Confirmado", "Producto añadido", "success");
     }
   };
-  const handleAlergiaRecipe = (product,json) => {
-    const jsonString = JSON.stringify(json).toLowerCase();
+  const handleAlergiaRecipe = (name, ingr,salud) => {
+   
+    
+      const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
+      const jsonStringSalud= JSON.stringify(salud).toLowerCase();
+      
+      if(health && jsonStringSalud.includes(health)){
+        
+        Swal.fire("Confirmado", "Producto añadido", "success");
+      }
 
-    if (jsonString.toLowerCase().includes(alergia) || product.toLowerCase().includes(alergia) ) {
-      Swal.fire({
-        title: "Este producto contiene tu alergia",
-        text: "¿Quieres continuar?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si,añadir",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire("Confirmado", "Producto añadido", "success");
-        }
-      });
-    }
+
+      else if (
+        jsonStringIngr.toLowerCase().includes(alergia) ||
+        name.toLowerCase().includes(alergia)
+      ) {
+        Swal.fire({
+          title: "Este producto contiene "+ alergia,
+          text: "¿Quieres continuar?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Si,añadir",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire("Confirmado", "Producto añadido", "success");
+          }
+        });
+      }
+      else{
+        Swal.fire("Confirmado", "Producto añadido", "success");
+      }
+   
   };
 
   return (
     <MyContext.Provider
-      value={{ alergia, setAlergia, handleAlergiaProd, handleAlergiaRecipe }}
+      value={{
+        alergia,
+        setAlergia,
+        handleAlergiaProd,
+        handleAlergiaRecipe,
+        health,
+        setHealth,
+      }}
     >
       {children}
     </MyContext.Provider>

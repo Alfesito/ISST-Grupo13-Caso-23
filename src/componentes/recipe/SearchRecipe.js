@@ -68,7 +68,7 @@ function SearchRecipe(props){
               <option value="low-sodium">Bajo en sodio</option>
             </select>
             <select className="selectorRecetas" onChange={handleSeleccionHealth}>
-              <option value="">Salud</option>
+              <option value="">Alergias</option>
               <option value="alcohol-free">Sin alcohol</option>
               <option value="celery-free">Sin apio</option>
               <option value="crustacean-free">Sin crustáceos</option>

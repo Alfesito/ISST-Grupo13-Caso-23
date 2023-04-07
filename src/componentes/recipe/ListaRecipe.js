@@ -13,8 +13,9 @@ function ListaRecipe(props) {
   
   const { handleAlergiaRecipe } = useContext(MyContext);
 
-  const handleAñadir = (name, ingredients) => {
-    handleAlergiaRecipe(name, ingredients);
+  const handleAñadir = (name, ingredients,salud) => {
+    
+    handleAlergiaRecipe(name, ingredients,salud);
   };
   return (
     <div>
@@ -41,7 +42,9 @@ function ListaRecipe(props) {
                     onClick={() =>
                       handleAñadir(
                         item.recipe.label,
-                        item.recipe.ingredientLines
+                        item.recipe.ingredientLines,
+                        item.recipe.healthLabels
+
                       )
                     }
                     style={{ float: "right" }}

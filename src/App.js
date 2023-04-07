@@ -21,7 +21,9 @@ import SignIn from "./componentes/SignIn";
 import Perfil from "./componentes/Perfil";
 import Recipe from "./componentes/recipe/Recipe";
 import Recomendaciones from "./componentes/recipe/Recomendaciones";
-import ContextProvider from "./context/MyContext";
+
+import { MyContext } from "./context/MyContext";
+import { useContext } from "react";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -74,8 +76,10 @@ function App() {
     recipeAPI();
   };
 
+  const{health,setHealth}= useContext(MyContext)
+
   const [diet, setDiet] = useState("");
-  const [health, setHealth] = useState("");
+
   const [cuisine, setCuisine] = useState("");
   const recipeAPI = async () => {
     if (API.API_connection) {
@@ -143,7 +147,7 @@ function App() {
   }, []);
 
   return (
-    <ContextProvider>
+    
       <div className="App">
         <Header />
         <h1>NutriApp</h1>
@@ -189,7 +193,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-    </ContextProvider>
+    
   );
 }
 
