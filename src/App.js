@@ -146,6 +146,7 @@ function App() {
     <ContextProvider>
       <div className="App">
         <Header />
+        <h1>NutriApp</h1>
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/navbar" element={<Naavbar />}></Route>
