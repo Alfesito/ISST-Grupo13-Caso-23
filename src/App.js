@@ -76,11 +76,10 @@ function App() {
     recipeAPI();
   };
 
-  const{health,setHealth}= useContext(MyContext)
+  const{ health,setHealth }= useContext(MyContext);
+  const {diet, setDiet} = useContext(MyContext);
+  const {cuisine, setCuisine} = useContext(MyContext);
 
-  const [diet, setDiet] = useState("");
-
-  const [cuisine, setCuisine] = useState("");
   const recipeAPI = async () => {
     if (API.API_connection) {
       try {
@@ -150,7 +149,6 @@ function App() {
     
       <div className="App">
         <Header />
-        <h1>NutriApp</h1>
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/navbar" element={<Naavbar />}></Route>

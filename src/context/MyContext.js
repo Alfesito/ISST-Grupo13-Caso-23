@@ -6,9 +6,9 @@ export const MyContext = createContext();
 
 export default function ContextProvider({ children }) {
   const [alergia, setAlergia] = useState("");
-
   const [health, setHealth] = useState("");
-  
+  const [diet, setDiet] = useState("");
+  const [cuisine, setCuisine] = useState("");  
 
 
   const handleAlergiaProd = (product) => {
@@ -33,8 +33,6 @@ export default function ContextProvider({ children }) {
     }
   };
   const handleAlergiaRecipe = (name, ingr,salud) => {
-   
-    
       const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
       const jsonStringSalud= JSON.stringify(salud).toLowerCase();
       
@@ -77,6 +75,10 @@ export default function ContextProvider({ children }) {
         handleAlergiaRecipe,
         health,
         setHealth,
+        diet,
+        setDiet,
+        cuisine,
+        setCuisine
       }}
     >
       {children}

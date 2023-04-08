@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import ListaRecipe from "./ListaRecipe";
 import API from "../../constants/data";
 
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import { MyContext } from "../../context/MyContext";
 
 function SearchRecipe(props){
     const [filtro, setFiltro] = useState("");
+    const {health} = useContext(MyContext);
+    const {diet} = useContext(MyContext);
+    const {cuisine} = useContext(MyContext);
+    
   
     const filtrar = () => {
       if (API.API_connection) {
@@ -58,7 +63,7 @@ function SearchRecipe(props){
               Buscar
             </Button>
             <div>
-            <select className="selectorRecetas" onChange={handleSeleccionDiet}>
+            <select className="selectorRecetas" onChange={handleSeleccionDiet} defaultValue={diet}>
               <option value="">Dieta</option>
               <option value="balanced">Equilibrado</option>
               <option value="high-fiber">Alto en fibra</option>
@@ -67,7 +72,7 @@ function SearchRecipe(props){
               <option value="low-fat">Bajo en grasas</option>
               <option value="low-sodium">Bajo en sodio</option>
             </select>
-            <select className="selectorRecetas" onChange={handleSeleccionHealth}>
+            <select className="selectorRecetas" onChange={handleSeleccionHealth} defaultValue={health}>
               <option value="">Alergias</option>
               <option value="alcohol-free">Sin alcohol</option>
               <option value="celery-free">Sin apio</option>
@@ -87,7 +92,7 @@ function SearchRecipe(props){
               <option value="vegan">Vegano</option>
               <option value="vegetarian">Vegetariano</option>
             </select>
-            <select className="selectorRecetas" onChange={handleSeleccionCuisine}>
+            <select className="selectorRecetas" onChange={handleSeleccionCuisine} defaultValue={cuisine}>
               <option value="cuisineType">Tipo de Cocina</option>
               <option value="American">Americana</option>
               <option value="Asian">Asiática</option>
