@@ -5,7 +5,6 @@ import API from "../../constants/data";
 
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 function SearchPage(props) {
   const [filtro, setFiltro] = useState("");

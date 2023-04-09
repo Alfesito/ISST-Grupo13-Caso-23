@@ -621,7 +621,7 @@ body {
     }
 
     #icon {
-      width: 60%;
+      width: 20%;
     }
 
     * {
@@ -630,7 +630,7 @@ body {
 
 
 /* botones perfil */
- .buttons {
+.buttons {
   display: flex;
   width: 250px;
   gap: 10px;
@@ -638,11 +638,11 @@ body {
   --h: 1.8em; /* the height */
 }
 
-.buttons button {
+.buttons a {
   --_c: #88C100;
   flex: calc(1.25 + var(--_s,0));
   min-width: 0;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: bold;
   height: var(--h);
   cursor: pointer;
@@ -656,8 +656,10 @@ body {
   margin: 0 calc(-0.288*var(--h)) 0 0;
   box-sizing: border-box;
   transition: flex .4s;
+  text-decoration: none; /* add this to remove the underline */
 }
-.buttons button + button {
+
+.buttons a + a {
   --_c: #FF003C;
   flex: calc(.90 + var(--_s,0));
   background: 
@@ -667,7 +669,8 @@ body {
   margin: 0 0 0 calc(-0.288*var(--h));
   padding: 0 0 0 calc(0.288*var(--h));
 }
-.buttons button:focus-visible {
+
+.buttons a:focus-visible {
   outline-offset: calc(-2*var(--b));
   outline: calc(var(--b)/2) solid #000;
   background: none;
@@ -675,23 +678,27 @@ body {
   margin: 0;
   padding: 0;
 }
-.buttons button:focus-visible + button {
+
+.buttons a:focus-visible + a {
   background: none;
   clip-path: none;
   margin: 0;
   padding: 0;
 }
-.buttons button:has(+ button:focus-visible) {
+
+.buttons a:has(+ a:focus-visible) {
   background: none;
   clip-path: none;
   margin: 0;
   padding: 0;
 }
-button:hover,
-button:active:not(:focus-visible) {
+
+a:hover,
+a:active:not(:focus-visible) {
   --_s: .75;
 }
-button:active {
+
+a:active {
   box-shadow: inset 0 0 0 100vmax var(--_c);
   color: #fff;
 }

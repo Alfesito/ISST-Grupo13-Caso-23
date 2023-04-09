@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { Dropdown } from "react-bootstrap";
-import { useState } from "react";
+
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
 
-import NavDropdown from "react-bootstrap/NavDropdown";
+
+
+import iconAvatar from "../iconAvatar.png"
 
 export default function SignIn() {
   
   const { setAlergia } = useContext(MyContext);
   const{ setHealth }= useContext(MyContext);
-  const {diet, setDiet} = useContext(MyContext);
-  const {cuisine, setCuisine} = useContext(MyContext);
+  const {setDiet} = useContext(MyContext);
+  const {setCuisine} = useContext(MyContext);
 
 
   const handleInputChange= (e)=>{
@@ -42,7 +43,7 @@ export default function SignIn() {
           {/* Icon */}
           <div class="fadeIn first">
             <img
-              src="http://danielzawadzki.com/codepen/01/icon.svg"
+              src={iconAvatar}
               id="icon"
               alt="imagen que queramos"
             />
@@ -68,8 +69,17 @@ export default function SignIn() {
               class="fadeIn third"
               placeholder="Repita su contraseña"
             ></input>
-            <select class="fadeIn fourth" className="selectorRecetas" onChange={handleSeleccionDiet} >
-              <option value="">Dieta</option>
+            
+            <input
+              type="text"
+              id="producto no deseado"
+              class="fadeIn fourth"
+              placeholder="Introduzca producto no deseado"
+              onChange={(e)=>handleInputChange(e.target.value)}
+            ></input>
+            <div class="fadeIn fifth">
+            <select className="selectorRecetas" onChange={handleSeleccionDiet} >
+              <option value="">Estilo de dieta</option>
               <option value="balanced">Equilibrado</option>
               <option value="high-fiber">Alto en fibra</option>
               <option value="high-protein">Alto en proteínas</option>
@@ -77,13 +87,8 @@ export default function SignIn() {
               <option value="low-fat">Bajo en grasas</option>
               <option value="low-sodium">Bajo en sodio</option>
             </select>
-            <input
-              type="text"
-              id="producto no deseado"
-              class="fadeIn fifth"
-              placeholder="Introduzca producto no deseado"
-              onChange={(e)=>handleInputChange(e.target.value)}
-            ></input>
+            </div>
+           
             {/* Dropdown */}
             <div class="fadeIn sixth">
               <select className="selectorRecetas" onChange={handleSeleccionCuisine} >
@@ -108,7 +113,7 @@ export default function SignIn() {
                 <option value="South East Asian">Sudeste Asiático</option>
               </select>
             </div>
-            <div>
+            <div class="fadeIn sixth">
             <select className="selectorRecetas" onChange={handleSeleccionHealth}>
               <option value="">Alergias</option>
               <option value="alcohol-free">Sin alcohol</option>

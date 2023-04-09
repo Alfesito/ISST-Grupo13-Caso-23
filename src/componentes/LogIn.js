@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+
+
+import iconAvatar from "../iconAvatar.png"
 
 export default function LogIn() {
   return (
@@ -13,10 +15,10 @@ export default function LogIn() {
 
           {/* Icon */}
           <div class="fadeIn first">
-            <img
-              src="http://danielzawadzki.com/codepen/01/icon.svg"
+          <img
+              src={iconAvatar}
               id="icon"
-              alt="img que queramos"
+              alt="imagen que queramos"
             />
           </div>
 
