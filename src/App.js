@@ -26,17 +26,17 @@ import { MyContext } from "./context/MyContext";
 import { useContext } from "react";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [parsed, setParsed] = useState([]);
-  const [recipe, setRecipe] = useState([]);
+  const [loading, setLoading] = useState(true); // Estado para el indicador de carga
+  const [products, setProducts] = useState([]); // Estado para los productos
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+  const [parsed, setParsed] = useState([]); // Estado para los datos analizados
+  const [recipe, setRecipe] = useState([]); // Estado para las recetas
 
   const searchAPI = async () => {
-    if (API.API_connection) {
+    if (API.API_connection) { // Comprobar si la conexión a la API está activa
       try {
-        setProducts([]);
-        setParsed([]);
+        setProducts([]); // Reiniciar los productos
+        setParsed([]); // Reiniciar los datos analizados
         const req = await fetch(
           API.URL_search +
             "?app_id=" +
@@ -45,50 +45,40 @@ function App() {
             API.KEY_search +
             "&ingr=" +
             searchTerm
-        );
-        const res = await req.json();
-        setParsed(res.parsed);
-        setProducts(res.hints);
-        //Elimina el primer objeto de res.hints ya que se repite con res.parsed
-        // if(res.text !== ""){
-        //   const obj = await res.hints
-        //   const firstPropName = await Object.keys(obj)[0];
-        //   await delete obj[firstPropName];
-        //   setProducts(obj)
-        // }else{
-        //   setProducts(res.hints)
-        // }
+        ); // Realizar petición a la API de búsqueda
+        const res = await req.json(); // Obtener la respuesta en formato JSON
+        setParsed(res.parsed); // Actualizar los datos analizados
+        setProducts(res.hints); // Actualizar los productos
       } catch (error) {
         console.log(error);
       }
     } else {
-      console.log("server-false");
-      setProducts(mockdata.hints);
+      console.log("server-false"); // Mostrar mensaje en consola si la conexión a la API está desactivada
+      setProducts(mockdata.hints); // Establecer datos de muestra en caso de conexión desactivada
     }
   };
 
   const handleInputChange = (value) => {
-    setSearchTerm(value);
+    setSearchTerm(value); // Manejar cambios en el término de búsqueda
   };
 
   const handleButtonClick = () => {
     searchAPI();
-    recipeAPI();
+    recipeAPI(); // Manejar clic en botón de búsqueda
   };
 
-  const{ health,setHealth }= useContext(MyContext);
-  const {diet, setDiet} = useContext(MyContext);
-  const {cuisine, setCuisine} = useContext(MyContext);
+  const { health, setHealth } = useContext(MyContext); // Contexto para el estado de salud
+  const { diet, setDiet } = useContext(MyContext); // Contexto para el estado de dieta
+  const { cuisine, setCuisine } = useContext(MyContext); // Contexto para el estado de cocina
 
   const recipeAPI = async () => {
-    if (API.API_connection) {
+    if (API.API_connection) { // Comprobar si la conexión a la API está activa
       try {
-        const busqueda = searchTerm !== "" ? searchTerm : "rice";
-        const dieta = diet !== "" ? "&diet=" + diet : "";
-        const salud = health !== "" ? "&health=" + health : "";
-        const cocina = cuisine !== "" ? "&cuisineType=" + cuisine : "";
+        const busqueda = searchTerm !== "" ? searchTerm : "rice"; // Obtener término de búsqueda, si está vacío, establecer "rice" como valor predeterminado
+        const dieta = diet !== "" ? "&diet=" + diet : ""; // Obtener dieta seleccionada, si no está seleccionada, no incluir en la URL
+        const salud = health !== "" ? "&health=" + health : ""; // Obtener estado de salud seleccionado, si no está seleccionado, no incluir en la URL
+        const cocina = cuisine !== "" ? "&cuisineType=" + cuisine : ""; // Obtener tipo de cocina seleccionado, si no está seleccionado, no incluir en la URL
         const req = await fetch(
-          // 'https://api.edamam.com/api/recipes/v2?type=public&q=rice&app_id=d37da41f&app_key=1f068730881ead6d9950d93dd720ab2c&diet=balanced&health=egg-free&cuisineType=Asian'
           API.URL_recipe +
             "?type=public&q=" +
             busqueda +
@@ -99,26 +89,14 @@ function App() {
             dieta +
             salud +
             cocina
-        );
-        const res = await req.json();
-        setRecipe(res.hits);
-        console.log(
-          API.URL_recipe +
-            "?type=public&q=" +
-            busqueda +
-            "&app_id=" +
-            API.ID_recipe +
-            "&app_key=" +
-            API.KEY_recipe +
-            dieta +
-            salud +
-            cocina
-        );
+        ); // Realizar petición a la API de recetas
+        const res = await req.json(); // Obtener la respuesta en formato JSON
+        setRecipe(res.hits); // Actualizar las recetas
       } catch (error) {
-        console.log(error);
+        console.log(error); // Maneja errores en caso de haberlos
       }
     } else {
-      setRecipe(mockdatarecipe.hits);
+      setRecipe(mockdatarecipe.hits); // Utiliza datos de muestra en caso de no haber conexión con la API
     }
   };
 
@@ -135,15 +113,12 @@ function App() {
   };
 
   useEffect(() => {
-    async function recogeDatos() {
-      await searchAPI();
-      await recipeAPI();
-      setTimeout(() => {
-        setLoading(false);
-      }, 2000);
-    }
-    recogeDatos();
+    // useEffect para manejar la carga inicial de la página
+    searchAPI(); // Llama a la función searchAPI() al cargar la página
+    recipeAPI(); // Llama a la función recipeAPI() al cargar la página
+    setLoading(false); // Actualiza el estado de carga a false al cargar la página
   }, []);
+
 
   return (
     

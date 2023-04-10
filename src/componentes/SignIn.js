@@ -4,10 +4,7 @@ import { Button } from "react-bootstrap";
 
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
-
-
-
-import iconAvatar from "../iconAvatar.png"
+import iconAvatar from "../images/iconAvatar.png"
 
 export default function SignIn() {
   

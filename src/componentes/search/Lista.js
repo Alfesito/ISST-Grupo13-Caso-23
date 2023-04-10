@@ -36,6 +36,13 @@ function Lista(props) {
                   <Link to={"/products/" + id}>
                     <Button variant="info">Ver</Button>
                   </Link>
+                  <Button
+                    variant="success"
+                    onClick={() => handleAñadir(item.food.label)}
+                    style={{ float: "right" }}
+                  >
+                    Añadir
+                  </Button>
                 </Card.Body>
               </Card>
             );

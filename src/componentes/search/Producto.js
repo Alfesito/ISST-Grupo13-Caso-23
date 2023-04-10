@@ -48,7 +48,7 @@ function Producto(props) {
                     <br />
                   </li>
                   <li>
-                    Proteína: {(item.food.nutrients.PROCNT * qu) / 100} g,¡
+                    Proteína: {(item.food.nutrients.PROCNT * qu) / 100} g
                     <br />
                   </li>
                   <li>

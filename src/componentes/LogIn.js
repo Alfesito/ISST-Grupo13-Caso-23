@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
-
-import iconAvatar from "../iconAvatar.png"
+import iconAvatar from "../images/iconAvatar.png"
 
 export default function LogIn() {
   return (
