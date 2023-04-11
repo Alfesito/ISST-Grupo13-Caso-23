@@ -10,7 +10,7 @@ export default function LogIn() {
       <div class="wrapper fadeInDown">
         <div id="formContent">
           {/* Tabs Titles */}
-          <h2 class="active"> Log in</h2>
+          <h2 class="active">Inicia sesión</h2>
 
           {/* Icon */}
           <div class="fadeIn first">
@@ -28,25 +28,25 @@ export default function LogIn() {
               id="login"
               class="fadeIn second"
               name="login"
-              placeholder="login"
+              placeholder="Usuario"
             ></input>
             <input
               type="text"
               id="password"
               class="fadeIn third"
               name="login"
-              placeholder="password"
+              placeholder="Contraseña"
             ></input>
             <Link to="/navbar">
               {" "}
-              <input type="submit" class="fadeIn fourth" value="Log In"></input>
+              <input type="submit" class="fadeIn fourth" value="Inicia sesión"></input>
             </Link>
           </form>
 
           {/* Remind Passowrd  */}
           <div id="formFooter">
             <a class="underlineHover" href="#">
-              Forgot Password?
+              ¿Olvidaste la contraseña?
             </a>
           </div>
         </div>

@@ -14,14 +14,14 @@ function LandingPage() {
             </div>
             <ul class="links">
               
-              <Link to={"/login"}><li>Log in</li></Link>
-              <Link to={"/signin"}><li>Sign in</li></Link>
+              <Link to={"/login"}><li>Inicia sesión</li></Link>
+              <Link to={"/signin"}><li>Regístrate</li></Link>
               
             </ul>
           </div>
           <div class="info">
             <h1>Página principal</h1>
-            <h2>"Where your new you begin"</h2>
+            <h2>"Donde tu nuevo tú comienza"</h2>
 
             
             <Link to={"/navbar"}>
