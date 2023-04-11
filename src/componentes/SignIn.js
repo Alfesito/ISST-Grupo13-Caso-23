@@ -35,7 +35,7 @@ export default function SignIn() {
       <div class="wrapper fadeInDown">
         <div id="formContent">
           {/* Tabs Titles */}
-          <h2 class="active"> Sign in</h2>
+          <h2 class="active"> Registrate</h2>
 
           {/* Icon */}
           <div class="fadeIn first">
@@ -57,48 +57,44 @@ export default function SignIn() {
             <input
               type="text"
               id="email"
-              class="fadeIn second"
+              class="fadeIn third"
               placeholder="Escriba su correo electrónico"
             ></input>
             <input
               type="text"
               id="password"
-              class="fadeIn third"
+              class="fadeIn fourth"
               placeholder="Escriba su contraseña"
             ></input>
             <input
               type="text"
               id="repassword"
-              class="fadeIn third"
+              class="fadeIn fifth"
               placeholder="Repita su contraseña"
             ></input>
             <input
               type="text"
               id="weight"
-              class="fadeIn second"
+              class="fadeIn sixth"
               placeholder="Registre su peso en Kg"
             ></input>
             <input
               type="text"
               id="height"
-              class="fadeIn second"
+              class="fadeIn seventh"
               placeholder="Registre su altura en cm"
             ></input>
-            <input
-              type="text"
-              id="allegies"
-              class="fadeIn second"
-              placeholder="Registre sus alergias"
-            ></input>
+          
             
             <input
               type="text"
               id="producto no deseado"
-              class="fadeIn fourth"
+              class="fadeIn eighth"
               placeholder="Introduzca producto no deseado"
               onChange={(e)=>handleInputChange(e.target.value)}
             ></input>
-            <div class="fadeIn fifth">
+            
+            <div class="fadeIn nineth">
             <select className="selectorRecetas" onChange={handleSeleccionDiet} >
               <option value="">Estilo de dieta</option>
               <option value="balanced">Equilibrado</option>
@@ -111,7 +107,7 @@ export default function SignIn() {
             </div>
            
             {/* Dropdown */}
-            <div class="fadeIn sixth">
+            <div class="fadeIn tenth">
               <select className="selectorRecetas" onChange={handleSeleccionCuisine} >
                 <option value="cuisineType">Tipo de Cocina</option>
                 <option value="American">Americana</option>
@@ -134,7 +130,7 @@ export default function SignIn() {
                 <option value="South East Asian">Sudeste Asiático</option>
               </select>
             </div>
-            <div class="fadeIn sixth">
+            <div class="fadeIn eleventh">
             <select className="selectorRecetas" onChange={handleSeleccionHealth}>
               <option value="">Alergias</option>
               <option value="alcohol-free">Sin alcohol</option>

@@ -12,8 +12,9 @@ export default function Prueba() {
         <div>
             <p>Altura:</p>
             <p>Peso:</p>
-            <p>Objetivo diario calórico:</p>
-            <p>Gusto culinario:</p>
+            <p>Estilo de dieta:</p>
+            <p>Tipo de cocina:</p>
+            <p>Alergias:</p>
         </div>
 
         

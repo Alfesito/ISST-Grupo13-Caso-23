@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../images/LogoNutriApp.png';
+import logo from '../images/cutebasc.png';
 
 function Header() {
   return (
