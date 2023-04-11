@@ -529,13 +529,23 @@ body {
       animation-delay: 2s;
       
     }
+    .fadeIn.tenth {
+      -webkit-animation-delay: 2.2s;
+      -moz-animation-delay: 2.2s;
+      animation-delay: 2.2s;
+    }
+    .fadeIn.eleventh {
+      -webkit-animation-delay: 2.4s;
+      -moz-animation-delay: 2.4s;
+      animation-delay: 2.4s;
+    }
 
     .fadeIn.x {
 
       z-index: -1;
-      -webkit-animation-delay: 1.6s;
-      -moz-animation-delay: 1.6s;
-      animation-delay: 1.6s;
+      -webkit-animation-delay: 2.6s;
+      -moz-animation-delay: 2.6s;
+      animation-delay: 2.6s;
     }
 
     /* Simple CSS3 Fade-in Animation */
