@@ -56,6 +56,12 @@ export default function SignIn() {
             ></input>
             <input
               type="text"
+              id="email"
+              class="fadeIn second"
+              placeholder="Escriba su correo electrónico"
+            ></input>
+            <input
+              type="text"
               id="password"
               class="fadeIn third"
               placeholder="Escriba su contraseña"
@@ -65,6 +71,24 @@ export default function SignIn() {
               id="repassword"
               class="fadeIn third"
               placeholder="Repita su contraseña"
+            ></input>
+            <input
+              type="text"
+              id="weight"
+              class="fadeIn second"
+              placeholder="Registre su peso en Kg"
+            ></input>
+            <input
+              type="text"
+              id="height"
+              class="fadeIn second"
+              placeholder="Registre su altura en cm"
+            ></input>
+            <input
+              type="text"
+              id="allegies"
+              class="fadeIn second"
+              placeholder="Registre sus alergias"
             ></input>
             
             <input
@@ -134,14 +158,14 @@ export default function SignIn() {
             </div>
 
             <Link to="/navbar">
-              <input type="submit" class="fadeIn x" value="Sign In" ></input>
+              <input type="submit" class="fadeIn x" value="Regístrate" ></input>
             </Link>
           </form>
 
           {/* Remind Passowrd  */}
           <div id="formFooter">
             <lergia class="underlineHover" href="#">
-              Forgot Password?
+              ¿Olvidaste la constraseña?
             </lergia>
           </div>
         </div>

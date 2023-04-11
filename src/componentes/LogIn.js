@@ -28,7 +28,7 @@ export default function LogIn() {
               id="login"
               class="fadeIn second"
               name="login"
-              placeholder="Usuario"
+              placeholder="Correo Electrónico"
             ></input>
             <input
               type="text"
