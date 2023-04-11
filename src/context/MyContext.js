@@ -13,7 +13,7 @@ export default function ContextProvider({ children }) {
 
   const handleAlergiaProd = (product) => {
     console.log(typeof (alergia))
-    if (product.toLowerCase().includes(alergia)) {
+    if (alergia.length !==0 && (product.toLowerCase().includes(alergia)) ){
       Swal.fire({
         title: "Este producto contiene " + alergia,
         text: "¿Quieres continuar?",
@@ -36,30 +36,37 @@ export default function ContextProvider({ children }) {
       const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
       const jsonStringSalud= JSON.stringify(salud).toLowerCase();
       
-      if(health && jsonStringSalud.includes(health)){
+      if(alergia.length !==0 ){
+        if(health && jsonStringSalud.includes(health)){
         
-        Swal.fire("Confirmado", "Producto añadido", "success");
+          Swal.fire("Confirmado", "Producto añadido", "success");
+        }
+  
+  
+        else if (
+          jsonStringIngr.toLowerCase().includes(alergia) ||
+          name.toLowerCase().includes(alergia)
+        ) {
+          Swal.fire({
+            title: "Este producto contiene "+ alergia,
+            text: "¿Quieres continuar?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si,añadir",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire("Confirmado", "Producto añadido", "success");
+            }
+          });
+        }
+        else{
+          Swal.fire("Confirmado", "Producto añadido", "success");
+        }
       }
 
-
-      else if (
-        jsonStringIngr.toLowerCase().includes(alergia) ||
-        name.toLowerCase().includes(alergia)
-      ) {
-        Swal.fire({
-          title: "Este producto contiene "+ alergia,
-          text: "¿Quieres continuar?",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Si,añadir",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire("Confirmado", "Producto añadido", "success");
-          }
-        });
-      }
+      
       else{
         Swal.fire("Confirmado", "Producto añadido", "success");
       }
