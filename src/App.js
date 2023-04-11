@@ -53,7 +53,6 @@ function App() {
         console.log(error);
       }
     } else {
-      console.log("server-false"); // Mostrar mensaje en consola si la conexión a la API está desactivada
       setProducts(mockdata.hints); // Establecer datos de muestra en caso de conexión desactivada
     }
   };

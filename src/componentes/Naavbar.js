@@ -46,22 +46,13 @@ function Naavbar() {
               <Link to="/perfil" className="button">
                 Perfil
               </Link>
-              <Link to="/login" className="button">
+              <Link to="/" className="button">
                 Salir
               </Link>
             </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      <div>
-        <Link to="/">
-          <Button id="volver" variant="info">
-            {" "}
-            Página Principal{" "}
-          </Button>{" "}
-        </Link>
-      </div>
     </>
   );
 }

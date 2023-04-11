@@ -134,7 +134,7 @@ export default function SignIn() {
             </div>
 
             <Link to="/navbar">
-              <input type="submit" class="fadeIn x" value="Sign In"></input>
+              <input type="submit" class="fadeIn x" value="Sign In" ></input>
             </Link>
           </form>
 
