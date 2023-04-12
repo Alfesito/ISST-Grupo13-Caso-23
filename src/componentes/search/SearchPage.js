@@ -6,7 +6,7 @@ import API from "../../constants/data";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-function SearchPage(props) {
+function SearchPage(props) { // def del componente SearchPage
   const [filtro, setFiltro] = useState(""); // Estado local para almacenar el valor del filtro de búsqueda
 
   const filtrar = () => {
@@ -19,11 +19,11 @@ function SearchPage(props) {
         return item.food.label.toUpperCase().replace(/\s/g, "").includes(nombre);
       });
       setFiltro(filtrados); // Se actualiza el estado local del filtro con los productos filtrados
-      props.onInputChange(filtrados); // Se llama a la función onInputChange de las props con los productos filtrados
+      props.onInputChange(filtrados); // Se llama a la funcioon onInputChange de las props con los productos filtrados
     }
   };
 
-  const handleInputChange = (event) => { // Manejador del evento de cambio en el input de búsqueda
+  const handleInputChange = (event) => { // manejador del evento de cambio en el input de busqueda
     setFiltro(event.target.value); // Se actualiza el estado local del filtro con el valor del input
     props.onInputChange(event.target.value); // Se llama a la función onInputChange de las props con el valor del input
   };
@@ -36,14 +36,16 @@ function SearchPage(props) {
             type="text"
             placeholder="Producto a buscar"
             id="filtro"
-            onChange={handleInputChange} // Se llama a la función handleInputChange cuando hay cambios en el input
+            onChange={handleInputChange}
+            // Se llama a la función handleInputChange cuando hay cambios en el input
           ></input>
 
           <Button
             id="buscador"
             variant="outline-info"
             size="sm"
-            onClick={() => filtrar()} // Se llama a la función filtrar() cuando se hace clic en el botón de búsqueda
+            onClick={() => filtrar()}
+            // Se llama a la función filtrar() cuando se hace clic en el botón de búsqueda
           >
             Buscar
           </Button>
