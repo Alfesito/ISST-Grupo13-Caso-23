@@ -9,13 +9,13 @@ import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
 
 
-function ListaRecipe(props) {
+function ListaRecipe(props) { // declaracion del componente ListaRecipe como una función
   
   const { handleAlergiaRecipe } = useContext(MyContext);
 
-  const handleAñadir = (name, ingredients,salud) => {
+  const handleAñadir = (name, ingredients,salud) => { // función manejadora de eventos
     
-    handleAlergiaRecipe(name, ingredients,salud);
+    handleAlergiaRecipe(name, ingredients,salud); // agrega recetas a una lista de alergias DADO un determinado contexto
   };
   return (
     <div>
