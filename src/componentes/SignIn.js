@@ -167,7 +167,7 @@ export default function SignIn() {
         </div>
       </div>
       <div>
-        <Link to="/navbar">
+        <Link to="/">
           <Button id="volver" variant="danger">
             {" "}
             Volver{" "}

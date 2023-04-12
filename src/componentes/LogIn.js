@@ -52,14 +52,7 @@ export default function LogIn() {
         </div>
       </div>
 
-      <Link to="/navbar">
-        <Button id="entrar" variant="outline-success">
-          {" "}
-          Iniciar sesión{" "}
-        </Button>{" "}
-      </Link>
-
-      <Link to="/navbar">
+      <Link to="/">
         <Button id="volver" variant="danger">
           {" "}
           Volver{" "}
