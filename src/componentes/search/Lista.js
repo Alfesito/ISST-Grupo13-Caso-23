@@ -8,13 +8,14 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
 
-function Lista(props) {
+function Lista(props) { // Devuelve una lista de productos
   const { handleAlergiaProd } = useContext(MyContext);
 
-  const handleAñadir = (product) => {
+  const handleAñadir = (product) => { // manejar el evento de annadir un producto a la lista de alergias personalizada
     handleAlergiaProd(product);
   };
   return (
+    //  Renderizado de la lista de productos
     <div>
       <Row lg={1}>
         {props.theparsed &&

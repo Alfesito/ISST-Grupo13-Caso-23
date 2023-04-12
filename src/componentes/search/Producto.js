@@ -8,13 +8,10 @@ import { MyContext } from "../../context/MyContext";
 
 function Producto(props) {
   let { productId } = useParams();
-  // console.log(
-  //   "🚀 ~ file: Producto.js ~ line 7 ~ Producto ~ productId",
-  //   productId
-  // );
 
   let id = props.theproducts.findIndex((el) => el.food.foodId === productId);
   let item = props.theproducts[id];
+  // Cantidad de producto utilizada (por defecto 100g)
   let qu =
     props.theparsed.length > 0 && props.theparsed[0].quantity
       ? props.theparsed[0].quantity
@@ -27,6 +24,7 @@ function Producto(props) {
     handleAlergiaProd(product,alergia)
   }
   return (
+    // renderizar el producto
     <div>
       <div className="containerr">
         <div className="box">
@@ -37,7 +35,7 @@ function Producto(props) {
 
             <div className="product-info">
               <h1 id="titulo">{item.food.label}</h1>
-
+                {/* Renderizado del valor nutricional */}
               <p className="price">
                 Valor nutricional <br />
               </p>
