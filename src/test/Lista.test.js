@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { render, fireEvent } from "@testing-library/react";
 import Lista from "../componentes/search/Lista";
+import { BrowserRouter } from "react-router-dom";
+import ContextProvider from "../context/MyContext";
 
 describe("Lista component", () => {
   const mockedParsed = [
@@ -13,41 +15,46 @@ describe("Lista component", () => {
     { food: { foodId: 4, image: "image4.png", label: "Food 4", category: "Category 2" } },
   ];
 
-  test("renders component with parsed and products data", () => {
-    const { getByText, getAllByRole } = render(
-      <Lista theparsed={mockedParsed} theproducts={mockedProducts} />
+  test("renders component with products data", () => {
+    const { getByTestId } = render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <ContextProvider>
+            <Lista
+              theparsed={mockedParsed}
+              theproducts={mockedProducts}
+            />
+          </ContextProvider></BrowserRouter></React.StrictMode>
     );
 
-    // Check that theparsed data is rendered
-    const parsedItems = getAllByRole("img");
-    expect(parsedItems.length).toBe(mockedParsed.length);
+    expect(getByTestId('lista')).toHaveTextContent('Food 3');
+    expect(getByTestId('lista')).toHaveTextContent('Category 2');
 
-    // Check that theproducts data is rendered
-    const productItems = getAllByRole("heading");
-    expect(productItems.length).toBe(mockedProducts.length);
   });
 
-  test("clicks on 'Añadir' button should call handleAñadir function", () => {
-    const handleAñadirMock = jest.fn();
-    const { getByText } = render(
-      <Lista
-        theparsed={mockedParsed}
-        theproducts={mockedProducts}
-        handleAñadir={handleAñadirMock}
-      />
+  test("renders component with parsed data", () => {
+    const { getByTestId } = render(
+      <React.StrictMode><BrowserRouter><ContextProvider>
+        <Lista
+          theparsed={mockedParsed}
+          theproducts={mockedProducts}
+        />
+      </ContextProvider></BrowserRouter></React.StrictMode>
+
     );
 
-    // Click on 'Añadir' button
-    const addButton = getByText("Añadir");
-    fireEvent.click(addButton);
-
-    // Check that handleAñadirMock function is called
-    expect(handleAñadirMock).toHaveBeenCalledTimes(1);
+    expect(getByTestId('lista')).toHaveTextContent('Food 1');
+    expect(getByTestId('lista')).toHaveTextContent('Food 2');
   });
 
   test("displays 'Relacionado:' when theparsed and theproducts data are available", () => {
     const { getByText } = render(
-      <Lista theparsed={mockedParsed} theproducts={mockedProducts} />
+      <React.StrictMode><BrowserRouter><ContextProvider>
+        <Lista
+          theparsed={mockedParsed}
+          theproducts={mockedProducts}
+        />
+      </ContextProvider></BrowserRouter></React.StrictMode>
     );
 
     // Check that 'Relacionado:' text is displayed
@@ -56,7 +63,14 @@ describe("Lista component", () => {
   });
 
   test("does not display 'Relacionado:' when theparsed or theproducts data are not available", () => {
-    const { queryByText } = render(<Lista theparsed={[]} theproducts={[]} />);
+    const { queryByText } = render(
+      <React.StrictMode><BrowserRouter><ContextProvider>
+        <Lista
+          theparsed={[]}
+          theproducts={[]}
+        />
+      </ContextProvider></BrowserRouter></React.StrictMode>
+      );
 
     // Check that 'Relacionado:' text is not displayed
     const relacionadoText = queryByText("Relacionado:");

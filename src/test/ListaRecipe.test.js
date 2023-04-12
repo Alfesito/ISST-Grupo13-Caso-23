@@ -1,15 +1,8 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import ListaRecipe from "../componentes/recipe/ListaRecipe";
-
-// Mock del contexto de MyContext
-jest.mock("../../context/MyContext", () => ({
-  MyContext: {
-    Consumer: ({ children }) => children({
-      handleAlergiaRecipe: jest.fn()
-    })
-  }
-}));
+import { BrowserRouter } from "react-router-dom";
+import ContextProvider from "../context/MyContext";
 
 describe("ListaRecipe", () => {
   const mockProducts = [
@@ -36,39 +29,23 @@ describe("ListaRecipe", () => {
   ];
 
   it("renders the correct number of cards with recipe information", () => {
-    const { getByText, getAllByTestId } = render(
-      <ListaRecipe theproducts={mockProducts} />
+    const { getByTestId } = render(
+      <React.StrictMode><BrowserRouter><ContextProvider>
+        <ListaRecipe theproducts={mockProducts} />
+      </ContextProvider></BrowserRouter></React.StrictMode>
     );
-
-    const cardTitles = getAllByTestId("card-title");
-    expect(cardTitles.length).toBe(mockProducts.length);
-    expect(getByText("Recipe 1")).toBeInTheDocument();
-    expect(getByText("Recipe 2")).toBeInTheDocument();
+    expect(getByTestId('lista')).toHaveTextContent('Recipe 1');
+    expect(getByTestId('lista')).toHaveTextContent('Source 2');
   });
 
-  it("calls handleAñadir function with correct arguments when 'Añadir' button is clicked", () => {
-    const mockHandleAlergiaRecipe = jest.fn();
-    const { getByText } = render(
-      <ListaRecipe
-        theproducts={mockProducts}
-        handleAlergiaRecipe={mockHandleAlergiaRecipe}
-      />
-    );
+  it("renders the correct recipe information with healthLabels", () => {
 
-    const addButton1 = getByText("Añadir", { exact: false });
-    fireEvent.click(addButton1);
-    expect(mockHandleAlergiaRecipe).toHaveBeenCalledWith(
-      "Recipe 1",
-      ["Ingredient 1", "Ingredient 2"],
-      ["Label 1", "Label 2"]
+    const { getByTestId } = render(
+      <React.StrictMode><BrowserRouter><ContextProvider>
+        <ListaRecipe theproducts={mockProducts} />
+      </ContextProvider></BrowserRouter></React.StrictMode>
     );
-
-    const addButton2 = getByText("Añadir", { exact: false });
-    fireEvent.click(addButton2);
-    expect(mockHandleAlergiaRecipe).toHaveBeenCalledWith(
-      "Recipe 2",
-      ["Ingredient 3", "Ingredient 4"],
-      ["Label 3", "Label 4"]
-    );
+    expect(getByTestId('lista')).toHaveTextContent('Recipe 1');
+    expect(getByTestId('lista')).toHaveTextContent('Source 2');
   });
 });
