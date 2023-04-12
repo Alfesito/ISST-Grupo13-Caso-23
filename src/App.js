@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./componentes/Header";
 import Alimentacion from "./componentes/search/Alimentacion";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -122,7 +121,6 @@ function App() {
   return (
     
       <div className="App">
-        <Header />
         <Routes>
           <Route path="/" element={<LandingPage />}></Route>
           <Route path="/navbar" element={<Naavbar />}></Route>
