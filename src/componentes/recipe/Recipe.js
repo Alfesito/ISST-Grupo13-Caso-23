@@ -29,7 +29,7 @@ function Recipe(props) { // Definicion del componente Recipe
             <div className="product-img">
               <img src={item.recipe.image} width="250" alt="" />
             </div>
-                /* Renderizar la lista de ingredientes */
+                {/* Renderizar la lista de ingredientes */}
             <div className="product-info">
               <h1 id="titulo">{item.recipe.label}</h1>
 
@@ -44,7 +44,7 @@ function Recipe(props) { // Definicion del componente Recipe
                   </div>
                 )}
               </p>
-              /* Renderizar los valores nutricionales */
+              {/* Renderizar los valores nutricionales  */}
               <p className="price">
                 Valor nutricional <br />
               </p>
@@ -76,7 +76,7 @@ function Recipe(props) { // Definicion del componente Recipe
                   </li>
                 </ul>
               </div>
-                /* Renderizar el enlace a la receta completa */
+                 {/* Renderizar el enlace a la receta completa  */}
               {item.recipe &&
                 item.recipe.url &&
                 item.recipe.source && ( //REVISAR SI SON NECESARIAS ESTAS CONDICIONES
