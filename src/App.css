@@ -546,6 +546,10 @@ body {
       -webkit-animation-delay: 2.6s;
       -moz-animation-delay: 2.6s;
       animation-delay: 2.6s;
+      background-color: #059d35;
+    }
+    .fadeIn.x:hover {
+      background-color: #18e60a;
     }
 
     /* Simple CSS3 Fade-in Animation */
