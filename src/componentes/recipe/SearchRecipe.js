@@ -7,15 +7,16 @@ import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { MyContext } from "../../context/MyContext";
 
-function SearchRecipe(props){
+function SearchRecipe(props){ // manejar la busqueda y los filtros de recetas
     const [filtro, setFiltro] = useState("");
     const {health} = useContext(MyContext);
     const {diet} = useContext(MyContext);
     const {cuisine} = useContext(MyContext);
     
   
-    const filtrar = () => {
-      if (API.API_connection) {
+    const filtrar = () => { // Si la conexión API está disponible, la función llama al evento onButtonClick para obtener los resultados de búsqueda a través de la API. Si la conexión API no está disponible, la función filtra los productos por su nombre y 
+      //luego llama al evento onInputChange para actualizar los resultados de búsqueda en la página.
+      if (API.API_connection) { // obtener los resultados de búsqueda a través de la API
         props.onButtonClick(filtro);
       }else{
         let nombre = filtro.toUpperCase().replace(/\s/g, "");
@@ -26,25 +27,25 @@ function SearchRecipe(props){
         props.onInputChange(filtrados);
       }
     };
-  
-    const handleInputChange = (event) => {
+    
+    const handleInputChange = (event) => { // manejar los cambios en el campo de entrada de texto
       setFiltro(event.target.value);
       props.onInputChange(event.target.value);
     };
 
-    const handleSeleccionDiet = (event) => {
+    const handleSeleccionDiet = (event) => { // manejar los cambios en el selector de dieta
       props.onSelectChangeDiet(event.target.value);
     };
 
-    const handleSeleccionHealth = (event) => {
+    const handleSeleccionHealth = (event) => { // manejar los cambios en el selector de salud
       props.onSelectChangeHealth(event.target.value);
     };
 
-    const handleSeleccionCuisine = (event) => {
+    const handleSeleccionCuisine = (event) => { // manejar los cambios en el selector de tipo de cocina
       props.onSelectChangeCuisine(event.target.value);
     };
   
-    return (
+    return ( // devuelve un componente formulario con un campo de entrada de texto y tres selectores
       <div>
         <div id="formulario">
           <Form className="form-inline">
