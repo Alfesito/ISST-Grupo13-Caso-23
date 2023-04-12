@@ -28,13 +28,15 @@ function ListaRecipe(props) { // declaracion del componente ListaRecipe como una
                 className="unproducto"
                 key={item.recipe.uri}
                 style={{ width: "20rem" }}
-              > // crear vista de la tarjeta con su imagen, titulo y texto correspondiente
+              > 
+              {/* crear vista de la tarjeta con su imagen, titulo y texto correspondiente */}
                 <Card.Img variant="top" src={item.recipe.image} />
                 <Card.Body>
                   <Card.Title>{item.recipe.label}</Card.Title>
                   <Card.Text>{item.recipe.source}</Card.Text>
 
-                  <Link to={"/recipe/" + id}> // anadir vista de la receta
+                  <Link to={"/recipe/" + id}>  
+                  {/* anadir vista de la receta */}
                     <Button variant="info">Ver</Button>
                   </Link>
                   <Button

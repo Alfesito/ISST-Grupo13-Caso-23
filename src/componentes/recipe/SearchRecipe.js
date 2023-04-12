@@ -117,7 +117,8 @@ function SearchRecipe(props){ // manejar la busqueda y los filtros de recetas
             </div>
           </Form>
           
-        </div> // renderizado del componente de la lista de recetas
+        </div> 
+         {/* renderizado del componente de la lista de recetas */}
         <div id="productosresultados">{<ListaRecipe theproducts={props.theproducts}/>}</div>
       </div>
       
