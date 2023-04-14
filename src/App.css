@@ -1,0 +1,662 @@
+#cabecera {
+  background-color: #282c34;
+
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-bottom: 2mm;
+}
+#linea {
+  height: 10px;
+  background-color: aquamarine;
+}
+
+.logo {
+  height: 10vmin;
+  pointer-events: none;
+  margin-right: 1cm;
+}
+
+#formulario {
+  text-align: center;
+}
+
+.unproducto {
+  width: 18rem;
+  margin: 3%;
+}
+
+.selectorRecetas {
+  margin: 3%;
+}
+
+#filtro {
+  margin: 1%;
+}
+
+#selector {
+  margin: 1%;
+}
+
+.container {
+  width: 200px;
+  height: 60px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+#divlocation {
+  text-align: center;
+}
+
+#divproductid {
+  visibility: hidden;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .box {
+    margin: 20px;
+  }
+  .product-info {
+    margin: 20px;
+  }
+}
+
+.containerr {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.box {
+  width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px 0 #999;
+}
+
+.product-img {
+  float: left;
+  margin-top: 20px;
+  transition: all 0.5s linear;
+}
+
+.product-info {
+  float: right;
+  margin-top: 20px;
+  margin-right: 40px;
+}
+
+h1 {
+  margin-bottom: 50px;
+  font-weight: bold;
+  font-size: 2.5em;
+  color: #333;
+  font-family: "Archivo Black", sans-serif;
+}
+
+.price {
+  margin-top: 5px;
+  font-size: 35px;
+  font-weight: bolder;
+  color: rgb(27, 148, 209);
+}
+
+.description {
+  margin-top: -20px;
+  margin-right: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  /* background: linear-gradient(45deg,  rgba(66, 183, 245,0.8) 0%,rgba(66, 245, 189,0.4) 100%);
+  color: gray;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+
+.container {
+  width: 1170px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin: auto;
+}
+.productobuscado {
+  display: flex;
+  glyph-orientation-horizontal: center;
+  justify-content: center;
+  width: 18rem;
+  margin: 3%;
+}
+
+/* Start Landing Page */
+
+.hero-image {
+  /*  This creates an image overlay  */
+  background-image: 
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)),
+    
+    /* photo coutesy of unsplash */
+    url("./images/fotolandingpage.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* to ensure the image takes up the entire viewport */
+  height: 100vh;  
+  position: relative;
+}
+
+/* centers the content on the viewport */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  color: #fff;
+  /*  words remain as is without breaking up  */
+  white-space: nowrap;
+  
+  /*  This creates a text shadow around the the text within the hero-text div  */
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4),
+               0px 8px 13px rgba(0, 0, 0, 0.1),
+               0px 16px 23px rgba(0, 0, 0, 0.1);
+  
+}
+
+:root {
+  --starting-color: #9FACE6;
+  --ending-color: #74EBD5;
+}
+.hero-text h1 {
+  font-size: 6em;
+  font-weight: 300;
+  color: #fff;
+  
+}
+.gradient-text {
+  font-size: 4rem;
+  font-weight: bold;
+  transition: background-color 1s ease;
+}
+
+.gradient-text.active-gradient {
+  background-color: #9FACE6;
+  background: linear-gradient(45deg, #9FACE6, #74EBD5, #9FACE6, #74EBD5);
+  background-size: 400% 200%;
+  
+  /* Redundant code :-( */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Animation */
+  -webkit-animation: GradientBreathe 2.42s linear infinite;
+  -moz-animation: GradientBreathe 2.42s linear infinite;
+  animation: GradientBreathe 2.42s linear infinite;
+}
+
+@-webkit-keyframes GradientBreathe {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@-moz-keyframes GradientBreathe {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes GradientBreathe { 
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.hero-text p {
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 700;
+}
+
+.btn-default,
+.btn-default:visited {
+  margin-top: 50px;
+  padding: 13px 25px;
+  border-radius: 5px;
+  border: none;
+  font-size: .9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #FFC312;
+  transition: background-color 0.1s;
+}
+
+.btn-default:hover,
+.btn-default:active {
+  background-color: #896600;
+}
+/* End Landing Page */
+
+/*Log In*/
+
+    @import url("https://fonts.googleapis.com/css?family=Poppins");
+
+    /* BASIC */
+
+    body {
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+    }
+
+    a {
+      color: #92badd;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      display: inline-block;
+      margin: 40px 8px 10px 8px;
+      color: #cccccc;
+    }
+
+    /* STRUCTURE */
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-height: 100%;
+      padding: 20px;
+    }
+
+    #formContent {
+      -webkit-border-radius: 10px 10px 10px 10px;
+      border-radius: 10px 10px 10px 10px;
+      background: #fff;
+      padding: 30px;
+      width: 90%;
+      max-width: 450px;
+      position:relative;
+      padding: 0px;
+      -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    #formFooter {
+      background-color: #f6f6f6;
+      border-top: 1px solid #dce8f1;
+      padding: 25px;
+      text-align: center;
+      -webkit-border-radius: 0 0 10px 10px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* TABS */
+
+    h2.active {
+      color: #0d0d0d;
+      border-bottom: 2px solid #5fbae9;
+    }
+
+    /* FORM TYPOGRAPHY*/
+
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    select {
+      background-color: #56baed;
+      border: none;
+      color: white;
+      padding: 15px 80px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 13px;
+      -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+      box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+      margin: 5px 20px 40px 20px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    input[type="button"]:hover,
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+      background-color: #39ace7;
+    }
+
+    input[type="button"]:active,
+    input[type="submit"]:active,
+    input[type="reset"]:active {
+      -moz-transform: scale(0.95);
+      -webkit-transform: scale(0.95);
+      -o-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+      transform: scale(0.95);
+    }
+
+    input[type="text"] {
+      background-color: #f6f6f6;
+      border: none;
+      color: #0d0d0d;
+      padding: 15px 32px;
+      text-align: left;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 5px;
+      width: 85%;
+      border: 2px solid #f6f6f6;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+    }
+
+    input[type="text"]:focus {
+      background-color: #fff;
+      border-bottom: 2px solid #5fbae9;
+    }
+
+    input[type="text"]:placeholder {
+      color: #cccccc;
+    }
+
+    /* ANIMATIONS */
+
+    /* Simple CSS3 Fade-in-down Animation */
+    .fadeInDown {
+      -webkit-animation-name: fadeInDown;
+      animation-name: fadeInDown;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+
+    /* Simple CSS3 Fade-in Animation */
+    @-webkit-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @-moz-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .fadeIn {
+      opacity: 0;
+      -webkit-animation: fadeIn ease-in 1;
+      -moz-animation: fadeIn ease-in 1;
+      animation: fadeIn ease-in 1;
+
+      -webkit-animation-fill-mode: forwards;
+      -moz-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      animation-duration: 1s;
+
+      
+    }
+
+    .fadeIn.first {
+      -webkit-animation-delay: 0.4s;
+      -moz-animation-delay: 0.4s;
+      animation-delay: 0.4s;
+    }
+
+    .fadeIn.second {
+      -webkit-animation-delay: 0.6s;
+      -moz-animation-delay: 0.6s;
+      animation-delay: 0.6s;
+    }
+
+    .fadeIn.third {
+      -webkit-animation-delay: 0.8s;
+      -moz-animation-delay: 0.8s;
+      animation-delay: 0.8s;
+    }
+    .fadeIn.fourth {
+      -webkit-animation-delay: 1s;
+      -moz-animation-delay: 1s;
+      animation-delay: 1s;
+    }
+    .fadeIn.fifth {
+      -webkit-animation-delay: 1.2s;
+      -moz-animation-delay: 1.2s;
+      animation-delay: 1.2s;
+    }
+    .fadeIn.sixth {
+      -webkit-animation-delay: 1.4s;
+      -moz-animation-delay: 1.4s;
+      animation-delay: 1.4s;
+    }
+    .fadeIn.seventh {
+      -webkit-animation-delay: 1.6s;
+      -moz-animation-delay: 1.6s;
+      animation-delay: 1.6s;
+    }
+    .fadeIn.eighth {
+      -webkit-animation-delay: 1.8s;
+      -moz-animation-delay: 1.8s;
+      animation-delay: 1.8s;
+    }
+
+    .fadeIn.nineth, #desplegable {
+      position: relative;
+      z-index: 1;
+      -webkit-animation-delay: 2s;
+      -moz-animation-delay: 2s;
+      animation-delay: 2s;
+      
+    }
+    .fadeIn.tenth {
+      -webkit-animation-delay: 2.2s;
+      -moz-animation-delay: 2.2s;
+      animation-delay: 2.2s;
+    }
+    .fadeIn.eleventh {
+      -webkit-animation-delay: 2.4s;
+      -moz-animation-delay: 2.4s;
+      animation-delay: 2.4s;
+    }
+
+    .fadeIn.x {
+
+      z-index: -1;
+      -webkit-animation-delay: 2.6s;
+      -moz-animation-delay: 2.6s;
+      animation-delay: 2.6s;
+      background-color: #059d35;
+    }
+    .fadeIn.x:hover {
+      background-color: #18e60a;
+    }
+
+    /* Simple CSS3 Fade-in Animation */
+    .underlineHover:after {
+      display: block;
+      left: 0;
+      bottom: -10px;
+      width: 0;
+      height: 2px;
+      background-color: #56baed;
+      content: "";
+      transition: width 0.2s;
+    }
+
+    .underlineHover:hover {
+      color: #0d0d0d;
+    }
+
+    .underlineHover:hover:after {
+      width: 100%;
+    }
+
+    /* OTHERS */
+
+    *:focus {
+      outline: none;
+    }
+
+    #icon {
+      width: 20%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+/* botones perfil */
+.buttons {
+  display: flex;
+  width: 250px;
+  gap: 10px;
+  --b: 5px;   /* the border thickness */
+  --h: 1.8em; /* the height */
+}
+
+.buttons a {
+  --_c: #88C100;
+  flex: calc(1.25 + var(--_s,0));
+  min-width: 0;
+  font-size: 24px;
+  font-weight: bold;
+  height: var(--h);
+  cursor: pointer;
+  color: var(--_c);
+  border: var(--b) solid var(--_c);
+  background: 
+    conic-gradient(at calc(100% - 1.3*var(--b)) 0,var(--_c) 209deg, #0000 211deg) 
+    border-box;
+  clip-path: polygon(0 0,100% 0,calc(100% - 0.577*var(--h)) 100%,0 100%);
+  padding: 0 calc(0.288*var(--h)) 0 0;
+  margin: 0 calc(-0.288*var(--h)) 0 0;
+  box-sizing: border-box;
+  transition: flex .4s;
+  text-decoration: none; /* add this to remove the underline */
+}
+
+.buttons a + a {
+  --_c: #FF003C;
+  flex: calc(.90 + var(--_s,0));
+  background: 
+    conic-gradient(from -90deg at calc(1.3*var(--b)) 100%,var(--_c) 119deg, #0000 121deg) 
+    border-box;
+  clip-path: polygon(calc(0.577*var(--h)) 0,100% 0,100% 100%,0 100%);
+  margin: 0 0 0 calc(-0.288*var(--h));
+  padding: 0 0 0 calc(0.288*var(--h));
+}
+
+.buttons a:focus-visible {
+  outline-offset: calc(-2*var(--b));
+  outline: calc(var(--b)/2) solid #000;
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+
+.buttons a:focus-visible + a {
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+
+.buttons a:has(+ a:focus-visible) {
+  background: none;
+  clip-path: none;
+  margin: 0;
+  padding: 0;
+}
+
+a:hover,
+a:active:not(:focus-visible) {
+  --_s: .75;
+}
+
+a:active {
+  box-shadow: inset 0 0 0 100vmax var(--_c);
+  color: #fff;
+}
