@@ -26,12 +26,11 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
+node/
+node_modules/
 !**/src/main/**/build/
 !**/src/test/**/build/
+yarn.lock
 
 ### VS Code ###
 .vscode/
-.frontend/build
-.frontend/node
-.frontend/node_modules
-.frontend/yarn.lock
