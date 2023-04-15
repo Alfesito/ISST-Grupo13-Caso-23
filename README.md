@@ -21,5 +21,10 @@
 
 ## Para ver en que branch trabajamos y cambiar:
 
-        $ git branch
-        $ git checkout <branch>
+        $ git branch    -> Ver branch
+        $ git checkout <branch>         -> Cambiar de branch
+
+# Uso de springdoc-openapi-ui  
+
+Esta biblioteca genera documentación sobre su API-REST automáticamente, en la dirección:
+        http://localhost:8080/swagger-ui.html
