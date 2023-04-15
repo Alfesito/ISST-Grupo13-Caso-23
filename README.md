@@ -11,7 +11,7 @@
 # Pasos para clonar el repositorio con la rama master:
 
         $ git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
-        $ git checkout master
+        $ git checkout master   -> Cambiar a la rama master
 
 # Pasos para subir al repositorio
     
