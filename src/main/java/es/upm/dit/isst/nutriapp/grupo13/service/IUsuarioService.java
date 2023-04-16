@@ -9,5 +9,5 @@ public interface IUsuarioService {
     List<Usuarios> getAll();
     Usuarios getById(Integer id);
     void remove(Integer id);
-    void save(Usuarios usuarios);
+    void save(Usuarios usuario);
 }
