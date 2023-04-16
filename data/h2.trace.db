@@ -183,3 +183,11 @@ CREATE TABLE usuarios (
   dieta VARCHAR(45) NOT NULL,
   cocina_fav VARCHAR(45)
 ) [42001-200]
+2023-04-16 13:17:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIO" no encontrada
+Table "USUARIO" not found; SQL statement:
+drop table usuario [42102-200]
+2023-04-16 13:17:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "USUARIOS[*]"; se esperaba "UPDATE, USE"
+Syntax error in SQL statement "USUARIOS[*]"; expected "UPDATE, USE"; SQL statement:
+USUARIOS [42001-200]
