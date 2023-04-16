@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
@@ -6,26 +6,62 @@ import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
 import iconAvatar from "../images/iconAvatar.png"
 
-export default function SignIn() {
-  
-  const { setAlergia } = useContext(MyContext);
-  const{ setHealth }= useContext(MyContext);
-  const {setDiet} = useContext(MyContext);
-  const {setCuisine} = useContext(MyContext);
+export default function SignIn() { 
+  const  [ username, setUsername ] = useState();
+  const  [ contraseña, setContraseña ] = useState();
+  const  [ correo, setCorreo ] = useState();
+  const  [ edad, setEdad ] = useState();
+  const  [ peso, setPeso ] = useState();
+  const  [ altura, setAltura ] = useState();
+  const { alergia, setAlergia } = useContext(MyContext);
+  const { health, setHealth }= useContext(MyContext);
+  const { diet, setDiet} = useContext(MyContext);
+  const {cuisine, setCuisine} = useContext(MyContext);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log({"username":username,"contrasena":contraseña,"correo":correo})
+    await fetch("/guardar",
+    {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({"username":username,"contrasena":contraseña,"correo":correo})
+    })
+    .then(function(res){ console.log(res) })
+    .catch(function(res){ console.log(res) })
+  };
 
-  const handleInputChange= (e)=>{
-    setAlergia(e)
+  const handleUsername = (event) => {
+    setUsername(event.target.value);
+    console.log(username)
+  };
+  const handleContraseña = (event) => {
+    setContraseña(event.target.value);
+  };
+  const handleCorreo = (event) => {
+    setCorreo(event.target.value);
+  };
+  const handleEdad = (event) => {
+    setEdad(event.target.value);
+  };
+  const handlePeso = (event) => {
+    setPeso(event.target.value);
+  };
+  const handleAltura = (event) => {
+    setAltura(event.target.value);
+  };
+  const handleInputChange= (event)=>{
+    setAlergia(event.target.value)
   }
-
   const handleSeleccionHealth = (event) => {
     setHealth(event.target.value);
   };
-
   const handleSeleccionCuisine = (event) => {
     setCuisine(event.target.value);
   };
-
   const handleSeleccionDiet = (event) => {
     setDiet(event.target.value);
   };
@@ -47,55 +83,66 @@ export default function SignIn() {
           </div>
 
           {/* Sign Form */}
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               id="username"
               class="fadeIn second"
               placeholder="Escriba su nombre de usuario"
+              value={username}
+              onChange={handleUsername}
             ></input>
             <input
               type="text"
               id="email"
               class="fadeIn third"
               placeholder="Escriba su correo electrónico"
+              value={correo}
+              onChange={handleCorreo}
             ></input>
             <input
               type="text"
               id="password"
               class="fadeIn fourth"
               placeholder="Escriba su contraseña"
+              value={contraseña}
+              onChange={handleContraseña}
             ></input>
             <input
               type="text"
-              id="repassword"
-              class="fadeIn fifth"
-              placeholder="Repita su contraseña"
+              id="edad"
+              class="fadeIn sixth"
+              placeholder="Escriba su edad"
+              value={edad}
+              onChange={handleEdad}
             ></input>
             <input
               type="text"
               id="weight"
-              class="fadeIn sixth"
+              class="fadeIn seventh"
               placeholder="Registre su peso en Kg"
+              value={peso}
+              onChange={handlePeso}
             ></input>
             <input
               type="text"
               id="height"
-              class="fadeIn seventh"
+              class="fadeIn eighth"
               placeholder="Registre su altura en cm"
+              value={altura}
+              onChange={handleAltura}
             ></input>
-          
-            
             <input
               type="text"
               id="producto no deseado"
-              class="fadeIn eighth"
+              class="fadeIn nineth"
               placeholder="Introduzca producto no deseado"
-              onChange={(e)=>handleInputChange(e.target.value)}
+              value={alergia}
+              onChange={handleInputChange}
             ></input>
             
             <div class="fadeIn nineth">
-            <select className="selectorRecetas" onChange={handleSeleccionDiet} >
+            <select className="selectorRecetas" onChange={handleSeleccionDiet} value={diet}>
               <option value="">Estilo de dieta</option>
               <option value="balanced">Equilibrado</option>
               <option value="high-fiber">Alto en fibra</option>
@@ -108,7 +155,7 @@ export default function SignIn() {
            
             {/* Dropdown */}
             <div class="fadeIn tenth">
-              <select className="selectorRecetas" onChange={handleSeleccionCuisine} >
+              <select className="selectorRecetas" onChange={handleSeleccionCuisine} value={cuisine}>
                 <option value="cuisineType">Tipo de Cocina</option>
                 <option value="American">Americana</option>
                 <option value="Asian">Asiática</option>
@@ -131,7 +178,7 @@ export default function SignIn() {
               </select>
             </div>
             <div class="fadeIn eleventh">
-            <select className="selectorRecetas" onChange={handleSeleccionHealth}>
+            <select className="selectorRecetas" onChange={handleSeleccionHealth} value={health}>
               <option value="">Alergias</option>
               <option value="alcohol-free">Sin alcohol</option>
               <option value="celery-free">Sin apio</option>
@@ -153,9 +200,9 @@ export default function SignIn() {
             </select>
             </div>
 
-            <Link to="/navbar">
-              <input type="submit" class="fadeIn x" value="Regístrate" ></input>
-            </Link>
+            {/* <Link to="/navbar"> */}
+              <button type="submit" class="fadeIn x" value="Regístrate" >Regístrate</button>
+            {/* </Link> */}
           </form>
 
           {/* Remind Passowrd  */}

@@ -7,17 +7,17 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Usuarios{
-    @Id
-    private int id;
     @NotEmpty
     private String username;
     @NotEmpty
-    private String contraseña;
+    private String contrasena;
+    @Id
     @NotEmpty
     @Email
     private String correo;
     private int edad;
     private Double peso;
+    private Double altura;
     private String indeseado;
     private String alergia;
     private String dieta;
@@ -25,11 +25,10 @@ public class Usuarios{
 
     public Usuarios(){}
 
-    public Usuarios(int id, String username, String contraseña, String correo, int edad, Double peso, String indeseado,
-            String alergia, String dieta, String cocina_fav) {
-        this.id = id;
+    public Usuarios(String username, String contrasena, String correo, int edad, Double peso, String indeseado,
+            String alergia, String dieta, String cocina_fav, Double altura) {
         this.username = username;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.correo = correo;
         this.edad = edad;
         this.peso = peso;
@@ -37,13 +36,7 @@ public class Usuarios{
         this.alergia = alergia;
         this.dieta = dieta;
         this.cocina_fav = cocina_fav;
-    }
-
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+        this.altura = altura;
     }
     public String getUsername() {
         return username;
@@ -51,11 +44,11 @@ public class Usuarios{
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getContraseña() {
-        return contraseña;
+    public String getcontrasena() {
+        return contrasena;
     }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setcontrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
     public String getCorreo() {
         return correo;
@@ -100,12 +93,18 @@ public class Usuarios{
         this.cocina_fav = cocina_fav;
     }
 
+    public Double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Double altura) {
+        this.altura = altura;
+    }
+
     @Override
     public String toString() {
-        return "Usuario [id=" + id + ", username=" + username + ", contraseña=" + contraseña + ", correo=" + correo
-                + ", edad=" + edad + ", peso=" + peso + ", indeseado=" + indeseado + ", alergia=" + alergia + ", dieta="
-                + dieta + ", cocina_fav=" + cocina_fav + "]";
+        return "Usuarios [username=" + username + ", contrasena=" + contrasena + ", correo=" + correo
+                + ", edad=" + edad + ", peso=" + peso + ", altura=" + altura + ", indeseado=" + indeseado + ", alergia="
+                + alergia + ", dieta=" + dieta + ", cocina_fav=" + cocina_fav + "]";
     }
-    
-
 }

@@ -1,37 +1,39 @@
 package es.upm.dit.isst.nutriapp.grupo13.controller;
 
 import java.util.Map;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import es.upm.dit.isst.nutriapp.grupo13.model.Usuarios;
+import es.upm.dit.isst.nutriapp.grupo13.repository.UsuariosRepository;
+import es.upm.dit.isst.nutriapp.grupo13.service.IUsuarioService;
 
-@Controller
+@RestController
 public class UsuariosController {
-    public static final String VISTA_FORMULARIO = "singin";
-    private RestTemplate restTemplate = new RestTemplate();
+        @Autowired
+        private IUsuarioService service;
 
+        private final UsuariosRepository usuariosRepository;
 
-    @GetMapping("/crear")
-        public String crear(Map<String, Object> model) {
-                Usuarios usuario = new Usuarios();
-                model.put("usuario", usuario);
-                model.put("accion", "guardar");
-                return VISTA_FORMULARIO;
+    public UsuariosController(UsuariosRepository t) {
+        this.usuariosRepository = t;
+    }
+
+        @GetMapping("/api/usuarios")
+        List<Usuarios> readAll() {
+                return (List<Usuarios>) usuariosRepository.findAll();
         }
 
-    @PostMapping("/guardar")
-        public String guardar(@Validated Usuarios usuarios, BindingResult result) {
-                if (result.hasErrors()) {
-                        return VISTA_FORMULARIO;
-                }
-                try { restTemplate.postForObject("http://localhost:8080/usuarios/", usuarios, Usuarios.class);
-                } catch(Exception e) {}
-                return "redirect:" + "lista";
+        @PostMapping("/guardar")
+        public void save(@RequestBody Usuarios usuarios) {
+                service.save(usuarios);
         }
 }
