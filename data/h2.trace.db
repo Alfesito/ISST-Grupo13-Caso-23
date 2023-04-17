@@ -409,3 +409,7 @@ CREATE TABLE USUARIOS (
   COCINA_FAV VARCHAR(45),
   ALTURA DOUBLE
 ) [42101-200]
+2023-04-17 08:57:25 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "FORM" no encontrada
+Table "FORM" not found; SQL statement:
+delete form usuarios [42102-200]

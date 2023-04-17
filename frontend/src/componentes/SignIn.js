@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
@@ -19,31 +18,38 @@ export default function SignIn() {
   const { cuisine, setCuisine } = useContext(MyContext);
   const [correct, setCorrect] = useState(false);
 
-  const handleSubmit = async (e) => {
-    setCorrect(false)
+  const handleVerify = async (e) => {
     e.preventDefault();
     if (username === "" || contraseña === "" || correo === "") {
       setCorrect(false)
       alert("Campos obligatorios nulos")
-    } else {
-      console.log({ "username": username, "contrasena": contraseña, "correo": correo, "edad": edad, "peso": parseFloat(peso), "altura": parseFloat(altura), "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
-      await fetch("/guardar",
-        {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          body: JSON.stringify({ "username": username, "contrasena": contraseña, "correo": correo, "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
-        })
-        .then(function (res) {
-          if (res.status === 200) {
-            setCorrect(true)
-          }
-          console.log(res)
-        })
-        .catch(function (res) { console.log(res) })
+    } else if (!correct){
+      setCorrect(true)
+    }else{
+      handleSubmit(e)
     }
+  }
+  const handleSubmit = async (e) => {
+    setCorrect(false)
+    e.preventDefault();
+
+    console.log({ "username": username, "contrasena": contraseña, "correo": correo, "edad": edad, "peso": parseFloat(peso), "altura": parseFloat(altura), "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
+    await fetch("/guardar",
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({ "username": username, "contrasena": contraseña, "correo": correo, "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
+      })
+      .then(function (res) {
+        if (res.status === 200) {
+          setCorrect(true)
+        }
+        console.log(res)
+      })
+      .catch(function (res) { console.log(res) })
 
   };
 
@@ -95,7 +101,7 @@ export default function SignIn() {
           </div>
 
           {/* Sign Form */}
-          <form onSubmit={handleSubmit}>
+          <form >
             <input
               type="text"
               id="username"
@@ -211,8 +217,8 @@ export default function SignIn() {
                 <option value="vegetarian">Vegetariano</option>
               </select>
             </div>
-            {correct ? <Link to="/navbar"><button type="submit" value="Regístrate" >Confirmar</button></Link> : 
-              <button type="submit" class="fadeIn x" value="Regístrate" >Regístrate</button>}
+            {correct ? <Link to="/navbar"><button type="submit" value="Confirmar" class="btn btn-success" onClick={handleVerify}>Confirmar</button></Link> :
+              <button type="submit" class="btn btn-info" value="Regístrate" onClick={handleVerify}>Regístrate</button>}
 
           </form>
 
@@ -226,10 +232,7 @@ export default function SignIn() {
       </div>
       <div>
         <Link to="/">
-          <Button id="volver" variant="danger">
-            {" "}
-            Volver{" "}
-          </Button>{" "}
+            <button id="volver" class="btn btn-danger">Volver</button>
         </Link>
       </div>
     </div>

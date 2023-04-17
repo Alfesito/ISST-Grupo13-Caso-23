@@ -19,12 +19,12 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public Usuarios getById(Integer id) {
+    public Usuarios getById(String id) {
         return (Usuarios) repository.findById(id).get();
     }
 
     @Override
-    public void remove(Integer id) {
+    public void remove(String id) {
         repository.deleteById(id);
     }
 
@@ -32,4 +32,5 @@ public class UsuarioService implements IUsuarioService{
     public void save(Usuarios usuario) {
         repository.save(usuario);
     }
+
 }
