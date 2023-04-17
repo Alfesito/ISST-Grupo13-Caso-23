@@ -16,21 +16,16 @@ export default function SignIn() {
   const { health, setHealth } = useContext(MyContext);
   const { diet, setDiet } = useContext(MyContext);
   const { cuisine, setCuisine } = useContext(MyContext);
-  const [correct, setCorrect] = useState(false);
 
   const handleVerify = async (e) => {
     e.preventDefault();
     if (username === "" || contraseña === "" || correo === "") {
-      setCorrect(false)
       alert("Campos obligatorios nulos")
-    } else if (!correct){
-      setCorrect(true)
-    }else{
+    } else {
       handleSubmit(e)
     }
   }
   const handleSubmit = async (e) => {
-    setCorrect(false)
     e.preventDefault();
 
     console.log({ "username": username, "contrasena": contraseña, "correo": correo, "edad": edad, "peso": parseFloat(peso), "altura": parseFloat(altura), "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
@@ -44,8 +39,8 @@ export default function SignIn() {
         body: JSON.stringify({ "username": username, "contrasena": contraseña, "correo": correo, "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
       })
       .then(function (res) {
-        if (res.status === 200) {
-          setCorrect(true)
+        if (res.status != 200) {
+          alert('Algo ha salido mal')
         }
         console.log(res)
       })
@@ -101,7 +96,7 @@ export default function SignIn() {
           </div>
 
           {/* Sign Form */}
-          <form >
+          <form onSubmit={handleVerify}>
             <input
               type="text"
               id="username"
@@ -217,22 +212,15 @@ export default function SignIn() {
                 <option value="vegetarian">Vegetariano</option>
               </select>
             </div>
-            {correct ? <Link to="/navbar"><button type="submit" value="Confirmar" class="btn btn-success" onClick={handleVerify}>Confirmar</button></Link> :
-              <button type="submit" class="btn btn-info" value="Regístrate" onClick={handleVerify}>Regístrate</button>}
-
+            <Link to="/login">
+              <input type="submit" class="fadeIn x" value="Regístrate" ></input>
+            </Link>
           </form>
-
-          {/* Remind Passowrd  */}
-          <div id="formFooter">
-            <lergia class="underlineHover" href="#">
-              ¿Olvidaste la constraseña?
-            </lergia>
-          </div>
         </div>
       </div>
       <div>
         <Link to="/">
-            <button id="volver" class="btn btn-danger">Volver</button>
+          <button id="volver" class="btn btn-danger">Volver</button>
         </Link>
       </div>
     </div>

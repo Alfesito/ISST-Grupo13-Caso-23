@@ -34,3 +34,5 @@ yarn.lock
 
 ### VS Code ###
 .vscode/
+.db
+data/

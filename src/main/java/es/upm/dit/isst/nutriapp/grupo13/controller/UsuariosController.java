@@ -44,10 +44,5 @@ public class UsuariosController {
                 } catch (Exception e) {
                 }
         }
-        @DeleteMapping("/cancelar/{id}")
-        ResponseEntity<Usuarios> eliminar(@PathVariable(value = "correo") String id) {
-                usuariosRepository.deleteById(id);
-                return ResponseEntity.ok().body(null);
-        }
 
 }
