@@ -1,6 +1,10 @@
 package es.upm.dit.isst.nutriapp.grupo13.controller;
 
+import java.io.Console;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,7 +67,7 @@ public class UsuariosController {
         }
         
         @PostMapping("/login/usuario")
-        public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
                 // Obtener el correo y la contraseña proporcionados por el usuario
                 String correo = loginRequest.getCorreo();
                 String contraseña = loginRequest.getContraseña();
@@ -73,6 +77,12 @@ public class UsuariosController {
 
                 // Validar las credenciales del usuario
                 if (usuario != null && passwordEncoder.matches(contraseña, usuario.getContrasena())) {
+                        // Obtener la sesión actual
+                        HttpSession session = request.getSession(true);
+                        
+                        // Almacenar la información del usuario en la sesión
+                        session.setAttribute("correo", correo);
+
                         return ResponseEntity.ok("Inicio de sesión exitoso");
                 } else {
                         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");

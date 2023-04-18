@@ -32,9 +32,9 @@ export default function LogIn() {
           .then((response) => {
             if (response.status === 200) {
               alert("Login correcto")
+              sessionStorage.setItem('correo', correo);
             }else{
               alert("Login incorrecto")
-              // window.location.href = '/';
             }
             console.log(response)
           })
