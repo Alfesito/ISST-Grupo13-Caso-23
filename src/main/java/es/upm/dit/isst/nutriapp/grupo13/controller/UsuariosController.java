@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,8 @@ import es.upm.dit.isst.nutriapp.grupo13.service.IUsuarioService;
 public class UsuariosController {
         @Autowired
         private IUsuarioService service;
+        @Autowired
+        private PasswordEncoder passwordEncoder;
         private final UsuariosRepository usuariosRepository;
         private RestTemplate restTemplate = new RestTemplate();
 
@@ -46,6 +49,9 @@ public class UsuariosController {
                         else if (service.existeUsuario(usuario.getUsername())) {
                                 return ResponseEntity.badRequest().body("El usuario ya está registrado.");
                         }else{
+                                // Codificar la contraseña antes de guardarla en la base de datos
+                                String passwordCodificada = passwordEncoder.encode(usuario.getcontrasena());
+                                usuario.setcontrasena(passwordCodificada);
                                 // Registrar el usuario si el correo y usuario no existen en la base de datos
                                 service.save(usuario);
                                 return ResponseEntity.ok("Usuario registrado exitosamente.");
