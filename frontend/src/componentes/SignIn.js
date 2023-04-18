@@ -75,7 +75,7 @@ export default function SignIn() {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "username": username, "contrasena": contraseña1, "correo": correo, "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
+        body: JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString() })
       })
       .then(function (res) {
         if (res.status === 200) {

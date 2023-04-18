@@ -44,10 +44,10 @@ public class Usuarios{
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getcontrasena() {
+    public String getContrasena() {
         return contrasena;
     }
-    public void setcontrasena(String contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
     public String getCorreo() {

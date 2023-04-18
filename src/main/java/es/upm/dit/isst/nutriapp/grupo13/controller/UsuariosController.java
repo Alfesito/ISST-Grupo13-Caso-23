@@ -39,7 +39,7 @@ public class UsuariosController {
         }
 
         @PostMapping("/registrar/usuario")
-        public ResponseEntity<?> registrar(@RequestBody @Validated Usuarios usuario, BindingResult result) {
+        public ResponseEntity<String> registrar(@RequestBody @Validated Usuarios usuario, BindingResult result) {
                 try {
                         // Verificar si el correo ya existe en la base de datos
                         if (service.existeCorreo(usuario.getCorreo())) {
@@ -50,8 +50,8 @@ public class UsuariosController {
                                 return ResponseEntity.badRequest().body("El usuario ya está registrado.");
                         }else{
                                 // Codificar la contraseña antes de guardarla en la base de datos
-                                String passwordCodificada = passwordEncoder.encode(usuario.getcontrasena());
-                                usuario.setcontrasena(passwordCodificada);
+                                String passwordCodificada = passwordEncoder.encode(usuario.getContrasena());
+                                usuario.setContrasena(passwordCodificada);
                                 // Registrar el usuario si el correo y usuario no existen en la base de datos
                                 service.save(usuario);
                                 return ResponseEntity.ok("Usuario registrado exitosamente.");
@@ -59,8 +59,25 @@ public class UsuariosController {
                         
                 } catch (Exception e) {
                         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar el usuario.");
-
                 }
         }
+        
+        @PostMapping("/login/usuario")
+        public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+                // Obtener el correo y la contraseña proporcionados por el usuario
+                String correo = loginRequest.getCorreo();
+                String contraseña = loginRequest.getContraseña();
 
+                // Consultar el usuario registrado en la base de datos
+                Usuarios usuario = usuariosRepository.findByCorreo(correo); // Suponiendo que tienes un método findByCorreo() en tu repositorio para buscar un usuario por correo electrónico
+
+                // Validar las credenciales del usuario
+                if (usuario != null && passwordEncoder.matches(contraseña, usuario.getContrasena())) {
+                        return ResponseEntity.ok("Inicio de sesión exitoso");
+                } else {
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+                }
+        }
 }
+
+
