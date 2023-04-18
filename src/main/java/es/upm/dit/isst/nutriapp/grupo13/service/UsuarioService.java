@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import es.upm.dit.isst.nutriapp.grupo13.model.Usuarios;
 import es.upm.dit.isst.nutriapp.grupo13.repository.UsuariosRepository;
+import org.springframework.http.ResponseEntity;
+
 
 @Service
 public class UsuarioService implements IUsuarioService{
@@ -33,4 +35,13 @@ public class UsuarioService implements IUsuarioService{
         repository.save(usuario);
     }
 
+    @Override
+    public boolean existeCorreo(String correo){
+        return repository.existsById(correo);
+    }
+
+    @Override
+    public boolean existeUsuario(String username){
+        return repository.existsById(username);
+    }
 }

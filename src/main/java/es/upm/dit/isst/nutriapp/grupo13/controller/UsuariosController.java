@@ -3,6 +3,7 @@ package es.upm.dit.isst.nutriapp.grupo13.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -34,14 +35,25 @@ public class UsuariosController {
                 return (List<Usuarios>) usuariosRepository.findAll();
         }
 
-        @PostMapping("/guardar")
-        public void save(@RequestBody @Validated Usuarios usuario, BindingResult result) {
-                if (result.hasErrors()) {
-                        service.save(usuario);
-                }
+        @PostMapping("/registrar/usuario")
+        public ResponseEntity<?> registrar(@RequestBody @Validated Usuarios usuario, BindingResult result) {
                 try {
-                        service.save(usuario);
+                        // Verificar si el correo ya existe en la base de datos
+                        if (service.existeCorreo(usuario.getCorreo())) {
+                                return ResponseEntity.badRequest().body("El correo ya está registrado.");
+                        }
+                        // Verificar si el usuario ya existe en la base de datos
+                        else if (service.existeUsuario(usuario.getUsername())) {
+                                return ResponseEntity.badRequest().body("El usuario ya está registrado.");
+                        }else{
+                                // Registrar el usuario si el correo y usuario no existen en la base de datos
+                                service.save(usuario);
+                                return ResponseEntity.ok("Usuario registrado exitosamente.");
+                        }
+                        
                 } catch (Exception e) {
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar el usuario.");
+
                 }
         }
 

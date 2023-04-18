@@ -68,7 +68,7 @@ export default function SignIn() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("/guardar",
+    await fetch("/registrar/usuario",
       {
         headers: {
           'Accept': 'application/json',
@@ -82,7 +82,7 @@ export default function SignIn() {
           alert("Gracias por registrarte :)")
           window.location.href = '/';
         } else {
-          alert('Algo ha salido mal')
+          alert('Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados')
           setCorrect(false)
         }
         console.log(res)

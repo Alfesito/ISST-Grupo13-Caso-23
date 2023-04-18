@@ -10,4 +10,6 @@ public interface IUsuarioService {
     Usuarios getById(String id);
     void remove(String id);
     void save(Usuarios usuario);
+    boolean existeCorreo(String correo);
+    boolean existeUsuario(String username);
 }
