@@ -7,7 +7,8 @@ import iconAvatar from "../images/iconAvatar.png"
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
-  const [contraseña, setContraseña] = useState("");
+  const [contraseña1, setContraseña1] = useState("");
+  const [contraseña2, setContraseña2] = useState("");
   const [correo, setCorreo] = useState("");
   const [edad, setEdad] = useState("");
   const [peso, setPeso] = useState("");
@@ -20,9 +21,43 @@ export default function SignIn() {
 
   const handleVerify = async (e) => {
     e.preventDefault();
-    if (username === "" || contraseña === "" || correo === "") {
+    if (username === "" || contraseña1 === "" || correo === "" || contraseña2 === "") {
       setCorrect(false)
       alert("Campos obligatorios nulos")
+    } else if (username.length < 5 || contraseña1.length < 5 || contraseña2.length < 5) {
+      setCorrect(false)
+      alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
+      return;
+
+    } else if (!/\S+@\S+\.\S+/.test(correo)) {
+      setCorrect(false)
+      alert("Correo electrónico inválido");
+      return;
+
+    } else if (contraseña1 !== contraseña2) {
+      setCorrect(false)
+      alert("Las contraseñas no son iguales");
+      return;
+    } else if (edad !== "" || peso !== "" || altura !== "") {
+      if (isNaN(parseInt(edad) && edad !== "")) {
+        setCorrect(false)
+        alert("La edad debe ser un número entero");
+        return;
+      } else if (isNaN(parseFloat(peso)) && peso !== "") {
+        setCorrect(false)
+        alert("El peso debe ser un número decimal");
+        return;
+      } else if (isNaN(parseFloat(altura)) && altura !== "") {
+        setCorrect(false)
+        alert("La altura debe ser un número decimal");
+        return;
+      } else{
+        if (correct) {
+          await handleSubmit(e)
+        } else {
+          setCorrect(true)
+        }
+      }
     } else {
       if (correct) {
         await handleSubmit(e)
@@ -40,13 +75,13 @@ export default function SignIn() {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "username": username, "contrasena": contraseña, "correo": correo, "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
+        body: JSON.stringify({ "username": username, "contrasena": contraseña1, "correo": correo, "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia, "alergia": health, "dieta": diet, "cocina_fav": cuisine })
       })
       .then(function (res) {
         if (res.status === 200) {
-          alert("Gracias por registrarte")
+          alert("Gracias por registrarte :)")
           window.location.href = '/';
-        }else{
+        } else {
           alert('Algo ha salido mal')
           setCorrect(false)
         }
@@ -58,8 +93,11 @@ export default function SignIn() {
   const handleUsername = (event) => {
     setUsername(event.target.value);
   };
-  const handleContraseña = (event) => {
-    setContraseña(event.target.value);
+  const handleContraseña1 = (event) => {
+    setContraseña1(event.target.value);
+  };
+  const handleContraseña2 = (event) => {
+    setContraseña2(event.target.value);
   };
   const handleCorreo = (event) => {
     setCorreo(event.target.value);
@@ -121,12 +159,20 @@ export default function SignIn() {
               onChange={handleCorreo}
             ></input>
             <input
-              type="text"
-              id="password"
+              type="password"
+              id="password1"
               class="fadeIn fourth"
               placeholder="Escriba su contraseña"
-              value={contraseña}
-              onChange={handleContraseña}
+              value={contraseña1}
+              onChange={handleContraseña1}
+            ></input>
+            <input
+              type="password"
+              id="password2"
+              class="fadeIn fourth"
+              placeholder="Reescriba su contraseña"
+              value={contraseña2}
+              onChange={handleContraseña2}
             ></input>
             <input
               type="text"
@@ -221,13 +267,12 @@ export default function SignIn() {
             </div>
             {correct ? <Link to="/login"><button type="submit" value="Confirmar" class="btn btn-success" onClick={handleVerify}>Confirmar</button></Link> :
               <button type="submit" class="btn btn-info" value="Regístrate" onClick={handleVerify}>Regístrate</button>}
-              {/* <input type="submit" class="fadeIn x" value="Regístrate"></input> */}
           </form>
         </div>
       </div>
       <div>
         <Link to="/">
-            <button id="volver" class="btn btn-danger">Volver</button>
+          <button id="volver" class="btn btn-danger">Volver</button>
         </Link>
       </div>
     </div>

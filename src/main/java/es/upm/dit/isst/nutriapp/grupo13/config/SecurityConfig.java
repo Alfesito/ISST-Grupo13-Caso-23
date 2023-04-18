@@ -14,12 +14,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .headers().frameOptions().disable()
-            .and()
+                .and()
             .authorizeRequests()
-            .antMatchers("/**").permitAll() // Permitir acceso a cualquier ruta sin necesidad de autenticación
-            .and()
-            .formLogin().disable() // Enable form-based authentication
-            .logout().disable() // Enable logout
+                .antMatchers(",","/login","/signin").permitAll() // Permitir acceso a cualquier ruta sin necesidad de autenticación
+                .and()
+            .formLogin().disable() // Disable login
+            .logout().disable() // Disable logout
             .csrf().disable() // Disable CSRF protection for simplicity, but you should enable it in production
             .httpBasic();
         return http.build();
