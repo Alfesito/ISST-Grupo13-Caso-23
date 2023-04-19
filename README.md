@@ -3,7 +3,7 @@
         
         $ ./mvnw clean install spring-boot:run -DskipTests=true
 
-    - Windows(no se han comprobado estos comandos):
+    - Windows:
         
         $ .\mvnw clean install spring-boot:run
 
