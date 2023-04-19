@@ -7,10 +7,10 @@ import { useEffect } from "react";
 import { mockdata } from "./constants/products";
 import { mockdatarecipe } from "./constants/recipe";
 
-import { Routes, Route } from "react-router-dom";
 import Producto from "./componentes/search/Producto";
 import NotFound from "./componentes/NotFound";
 import API from "./constants/data";
+import { Route, Routes } from "react-router-dom";
 
 import Naavbar from "./componentes/Naavbar";
 import Prueba from "./componentes/Prueba";
@@ -122,10 +122,10 @@ function App() {
     
       <div className="App">
         <Routes>
-          <Route path="/" element={<LandingPage />}></Route>
-          <Route path="/navbar" element={<Naavbar />}></Route>
-          <Route path="/login" element={<LogIn />}></Route>
-          <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/" exact={true} element={<LandingPage />}></Route>
+          <Route path="/navbar" exact={true} element={<Naavbar />}></Route>
+          <Route path="/login" exact={true} element={<LogIn />}></Route>
+          <Route path="/signin" exact={true} element={<SignIn />}></Route>
           <Route path="/prueba" element={<Prueba />}></Route>
           <Route path="/perfil" element={<Perfil />}></Route>
           <Route
@@ -162,6 +162,7 @@ function App() {
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
+
       </div>
     
   );

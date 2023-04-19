@@ -18,14 +18,18 @@ public class SecurityConfig {
             .headers().frameOptions().disable()
                 .and()
             .authorizeRequests()
-                .antMatchers(",","/login","/signin").permitAll() // Permitir acceso a cualquier ruta sin necesidad de autenticación
+                .antMatchers("/","/login","/signin").permitAll() // Permitir acceso a cualquier ruta sin necesidad de autenticación
                 .and()
-            .formLogin().disable() // Disable login
+            .formLogin() // Habilitar el formulario de inicio de sesión
+                .loginPage("/") // Especificar la página de inicio de sesión
+                .permitAll() // Permitir acceso a la página de inicio de sesión sin necesidad de autenticación
+                .and()
             .logout().disable() // Disable logout
             .csrf().disable() // Disable CSRF protection for simplicity, but you should enable it in production
-            .httpBasic();
+            .httpBasic().disable(); // Disable HTTP basic authentication
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){

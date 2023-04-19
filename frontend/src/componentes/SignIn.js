@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
@@ -17,53 +18,37 @@ export default function SignIn() {
   const { health, setHealth } = useContext(MyContext);
   const { diet, setDiet } = useContext(MyContext);
   const { cuisine, setCuisine } = useContext(MyContext);
-  const [correct, setCorrect] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleVerify = async (e) => {
     e.preventDefault();
     if (username === "" || contraseña1 === "" || correo === "" || contraseña2 === "") {
-      setCorrect(false)
       alert("Campos obligatorios nulos")
     } else if (username.length < 5 || contraseña1.length < 5 || contraseña2.length < 5) {
-      setCorrect(false)
       alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
       return;
-
     } else if (!/\S+@\S+\.\S+/.test(correo)) {
-      setCorrect(false)
       alert("Correo electrónico inválido");
       return;
-
     } else if (contraseña1 !== contraseña2) {
-      setCorrect(false)
       alert("Las contraseñas no son iguales");
       return;
     } else if (edad !== "" || peso !== "" || altura !== "") {
       if (isNaN(parseInt(edad) && edad !== "")) {
-        setCorrect(false)
         alert("La edad debe ser un número entero");
         return;
       } else if (isNaN(parseFloat(peso)) && peso !== "") {
-        setCorrect(false)
         alert("El peso debe ser un número decimal");
         return;
       } else if (isNaN(parseFloat(altura)) && altura !== "") {
-        setCorrect(false)
         alert("La altura debe ser un número decimal");
         return;
       } else{
-        if (correct) {
-          await handleSubmit(e)
-        } else {
-          setCorrect(true)
-        }
+        await handleSubmit(e)
       }
     } else {
-      if (correct) {
-        await handleSubmit(e)
-      } else {
-        setCorrect(true)
-      }
+      await handleSubmit(e)
     }
   }
   const handleSubmit = async (e) => {
@@ -79,11 +64,9 @@ export default function SignIn() {
       })
       .then(function (res) {
         if (res.status === 200) {
-          alert("Gracias por registrarte :)")
-          window.location.href = '/';
+          navigate("/login");
         } else {
           alert('Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados')
-          setCorrect(false)
         }
         console.log(res)
       })
@@ -265,8 +248,7 @@ export default function SignIn() {
                 <option value="vegetarian">Vegetariano</option>
               </select>
             </div>
-            {correct ? <Link to="/login"><button type="submit" value="Confirmar" class="btn btn-success" onClick={handleVerify}>Confirmar</button></Link> :
-              <button type="submit" class="btn btn-info" value="Regístrate" onClick={handleVerify}>Regístrate</button>}
+              <input type="submit" class="fadeIn x" value="Regístrate" onClick={handleVerify}></input>
           </form>
         </div>
       </div>
