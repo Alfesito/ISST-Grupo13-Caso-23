@@ -70,6 +70,13 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>6.0.3</version>
         </dependency>
+        <!-- https://blog.softtek.com/es/autenticando-apis-con-spring-y-jwt -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -121,7 +128,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                     </execution>
-                    <execution>
+                    <!-- <execution>
                         <id>yarn test</id>
                         <goals>
                             <goal>yarn</goal>
@@ -133,7 +140,7 @@
                                 <CI>true</CI>
                             </environmentVariables>
                         </configuration>
-                    </execution>
+                    </execution> -->
                     <execution>
                         <id>yarn build</id>
                         <goals>

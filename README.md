@@ -5,8 +5,7 @@
 
     - Windows(no se han comprobado estos comandos):
         
-        $ .\mvnw install    -> Solo la primera vez para instalar
-        $ .\mvnw run
+        $ .\mvnw clean install spring-boot:run
 
 # Pasos para clonar el repositorio con la rama master:
 
