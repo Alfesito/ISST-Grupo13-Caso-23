@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 import Nav from "react-bootstrap/Nav";
@@ -10,6 +9,12 @@ import Header from "./Header";
 import { Link } from "react-router-dom";
 
 function Naavbar() {
+
+  function logout(){
+    sessionStorage.removeItem('correo');
+    console.log("onclick");
+  }
+   
   return (
     <>
       <Header />
@@ -48,7 +53,7 @@ function Naavbar() {
               <Link to="/perfil" className="button">
                 Perfil
               </Link>
-              <Link to="/" className="button">
+              <Link to="/" className="button" onClick={logout}>
                 Salir
               </Link>
             </div>
