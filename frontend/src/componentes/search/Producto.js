@@ -19,10 +19,36 @@ function Producto(props) {
 
   const { alergia } = useContext(MyContext);
   const {handleAlergiaProd}= useContext(MyContext);
+  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
 
   const handleAñadir = (product,alergia) => {
-    handleAlergiaProd(product,alergia)
+    handleAlergiaProd(product,alergia);
+    handleSubmit(e);
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await fetch(`/api/añadir/ingestas/${correo}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({ "correo": correo, "comida": item.food.label, "kcal": (item.food.nutrients.ENERC_KCAL * qu) / 100, "proteina": (item.food.nutrients.PROCNT * qu) / 100, 
+        "grasa": (item.food.nutrients.FAT * qu) / 100, "carb": (item.food.nutrients.CHOCDF * qu) / 100, "fibra": (item.food.nutrients.FIBTG * qu) / 10 })
+      })
+      .then(function (res) {
+        if (res.status === 200) {
+          navigate("/alimentacion");
+        } else {
+          alert('Algo ha salido mal')
+        }
+        console.log(res)
+      })
+      .catch(function (res) { console.log(res) })
+  };
+
   return (
     // renderizar el producto
     <div>

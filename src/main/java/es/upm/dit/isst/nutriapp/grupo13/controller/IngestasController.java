@@ -22,6 +22,9 @@ import es.upm.dit.isst.nutriapp.grupo13.service.IIngestasService;
 @RestController
 public class IngestasController {
 
+        @Autowired
+        private IIngestasService service;
+
         private final IngestasRepository ingestasRepository;
                 public IngestasController(IngestasRepository t) {
                         this.ingestasRepository = t;
@@ -34,9 +37,9 @@ public class IngestasController {
         }
 
         @PostMapping("/api/añadir/ingestas/{correo}")
-        public ResponseEntity<String> añadirIngesta(@RequestBody Ingestas usuario, BindingResult result) {
+        public ResponseEntity<String> añadirIngesta(@RequestBody Ingestas ingesta, BindingResult result) {
                 try {
-        
+                        service.save(ingesta);
                         return ResponseEntity.ok("Alimento registrado exitosamente.");
                 } catch (Exception e) {
                         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar el alimento.");
