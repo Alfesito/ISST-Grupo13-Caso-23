@@ -27,13 +27,13 @@ function Naavbar() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link as={Link} to="/navbar">
+              <Nav.Link as={Link} to="/hoy">
                 Hoy
               </Nav.Link>
               <Nav.Link as={Link} to="/alimentacion">
                 Alimentación
               </Nav.Link>
-              <Nav.Link as={Link} to="/navbar">
+              <Nav.Link as={Link} to="/historial">
                 Historial
               </Nav.Link>
               <Nav.Link as={Link} to="/recomendaciones">

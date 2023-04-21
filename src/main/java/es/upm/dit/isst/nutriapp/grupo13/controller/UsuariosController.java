@@ -30,9 +30,8 @@ public class UsuariosController {
         private IUsuarioService service;
         @Autowired
         private PasswordEncoder passwordEncoder;
+        
         private final UsuariosRepository usuariosRepository;
-        private RestTemplate restTemplate = new RestTemplate();
-
         public UsuariosController(UsuariosRepository t) {
                 this.usuariosRepository = t;
         }

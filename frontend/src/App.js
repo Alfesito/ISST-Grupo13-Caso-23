@@ -23,6 +23,8 @@ import Recomendaciones from "./componentes/recipe/Recomendaciones";
 
 import { MyContext } from "./context/MyContext";
 import { useContext } from "react";
+import Historial from "./componentes/Historial";
+import Hoy from "./componentes/Hoy";
 
 function App() {
   const [loading, setLoading] = useState(true); // Estado para el indicador de carga
@@ -128,6 +130,8 @@ function App() {
           <Route path="/signin" exact={true} element={<SignIn />}></Route>
           <Route path="/prueba" element={<Prueba />}></Route>
           <Route path="/perfil" element={<Perfil />}></Route>
+          <Route path="/historial" element={<Historial />}></Route>
+          <Route path="/hoy" element={<Hoy />}></Route>
           <Route
             path="/alimentacion"
             element={

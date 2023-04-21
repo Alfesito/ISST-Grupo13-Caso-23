@@ -1,4 +1,5 @@
 import Naavbar from "./Naavbar";
+import React from "react";
 
 function Hoy(){
 
