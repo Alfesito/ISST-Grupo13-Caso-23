@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface IngestasRepository extends CrudRepository<Ingestas, String>{
     
     List<Ingestas> findAllByCorreo(String correo);
+    
+    
 }

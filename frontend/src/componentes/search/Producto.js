@@ -3,8 +3,10 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "../../context/MyContext";
+import { useNavigate } from 'react-router-dom';
+
 
 function Producto(props) {
   let { productId } = useParams();
@@ -20,14 +22,14 @@ function Producto(props) {
   const { alergia } = useContext(MyContext);
   const {handleAlergiaProd}= useContext(MyContext);
   const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const navigate = useNavigate();
 
   const handleAñadir = (product,alergia) => {
     handleAlergiaProd(product,alergia);
-    handleSubmit(e);
+    handleSubmit();
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     await fetch(`/api/añadir/ingestas/${correo}`,
       {
         headers: {
