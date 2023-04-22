@@ -21,6 +21,7 @@ public class Usuarios{
     private int edad;
     private Double peso;
     private Double altura;
+    private String sexo;
     private String indeseado;
     private String alergia;
     private String dieta;
@@ -28,19 +29,24 @@ public class Usuarios{
 
     public Usuarios(){}
 
-    public Usuarios(String username, String contrasena, String correo, int edad, Double peso, String indeseado,
-            String alergia, String dieta, String cocina_fav, Double altura) {
+    
+    public Usuarios(@NotEmpty String username, @NotEmpty String contrasena, @NotEmpty @Email String correo, int edad,
+            Double peso, Double altura, String sexo, String indeseado, String alergia, String dieta,
+            String cocina_fav) {
         this.username = username;
         this.contrasena = contrasena;
         this.correo = correo;
         this.edad = edad;
         this.peso = peso;
+        this.altura = altura;
+        this.sexo = sexo;
         this.indeseado = indeseado;
         this.alergia = alergia;
         this.dieta = dieta;
         this.cocina_fav = cocina_fav;
-        this.altura = altura;
     }
+
+
     public String getUsername() {
         return username;
     }
@@ -109,5 +115,15 @@ public class Usuarios{
         return "Usuarios [username=" + username + ", contrasena=" + contrasena + ", correo=" + correo
                 + ", edad=" + edad + ", peso=" + peso + ", altura=" + altura + ", indeseado=" + indeseado + ", alergia="
                 + alergia + ", dieta=" + dieta + ", cocina_fav=" + cocina_fav + "]";
+    }
+
+
+    public String getSexo() {
+        return sexo;
+    }
+
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }

@@ -87,6 +87,11 @@ public class UsuariosController {
                         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
                 }
         }
+
+        @GetMapping("/api/perfil/{correo}")
+        Usuarios readPerfilUsuarios(@PathVariable String correo) {
+                return (Usuarios) usuariosRepository.findByCorreo(correo);
+        }
 }
 
 

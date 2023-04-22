@@ -14,6 +14,7 @@ export default function SignIn() {
   const [edad, setEdad] = useState("");
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
+  const [sexo, setSexo] = useState("");
   const { alergia, setAlergia } = useContext(MyContext);
   const { health, setHealth } = useContext(MyContext);
   const { diet, setDiet } = useContext(MyContext);
@@ -60,7 +61,7 @@ export default function SignIn() {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString() })
+        body: JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString(), "sexo": sexo })
       })
       .then(function (res) {
         if (res.status === 200) {
@@ -105,6 +106,9 @@ export default function SignIn() {
   };
   const handleSeleccionDiet = (event) => {
     setDiet(event.target.value);
+  };
+  const handleSeleccionSexo = (event) => {
+    setSexo(event.target.value);
   };
 
   return (
@@ -189,6 +193,13 @@ export default function SignIn() {
               value={alergia}
               onChange={handleInputChange}
             ></input>
+
+<div class="fadeIn tenth">
+              <select className="selectorRecetas" onChange={handleSeleccionSexo} value={cuisine}>
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>
+              </select>
+            </div>
 
             <div class="fadeIn nineth">
               <select className="selectorRecetas" onChange={handleSeleccionDiet} value={diet}>
