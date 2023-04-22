@@ -68,7 +68,7 @@ export default function SignIn() {
         } else {
           alert('Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados')
         }
-        console.log(res)
+        console.log(JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString() }))
       })
       .catch(function (res) { console.log(res) })
   };

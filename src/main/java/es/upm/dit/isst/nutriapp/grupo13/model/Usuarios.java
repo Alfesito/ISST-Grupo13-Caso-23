@@ -9,15 +9,14 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Usuarios{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
     @NotEmpty
     private String username;
     @NotEmpty
     private String contrasena;
     @NotEmpty
     @Email
+    @Id
     private String correo;
     private int edad;
     private Double peso;

@@ -67,13 +67,13 @@ function Lista(props) { // Devuelve una lista de productos
                   <Link to={"/products/" + id}>
                     <Button variant="info">Ver</Button>
                   </Link>
-                  <Button
+                  {/* <Button
                     variant="success"
                     onClick={() => handleAñadir(item.food.label)}
                     style={{ float: "right" }}
                   >
                     Añadir
-                  </Button>
+                  </Button> */}
                 </Card.Body>
               </Card>
             );

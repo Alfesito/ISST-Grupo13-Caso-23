@@ -3,8 +3,10 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "../../context/MyContext";
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Recipe(props) { // Definicion del componente Recipe
@@ -14,12 +16,36 @@ function Recipe(props) { // Definicion del componente Recipe
     props.theproducts &&
     props.theproducts.findIndex((el) => el.recipe.label === recipeId);
   let item = props.theproducts[id];
-
  
   const { handleAlergiaRecipe } = useContext(MyContext);
+  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    await fetch(`/api/añadir/ingestas/${correo}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({ "correo": correo, "comida": item.recipe.label, "kcal": item.recipe.calories, "proteina": item.recipe.totalNutrients.PROCNT.quantity, 
+        "grasa": item.recipe.totalNutrients.FAT.quantity, "carb": item.recipe.totalNutrients.ENERC_KCAL.quantity, "fibra": item.recipe.totalNutrients.ENERC_KCAL.quantity })
+      })
+      .then(function (res) {
+        if (res.status === 200) {
+          navigate("/recomendaciones");
+        } else {
+          alert('Algo ha salido mal')
+        }
+        console.log(res)
+      })
+      .catch(function (res) { console.log(res) })
+  };
 
   const handleAñadir = (name, ingredients) => { //
     handleAlergiaRecipe(name, ingredients);
+    handleSubmit();
   };
   return ( // Renderizar el componente Recipe
     <div>

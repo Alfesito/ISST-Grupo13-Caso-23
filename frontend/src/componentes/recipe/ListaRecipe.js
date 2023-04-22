@@ -39,7 +39,7 @@ function ListaRecipe(props) { // declaracion del componente ListaRecipe como una
                   {/* anadir vista de la receta */}
                     <Button variant="info">Ver</Button>
                   </Link>
-                  <Button
+                  {/* <Button
                     variant="success"
                     onClick={() =>
                       handleAñadir(
@@ -52,7 +52,7 @@ function ListaRecipe(props) { // declaracion del componente ListaRecipe como una
                     style={{ float: "right" }}
                   >
                     Añadir
-                  </Button>
+                  </Button> */}
                 </Card.Body>
               </Card>
             );

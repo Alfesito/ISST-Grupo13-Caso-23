@@ -14,7 +14,7 @@ function Historial() {
             //`/api/ingestas/${correo}`
             await fetch(`/api/ingestas/${correo}`)
             .then(response => response.json())
-            .then(data => setComidas(data) || console.log(data))
+            .then(data => setComidas(data.reverse()) || console.log(data))
             .catch(error => console.error(error));
         }
         obtenerComidas();
@@ -46,6 +46,7 @@ function Historial() {
                                 <td>{ingesta.carb}</td>
                                 <td>{ingesta.grasa}</td>
                                 <td>{ingesta.fibra}</td>
+                                <td><Button id="volver" variant="danger">Volver</Button></td>
                             </tr>
                         ))}
                     </tbody>
