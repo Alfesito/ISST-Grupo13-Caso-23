@@ -13,7 +13,7 @@ public class IngestasService implements IIngestasService{
     private IngestasRepository repository;
 
     @Override
-    public void remove(String id) {
+    public void remove(Long id) {
         repository.deleteById(id);
     }
 

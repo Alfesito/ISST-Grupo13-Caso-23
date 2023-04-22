@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface IngestasRepository extends CrudRepository<Ingestas, String>{
+public interface IngestasRepository extends CrudRepository<Ingestas, Long>{
     
     List<Ingestas> findAllByCorreo(String correo);
+    // void deleteById(Long id);
     
     
 }

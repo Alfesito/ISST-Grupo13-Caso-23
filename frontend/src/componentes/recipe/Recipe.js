@@ -8,7 +8,6 @@ import { MyContext } from "../../context/MyContext";
 import { useNavigate } from 'react-router-dom';
 
 
-
 function Recipe(props) { // Definicion del componente Recipe
   let { recipeId } = useParams();   // Obtener el parámetro recipeId de la URL mediante el hook useParams de react-router-dom
 
@@ -29,8 +28,8 @@ function Recipe(props) { // Definicion del componente Recipe
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "correo": correo, "comida": item.recipe.label, "kcal": item.recipe.calories, "proteina": item.recipe.totalNutrients.PROCNT.quantity, 
-        "grasa": item.recipe.totalNutrients.FAT.quantity, "carb": item.recipe.totalNutrients.ENERC_KCAL.quantity, "fibra": item.recipe.totalNutrients.ENERC_KCAL.quantity })
+        body: JSON.stringify({ "fecha":new Date(), "correo": correo, "comida": item.recipe.label, "kcal": item.recipe.calories, "proteina": Math.round(item.recipe.totalNutrients.PROCNT.quantity), 
+        "grasa": Math.round(item.recipe.totalNutrients.FAT.quantity), "carb": Math.round(item.recipe.totalNutrients.CHOCDF.quantity), "fibra": Math.round(item.recipe.totalNutrients.FIBTG.quantity) })
       })
       .then(function (res) {
         if (res.status === 200) {
@@ -91,12 +90,12 @@ function Recipe(props) { // Definicion del componente Recipe
                   </li>
                   <li>
                     Carbohidratos:{" "}
-                    {Math.round(item.recipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
+                    {Math.round(item.recipe.totalNutrients.CHOCDF.quantity)}{" "}
                     g<br />
                   </li>
                   <li>
                     Fibra:{" "}
-                    {Math.round(item.recipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
+                    {Math.round(item.recipe.totalNutrients.FIBTG.quantity)}{" "}
                     g<br />
                     <br />
                   </li>

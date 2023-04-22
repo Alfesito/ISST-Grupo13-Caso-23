@@ -5,18 +5,45 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "../../context/MyContext";
+import { useNavigate } from 'react-router-dom';
 
 
 function ListaRecipe(props) { // declaracion del componente ListaRecipe como una función
   
   const { handleAlergiaRecipe } = useContext(MyContext);
 
-  const handleAñadir = (name, ingredients,salud) => { // función manejadora de eventos
-    
-    handleAlergiaRecipe(name, ingredients,salud); // agrega recetas a una lista de alergias DADO un determinado contexto
+  const handleAñadir = (item) => { // función manejadora de eventos
+    handleAlergiaRecipe(item.recipe.label,item.recipe.ingredientLines,item.recipe.healthLabels); // agrega recetas a una lista de alergias DADO un determinado contexto
+    handleSubmit(item);
   };
+
+  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const navigate = useNavigate();
+
+  const handleSubmit = async (item) => {
+    await fetch(`/api/añadir/ingestas/${correo}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify({ "fecha":new Date(), "correo": correo, "comida": item.recipe.label, "kcal": item.recipe.calories, "proteina": Math.round(item.recipe.totalNutrients.PROCNT.quantity), 
+        "grasa": Math.round(item.recipe.totalNutrients.FAT.quantity), "carb": Math.round(item.recipe.totalNutrients.CHOCDF.quantity), "fibra": Math.round(item.recipe.totalNutrients.FIBTG.quantity) })
+      })
+      .then(function (res) {
+        if (res.status === 200) {
+          navigate("/recomendaciones");
+        } else {
+          alert('Algo ha salido mal')
+        }
+        console.log(res)
+      })
+      .catch(function (res) { console.log(res) })
+  };
+
   return (
     <div>
       <Row lg={4}>
@@ -39,20 +66,15 @@ function ListaRecipe(props) { // declaracion del componente ListaRecipe como una
                   {/* anadir vista de la receta */}
                     <Button variant="info">Ver</Button>
                   </Link>
-                  {/* <Button
+                  <Button
                     variant="success"
                     onClick={() =>
-                      handleAñadir(
-                        item.recipe.label,
-                        item.recipe.ingredientLines,
-                        item.recipe.healthLabels
-
-                      )
+                      handleAñadir(item)
                     }
                     style={{ float: "right" }}
                   >
                     Añadir
-                  </Button> */}
+                  </Button>
                 </Card.Body>
               </Card>
             );

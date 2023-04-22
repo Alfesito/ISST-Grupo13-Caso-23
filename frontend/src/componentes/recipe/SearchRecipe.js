@@ -19,12 +19,7 @@ function SearchRecipe(props){ // manejar la busqueda y los filtros de recetas
       if (API.API_connection) { // obtener los resultados de búsqueda a través de la API
         props.onButtonClick(filtro);
       }else{
-        let nombre = filtro.toUpperCase().replace(/\s/g, "");
-        let filtrados = props.theproducts && props.theproducts.filter((item) => {
-          return item.recipe.label.toUpperCase().replace(/\s/g, "").includes(nombre);
-        });
-        setFiltro(filtrados);
-        props.onInputChange(filtrados);
+        console.log("Sin conexion de la API")
       }
     };
     

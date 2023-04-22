@@ -24,6 +24,8 @@ function Producto(props) {
   const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
   const navigate = useNavigate();
 
+  
+
   const handleAñadir = (product,alergia) => {
     handleAlergiaProd(product,alergia);
     handleSubmit();
@@ -37,7 +39,7 @@ function Producto(props) {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "correo": correo, "comida": item.food.label, "kcal": (item.food.nutrients.ENERC_KCAL * qu) / 100, "proteina": (item.food.nutrients.PROCNT * qu) / 100, 
+        body: JSON.stringify({"fecha":new Date(), "correo": correo, "comida": item.food.label, "kcal": (item.food.nutrients.ENERC_KCAL * qu) / 100, "proteina": (item.food.nutrients.PROCNT * qu) / 100, 
         "grasa": (item.food.nutrients.FAT * qu) / 100, "carb": (item.food.nutrients.CHOCDF * qu) / 100, "fibra": (item.food.nutrients.FIBTG * qu) / 10 })
       })
       .then(function (res) {
