@@ -100,28 +100,28 @@ public class UsuariosController {
         }
 
         @PutMapping("/api/modificar/perfil/{correo}")
-        public ResponseEntity<Usuarios> updatePerfilUsuarios(@PathVariable String correo,
-                        @RequestParam Integer edad,
-                        @RequestParam Double peso,
-                        @RequestParam Integer altura,
-                        @RequestParam String alergia,
-                        @RequestParam String sexo,
-                        @RequestParam String dieta,
-                        @RequestParam String tipoCocina,
-                        @RequestParam String alergias) {
+        public ResponseEntity<String> updateUsuarios(@RequestBody Usuarios newUsuario, @PathVariable String correo) {
+                try {
+                        Usuarios usuario = usuariosRepository.findByCorreo(correo);
+                        if (usuario == null) {
+                                return ResponseEntity.notFound().build();
+                        }
+                        
+                        usuario.setPeso(newUsuario.getPeso());
+                        usuario.setAltura(newUsuario.getAltura());
+                        usuario.setEdad(newUsuario.getEdad());
+                        usuario.setIndeseado(newUsuario.getIndeseado());
+                        usuario.setAlergia(newUsuario.getAlergia());
+                        usuario.setDieta(newUsuario.getDieta());
+                        usuario.setCocina_fav(newUsuario.getCocina_fav());
+                        usuario.setSexo(newUsuario.getSexo());
 
-                Usuarios usuario = usuariosRepository.findByCorreo(correo); // buscar usuario por correo
-                usuario.setEdad(edad); // actualizar edad
-                usuario.setPeso(peso); // actualizar peso
-                usuario.setAltura(altura); // actualizar altura
-                usuario.setAlergia(alergia); // actualizar alergia
-                usuario.setSexo(sexo); // actualizar sexo
-                usuario.setDieta(dieta); // actualizar dieta
-                usuario.setCocina_fav(tipoCocina); // actualizar tipo de cocina
-                usuario.setIndeseado(alergias); // actualizar alergias
-                usuariosRepository.save(usuario); // guardar cambios en la base de datos
-
-                return ResponseEntity.ok().body(usuario);
-
+                        usuariosRepository.save(usuario);
+                        return ResponseEntity.ok().body("Usuario actualizado");
+                } catch (Exception e) {
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error al actualizar el usuario: " + e.getMessage());
+                }
         }
+
 }

@@ -4,7 +4,7 @@ import Table from "./Table";
 import { useState, useEffect } from "react";
 import Grafico from "./Grafico";
 
-export default function hoy() {
+export default function Hoy() {
   const [comidas, setComidas] = useState([]);
   const [correo, setCorreo] = useState(sessionStorage.getItem("correo"));
   const [totalKcal, setTotalKcal] = useState(0);

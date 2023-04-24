@@ -24,7 +24,7 @@ import Recomendaciones from "./componentes/recipe/Recomendaciones";
 import { MyContext } from "./context/MyContext";
 import { useContext } from "react";
 import Historial from "./componentes/Historial";
-import Hoy from "./componentes/hoy/hoy";
+import Hoy from "./componentes/hoy/Hoy";
 
 function App() {
   const [loading, setLoading] = useState(true); // Estado para el indicador de carga

@@ -194,14 +194,6 @@ export default function SignIn() {
               onChange={handleInputChange}
             ></input>
 
-<div class="fadeIn tenth">
-              <select className="selectorRecetas" onChange={handleSeleccionSexo} value={sexo}>
-                <option value="">Sexo</option>
-                <option value="hombre">Hombre</option>
-                <option value="mujer">Mujer</option>
-              </select>
-            </div>
-
             <div class="fadeIn nineth">
               <select className="selectorRecetas" onChange={handleSeleccionDiet} value={diet}>
                 <option value="">Estilo de dieta</option>
