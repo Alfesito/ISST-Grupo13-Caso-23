@@ -3,13 +3,13 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useState, useEffect } from "react";
 
-export default function Grafico() {
-  const percentage = 10;
+export default function Grafico(props) {
+  const percentage = (props.actual/props.maxValue).toFixed(2);
   return (
     <div className="circulo">
       <CircularProgressbar
-        value={percentage}
-        text={`${percentage}%`}
+        value={percentage*100}
+        text={`${percentage*100}%`}
         styles={buildStyles({
           // Rotation of path and trail, in number of turns (0-1)
           rotation: 0.75,
