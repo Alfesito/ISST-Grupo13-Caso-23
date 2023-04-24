@@ -27,13 +27,15 @@ public class IngestasController {
         private IIngestasService service;
 
         private final IngestasRepository ingestasRepository;
+
+        
                 public IngestasController(IngestasRepository t) {
                         this.ingestasRepository = t;
                 }
 
 
         @GetMapping("/api/ingestas/{correo}")
-        List<Ingestas> readAllIngestas(@PathVariable String correo) {
+        public List<Ingestas> readAllIngestas(@PathVariable String correo) {
                 return (List<Ingestas>) ingestasRepository.findAllByCorreo(correo);
         }
 

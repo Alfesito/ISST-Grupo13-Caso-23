@@ -2,6 +2,7 @@ import React from "react";
 import Naavbar from "../Naavbar";
 import Table from "./Table";
 import { useState, useEffect } from "react";
+import Grafico from "./Grafico";
 
 export default function hoy() {
   const [comidas, setComidas] = useState([]);
@@ -28,6 +29,7 @@ export default function hoy() {
     <div>
       <Naavbar />
       <Table comidas={comidas}/>
+      <Grafico comidas ={comidas}/>
     </div>
   );
 }
