@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,8 +32,9 @@ public class UsuariosController {
         private IUsuarioService service;
         @Autowired
         private PasswordEncoder passwordEncoder;
-        
+
         private final UsuariosRepository usuariosRepository;
+
         public UsuariosController(UsuariosRepository t) {
                 this.usuariosRepository = t;
         }
@@ -51,7 +54,7 @@ public class UsuariosController {
                         // Verificar si el usuario ya existe en la base de datos
                         else if (service.existeUsuario(usuario.getUsername())) {
                                 return ResponseEntity.badRequest().body("El usuario ya está registrado.");
-                        }else{
+                        } else {
                                 // Codificar la contraseña antes de guardarla en la base de datos
                                 String passwordCodificada = passwordEncoder.encode(usuario.getContrasena());
                                 usuario.setContrasena(passwordCodificada);
@@ -59,12 +62,13 @@ public class UsuariosController {
                                 service.save(usuario);
                                 return ResponseEntity.ok("Usuario registrado exitosamente.");
                         }
-                        
+
                 } catch (Exception e) {
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar el usuario.");
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                        .body("Error al registrar el usuario.");
                 }
         }
-        
+
         @PostMapping("/login/usuario")
         public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
                 // Obtener el correo y la contraseña proporcionados por el usuario
@@ -72,13 +76,15 @@ public class UsuariosController {
                 String contraseña = loginRequest.getContraseña();
 
                 // Consultar el usuario registrado en la base de datos
-                Usuarios usuario = usuariosRepository.findByCorreo(correo); // Suponiendo que tienes un método findByCorreo() en tu repositorio para buscar un usuario por correo electrónico
+                Usuarios usuario = usuariosRepository.findByCorreo(correo); // Suponiendo que tienes un método
+                                                                            // findByCorreo() en tu repositorio para
+                                                                            // buscar un usuario por correo electrónico
 
                 // Validar las credenciales del usuario
                 if (usuario != null && passwordEncoder.matches(contraseña, usuario.getContrasena())) {
                         // Obtener la sesión actual
                         HttpSession session = request.getSession(true);
-                        
+
                         // Almacenar la información del usuario en la sesión
                         session.setAttribute("correo", correo);
 
@@ -89,9 +95,33 @@ public class UsuariosController {
         }
 
         @GetMapping("/api/perfil/{correo}")
-        Usuarios readPerfilUsuarios(@PathVariable String correo) {
+        public Usuarios readPerfilUsuarios(@PathVariable String correo) {
                 return (Usuarios) usuariosRepository.findByCorreo(correo);
         }
+
+        @PutMapping("/api/modificar/perfil/{correo}")
+        public ResponseEntity<Usuarios> updatePerfilUsuarios(@PathVariable String correo,
+                        @RequestParam Integer edad,
+                        @RequestParam Double peso,
+                        @RequestParam Integer altura,
+                        @RequestParam String alergia,
+                        @RequestParam String sexo,
+                        @RequestParam String dieta,
+                        @RequestParam String tipoCocina,
+                        @RequestParam String alergias) {
+
+                Usuarios usuario = usuariosRepository.findByCorreo(correo); // buscar usuario por correo
+                usuario.setEdad(edad); // actualizar edad
+                usuario.setPeso(peso); // actualizar peso
+                usuario.setAltura(altura); // actualizar altura
+                usuario.setAlergia(alergia); // actualizar alergia
+                usuario.setSexo(sexo); // actualizar sexo
+                usuario.setDieta(dieta); // actualizar dieta
+                usuario.setCocina_fav(tipoCocina); // actualizar tipo de cocina
+                usuario.setIndeseado(alergias); // actualizar alergias
+                usuariosRepository.save(usuario); // guardar cambios en la base de datos
+
+                return ResponseEntity.ok().body(usuario);
+
+        }
 }
-
-

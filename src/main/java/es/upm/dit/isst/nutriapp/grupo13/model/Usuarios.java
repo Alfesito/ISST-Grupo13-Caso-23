@@ -20,7 +20,7 @@ public class Usuarios{
     private String correo;
     private int edad;
     private Double peso;
-    private Double altura;
+    private int altura;
     private String sexo;
     private String indeseado;
     private String alergia;
@@ -31,7 +31,7 @@ public class Usuarios{
 
     
     public Usuarios(@NotEmpty String username, @NotEmpty String contrasena, @NotEmpty @Email String correo, int edad,
-            Double peso, Double altura, String sexo, String indeseado, String alergia, String dieta,
+            Double peso, int altura, String sexo, String indeseado, String alergia, String dieta,
             String cocina_fav) {
         this.username = username;
         this.contrasena = contrasena;
@@ -102,11 +102,11 @@ public class Usuarios{
         this.cocina_fav = cocina_fav;
     }
 
-    public Double getAltura() {
+    public int getAltura() {
         return altura;
     }
 
-    public void setAltura(Double altura) {
+    public void setAltura(int altura) {
         this.altura = altura;
     }
 

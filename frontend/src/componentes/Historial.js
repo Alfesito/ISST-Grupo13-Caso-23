@@ -40,6 +40,8 @@ function Historial() {
         })
         .catch(function (res) { console.log(res) })
     }
+
+
     return (
         <>
             <Naavbar />

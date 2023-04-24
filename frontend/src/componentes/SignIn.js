@@ -42,7 +42,7 @@ export default function SignIn() {
       } else if (isNaN(parseFloat(peso)) && peso !== "") {
         alert("El peso debe ser un número decimal");
         return;
-      } else if (isNaN(parseFloat(altura)) && altura !== "") {
+      } else if (isNaN(parseInt(altura)) && altura !== "") {
         alert("La altura debe ser un número decimal");
         return;
       } else{
@@ -61,7 +61,7 @@ export default function SignIn() {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        body: JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString(), "sexo": sexo })
+        body: JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": parseInt(altura), "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString(), "sexo": sexo.toString() })
       })
       .then(function (res) {
         if (res.status === 200) {
@@ -195,7 +195,7 @@ export default function SignIn() {
             ></input>
 
 <div class="fadeIn tenth">
-              <select className="selectorRecetas" onChange={handleSeleccionSexo} value={cuisine}>
+              <select className="selectorRecetas" onChange={handleSeleccionSexo} value={sexo}>
                 <option value="">Sexo</option>
                 <option value="hombre">Hombre</option>
                 <option value="mujer">Mujer</option>
