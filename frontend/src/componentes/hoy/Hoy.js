@@ -7,36 +7,33 @@ import Grafico from "./Grafico";
 export default function hoy() {
   const [comidas, setComidas] = useState([]);
   const [correo, setCorreo] = useState(sessionStorage.getItem("correo"));
-  let totalKcal=0;
-  let kcalArray
+  const [totalKcal, setTotalKcal] = useState(0);
+  
   const objetivoKcal = 6000;
 
   async function obtenerComidas() {
-    const correoActual = sessionStorage.getItem("correo");
-    setCorreo(correoActual);
-    //`/api/ingestas/${correo}`
-    await fetch(`/api/ingestas/${correo}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setComidas(data.reverse());
-        sumaKcal();
-        console.log(totalKcal)
-      })
-      .catch((error) => console.error(error));
-  }
+  const correoActual = sessionStorage.getItem("correo");
+  setCorreo(correoActual);
+  //`/api/ingestas/${correo}`
+  await fetch(`/api/ingestas/${correo}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setComidas(data.reverse());
+      console.log(comidas); // Aquí ya debería mostrar el array actualizado
+      const kcalArray = data.map((product) => product.kcal); 
+      setTotalKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0));
+      console.log(totalKcal); // Aquí ya debería mostrar la suma de las kcal
+    })
+    .catch((error) => console.error(error));
+}
 
-  useEffect(() => {
-    obtenerComidas()
-    console.log(comidas)
-
-  }, []);
+useEffect(() => {
+  obtenerComidas();
+}, []);
 
 
 
-   function sumaKcal(){
-    kcalArray = comidas.products.map((product) => product.kcal);
-    totalKcal = kcalArray.reduce((acc, kcal) => acc + kcal, 0);
-  }
+
   
   
   return (
