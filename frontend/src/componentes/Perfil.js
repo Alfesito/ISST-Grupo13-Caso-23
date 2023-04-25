@@ -2,9 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../context/MyContext";
+import Naavbar from "./Naavbar";
 
 function Perfil() {
-  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const { correo } = useContext(MyContext);
   const [perfil, setPerfil] = useState([]);
   const [cambiar, setCambiar] = useState(false);
   const [edad, setEdad] = useState("");
@@ -21,8 +24,6 @@ function Perfil() {
   }, []);
 
   async function getDatosUsuario() {
-    const correoActual = sessionStorage.getItem('correo');
-    setCorreo(correoActual);
     await fetch(`/api/perfil/${correo}`)
       .then(response => response.json())
       .then(data => setPerfil(data) || console.log(data))
@@ -41,8 +42,7 @@ function Perfil() {
     setCambiar(true);
   }
 
-  async function guardarCambios(e) {
-    e.preventDefault();
+  async function guardarCambios() {
     await fetch(`/api/modificar/perfil/${correo}`,
       {
         headers: {
@@ -50,10 +50,13 @@ function Perfil() {
           'Content-Type': 'application/json'
         },
         method: "PUT",
-        body: JSON.stringify({ "correo": correo.toString(), "edad": parseInt(edad), "peso": parseFloat(peso), "altura": parseInt(altura), "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString(), "sexo": sexo.toString() }),
+        body: JSON.stringify({ "correo": correo, "edad": edad, "peso": peso, "altura": 
+          altura, "indeseado": alergia, "alergia": health, "dieta": diet,
+          "cocina_fav": cuisine, "sexo": sexo }),
       })
-      .then(setCambiar(false) || console.log(JSON.stringify({ "edad": parseInt(edad), "peso": parseFloat(peso), "altura": parseInt(altura), "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString(), "sexo": sexo.toString() })))
+      .then(getDatosUsuario)
       .catch(error => console.error(error));
+      setCambiar(false);
   }
 
   const handleEdad = (event) => {
@@ -83,6 +86,7 @@ function Perfil() {
 
   return (
     <div>
+      <Naavbar />
       <h1><b>Nombre de usuario:</b></h1>
       {cambiar ?
         <div>
@@ -198,10 +202,10 @@ function Perfil() {
         </div>
 
       }
-
-      <Link to={"/navbar"}>
+{/* 
+      <Link to={"/hoy"}>
         <Button variant="danger">Volver</Button>
-      </Link>
+      </Link> */}
 
     </div>
   );

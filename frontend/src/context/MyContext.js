@@ -41,11 +41,11 @@ export default function ContextProvider({ children }) {
     }
   };
   const handleAlergiaRecipe = (name, ingr,salud) => {
-      // const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
-      // const jsonStringSalud= JSON.stringify(salud).toLowerCase();
+      const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
+      const jsonStringSalud= JSON.stringify(salud).toLowerCase();
       // Da error las anteriores definiciones de variables
-      const jsonStringIngr = ingr;
-      const jsonStringSalud= salud;
+      // const jsonStringIngr = ingr;
+      // const jsonStringSalud= salud;
       
       if(alergia.length !==0 ){
         if(health && jsonStringSalud.includes(health)){

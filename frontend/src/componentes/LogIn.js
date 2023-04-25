@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
+import { useEffect } from "react";
 
 import iconAvatar from "../images/iconAvatar.png"
 
@@ -13,7 +14,11 @@ export default function LogIn() {
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
   const { correo } = useContext(MyContext);
-  const {logInCorreo} = useContext(MyContext);
+  const {logInCorreo, logOutCorreo} = useContext(MyContext);
+
+  useEffect(() => {
+    logOutCorreo();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
