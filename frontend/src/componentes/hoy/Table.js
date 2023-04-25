@@ -24,11 +24,11 @@ function Table(props) {
           {comidas.map(producto => (
             <tr>
             <td class="text-left">{producto.comida}</td>
-            <td class="text-left">{producto.kcal}</td>
-            <td class="text-left">{producto.proteina}</td>
-            <td class="text-left">{producto.grasa}</td>
-            <td class="text-left">{producto.carb}</td>
-            <td class="text-left">{producto.fibra}</td>
+            <td class="text-left">{producto.kcal.toFixed(2)}</td>
+            <td class="text-left">{producto.proteina.toFixed(2)}</td>
+            <td class="text-left">{producto.grasa.toFixed(2)}</td>
+            <td class="text-left">{producto.carb.toFixed(2)}</td>
+            <td class="text-left">{producto.fibra.toFixed(2)}</td>
           </tr>
           ))
           }

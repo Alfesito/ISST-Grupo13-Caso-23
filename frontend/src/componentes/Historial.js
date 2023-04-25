@@ -59,11 +59,11 @@ function Historial() {
                         {comidas && comidas.map(ingesta => (
                             <tr key={ingesta.id}>
                                 <td>{ingesta.comida}</td>
-                                <td>{ingesta.kcal}</td>
-                                <td>{ingesta.proteina}</td>
-                                <td>{ingesta.carb}</td>
-                                <td>{ingesta.grasa}</td>
-                                <td>{ingesta.fibra}</td>
+                                <td>{ingesta.kcal.toFixed(2)}</td>
+                                <td>{ingesta.proteina.toFixed(2)}</td>
+                                <td>{ingesta.carb.toFixed(2)}</td>
+                                <td>{ingesta.grasa.toFixed(2)}</td>
+                                <td>{ingesta.fibra.toFixed(2)}</td>
                                 <td>{ingesta.fecha}</td>
                                 <td><Button id={ingesta.id} variant="danger" onClick={() => eliminarIngesta(ingesta.id)}>Eliminar</Button></td>
                             </tr>

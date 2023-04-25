@@ -35,7 +35,8 @@ export default function Grafico(props) {
           })}
         />
       </div>
-      <h2>{props.titulo}</h2>
+      <h2>{props.info}</h2>
+      <h3>{props.titulo}</h3>
     </div>
   );
 }

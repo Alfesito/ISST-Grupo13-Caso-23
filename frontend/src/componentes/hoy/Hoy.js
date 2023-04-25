@@ -8,13 +8,26 @@ import { MyContext } from "../../context/MyContext";
 
 export default function Hoy() {
   const [comidas, setComidas] = useState([]);
-  const { correo } = useContext(MyContext);    
+  const { correo } = useContext(MyContext);
   const [totalKcal, setTotalKcal] = useState(0);
   const [totalProt, setTotalProt] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
   const [totalGrasas, setTotalGrasas] = useState(0);
 
-  const objetivoKcal = 6000;
+  const [edad, setEdad] = useState(null);
+  const [altura, setAltura] = useState(null);
+  const [peso, setPeso] = useState(null);
+  const [sexo, setSexo] = useState(null);
+
+  const TMBhombre = 10 * peso + 6.25 * altura - 5 * edad + 5;
+  const TMBmujer = 10 * peso + 6.25 * altura - 5 * edad - 161;
+
+  const TDEE = null;
+
+  const objetivoKcal = 2000;
+  const objetivoProt = 0.8 * peso;
+  const objetivoGrasa = 0.3 * peso;
+  const objetivoCarbs = objetivoKcal - objetivoProt * 4 - objetivoGrasa * 9;
 
   async function obtenerComidas() {
     //`/api/ingestas/${correo}`
@@ -23,8 +36,8 @@ export default function Hoy() {
       .then((data) => {
         setComidas(data.reverse());
         const kcalArray = data.map((product) => product.kcal);
-        setTotalKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0));
-        
+        setTotalKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0).toFixed(2));
+
         const protArray = data.map((product) => product.proteina);
         setTotalProt(protArray.reduce((acc, prot) => acc + prot, 0));
 
@@ -33,59 +46,73 @@ export default function Hoy() {
 
         const grasasArray = data.map((product) => product.grasa);
         setTotalGrasas(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
+      })
+      .catch((error) => console.error(error));
+  }
 
-
+  async function obtenerUser() {
+    await fetch(`/api/perfil/${correo}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEdad(data.edad);
+        setAltura(data.altura);
+        setPeso(data.peso);
+        setSexo(data.sexo);
       })
       .catch((error) => console.error(error));
   }
 
   useEffect(() => {
     obtenerComidas();
+    obtenerUser();
   }, []);
 
   return (
     <div>
-  <Naavbar />
-  <div class="hoy">
-    <div class="graficos-wrapper">
-      <div class="grafico-wrapper">
-        <Grafico
-          comidas={comidas}
-          actual={totalKcal}
-          maxValue={objetivoKcal}
-          titulo={"Kcal"}
-        />
-      </div>
-      <div class="grafico-wrapper">
-        <Grafico
-          comidas={comidas}
-          actual={totalProt}
-          maxValue={objetivoKcal}
-          titulo={"Proteinas"}
-        />
-      </div>
-      <div class="grafico-wrapper">
-        <Grafico
-          comidas={comidas}
-          actual={totalCarbs}
-          maxValue={objetivoKcal}
-          titulo={"Carbohidratos"}
-        />
-      </div>
-      <div class="grafico-wrapper">
-        <Grafico
-          comidas={comidas}
-          actual={totalGrasas}
-          maxValue={objetivoKcal}
-          titulo={"Grasas"}
-        />
+      <Naavbar />
+      <div class="hoy">
+        <div class="graficos-wrapper">
+          <div class="circle">
+            <Grafico
+              comidas={comidas}
+              actual={totalKcal}
+              maxValue={objetivoKcal}
+              titulo={"Kcal"}
+              info={(objetivoKcal - totalKcal).toFixed(1) + " restantes"}
+            />
+          </div>
+          <div class="circle">
+            <Grafico
+              comidas={comidas}
+              actual={totalProt}
+              maxValue={objetivoProt}
+              titulo={"Proteinas"}
+              info={(objetivoProt - totalProt).toFixed(1) + " restantes"}
+            />
+          </div>
+          <div class="circle">
+            <Grafico
+              comidas={comidas}
+              actual={totalCarbs}
+              maxValue={objetivoCarbs}
+              titulo={"Carbohidratos"}
+              info={(objetivoCarbs - totalCarbs).toFixed(1) + " restantes"}
+            />
+          </div>
+          <div class="circle">
+            <Grafico
+              comidas={comidas}
+              actual={totalGrasas}
+              maxValue={objetivoGrasa}
+              titulo={"Grasas"}
+              info={(objetivoGrasa - totalGrasas).toFixed(1) + " restantes"}
+            />
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <Table comidas={comidas} />
+        </div>
       </div>
     </div>
-    <div class="table-wrapper">
-      <Table comidas={comidas} />
-    </div>
-  </div>
-</div>
-
   );
 }
