@@ -11,6 +11,7 @@ export default function ContextProvider({ children }) {
   const [cuisine, setCuisine] = useState("");
   const [correo, setCorreo] = useState("");
 
+
   const logInCorreo = (email) => {
     setCorreo(email);
   }
@@ -19,10 +20,21 @@ export default function ContextProvider({ children }) {
 
   }
 
+  const getUsuario = async () => {
+    await fetch(`/api/perfil/${correo}`)
+      .then(response => response.json())
+      .then(data => setAlergia(data.indeseado) ||
+        setCuisine(data.cocina_fav) ||
+        setHealth(data.alergia) ||
+        setDiet(data.dieta))
+      .catch(error => console.error(error));
+  }
 
-  const handleAlergiaProd = (product) => {
-    console.log(typeof (alergia))
-    if (alergia.length !== 0 && (product.toLowerCase().includes(alergia)) ){
+
+  const handleAlergiaProd = async (product) => {
+    getUsuario();
+
+    if (alergia.length !== 0 && (product.toLowerCase().includes(alergia))) {
       Swal.fire({
         title: "Este producto contiene " + alergia,
         text: "¿Quieres continuar?",
@@ -37,49 +49,36 @@ export default function ContextProvider({ children }) {
         }
       });
     }
-    else{
+    else {
       Swal.fire("Confirmado", "Producto añadido", "success");
     }
   };
-  const handleAlergiaRecipe = (name, ingr,salud) => {
-      const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
-      const jsonStringSalud= JSON.stringify(salud).toLowerCase();
-      
-      if(alergia.length !==0 ){
-        if(health && jsonStringSalud.includes(health)){
-        
-          Swal.fire("Confirmado", "Producto añadido", "success");
-        }
-  
-  
-        else if (
-          jsonStringIngr.toLowerCase().includes(alergia) ||
-          name.toLowerCase().includes(alergia)
-        ) {
-          Swal.fire({
-            title: "Este producto contiene "+ alergia,
-            text: "¿Quieres continuar?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Si,añadir",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire("Confirmado", "Producto añadido", "success");
-            }
-          });
-        }
-        else{
-          Swal.fire("Confirmado", "Producto añadido", "success");
-        }
-      }
+  const handleAlergiaRecipe = async (name, ingr) => {
+    getUsuario();
 
-      
-      else{
-        Swal.fire("Confirmado", "Producto añadido", "success");
-      }
-   
+    const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
+    if (
+      jsonStringIngr.toLowerCase().includes(alergia.toLowerCase()) ||
+      name.toLowerCase().includes(alergia.toLowerCase())
+    ) {
+      Swal.fire({
+        title: "Este producto contiene " + alergia.toLowerCase(),
+        text: "¿Quieres continuar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si,añadir",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Confirmado", "Producto añadido", "success");
+        }
+      });
+    }
+    else {
+      Swal.fire("Confirmado", "Producto añadido", "success");
+    }
+
   };
 
   return (
@@ -98,7 +97,8 @@ export default function ContextProvider({ children }) {
         correo,
         setCorreo,
         logInCorreo,
-        logOutCorreo
+        logOutCorreo,
+        getUsuario
       }}
     >
       {children}

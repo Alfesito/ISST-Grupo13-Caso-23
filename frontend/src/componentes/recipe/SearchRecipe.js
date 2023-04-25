@@ -12,6 +12,11 @@ function SearchRecipe(props){ // manejar la busqueda y los filtros de recetas
     const {health} = useContext(MyContext);
     const {diet} = useContext(MyContext);
     const {cuisine} = useContext(MyContext);
+    const { getUsuario } = useContext(MyContext);
+
+    useEffect(() => {
+      getUsuario();
+    }, []);
   
     const filtrar = () => { // Si la conexión API está disponible, la función llama al evento onButtonClick para obtener los resultados de búsqueda a través de la API. Si la conexión API no está disponible, la función filtra los productos por su nombre y 
       //luego llama al evento onInputChange para actualizar los resultados de búsqueda en la página.
