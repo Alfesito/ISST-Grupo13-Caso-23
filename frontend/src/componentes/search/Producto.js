@@ -4,8 +4,9 @@ import { Link, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 import { useContext, useState } from "react";
-import { MyContext } from "../../context/MyContext";
 import { useNavigate } from 'react-router-dom';
+import { MyContext } from "../../context/MyContext";
+import { useEffect } from "react";
 
 
 function Producto(props) {
@@ -21,10 +22,8 @@ function Producto(props) {
 
   const { alergia } = useContext(MyContext);
   const {handleAlergiaProd}= useContext(MyContext);
-  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const { correo } = useContext(MyContext);
   const navigate = useNavigate();
-
-  
 
   const handleAñadir = (product,alergia) => {
     handleAlergiaProd(product,alergia);

@@ -5,13 +5,13 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { MyContext } from "../../context/MyContext";
 import { useNavigate } from 'react-router-dom';
 
 function Lista(props) { // Devuelve una lista de productos
   const { handleAlergiaProd } = useContext(MyContext);
-  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const { correo } = useContext(MyContext);
   const navigate = useNavigate();
 
   // Cantidad de producto utilizada (por defecto 100g)

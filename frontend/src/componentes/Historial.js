@@ -10,7 +10,6 @@ function Historial() {
     const { correo } = useContext(MyContext);    
 
     async function obtenerComidas() {
-        //`/api/ingestas/${correo}`
         await fetch(`/api/ingestas/${correo}`)
             .then(response => response.json())
             .then(data => setComidas(data.reverse()) || console.log(data))

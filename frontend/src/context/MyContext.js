@@ -11,13 +11,14 @@ export default function ContextProvider({ children }) {
   const [cuisine, setCuisine] = useState("");
   const [correo, setCorreo] = useState("");
 
-
   const logInCorreo = (email) => {
     setCorreo(email);
   }
   const logOutCorreo = () => {
     setCorreo("");
+
   }
+
 
   const handleAlergiaProd = (product) => {
     console.log(typeof (alergia))
@@ -43,9 +44,6 @@ export default function ContextProvider({ children }) {
   const handleAlergiaRecipe = (name, ingr,salud) => {
       const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
       const jsonStringSalud= JSON.stringify(salud).toLowerCase();
-      // Da error las anteriores definiciones de variables
-      // const jsonStringIngr = ingr;
-      // const jsonStringSalud= salud;
       
       if(alergia.length !==0 ){
         if(health && jsonStringSalud.includes(health)){

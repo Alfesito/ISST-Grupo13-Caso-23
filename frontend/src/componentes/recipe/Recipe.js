@@ -17,7 +17,7 @@ function Recipe(props) { // Definicion del componente Recipe
   let item = props.theproducts[id];
  
   const { handleAlergiaRecipe } = useContext(MyContext);
-  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
+  const { correo } = useContext(MyContext);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {

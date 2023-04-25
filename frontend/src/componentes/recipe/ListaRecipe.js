@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Link } from "react-router-dom";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
 import { useNavigate } from 'react-router-dom';
 
@@ -13,14 +13,14 @@ import { useNavigate } from 'react-router-dom';
 function ListaRecipe(props) { // declaracion del componente ListaRecipe como una función
   
   const { handleAlergiaRecipe } = useContext(MyContext);
+  const { correo } = useContext(MyContext);
+  const navigate = useNavigate();
+
 
   const handleAñadir = (item) => { // función manejadora de eventos
     handleAlergiaRecipe(item.recipe.label,item.recipe.ingredientLines,item.recipe.healthLabels); // agrega recetas a una lista de alergias DADO un determinado contexto
     handleSubmit(item);
   };
-
-  const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
-  const navigate = useNavigate();
 
   const handleSubmit = async (item) => {
     await fetch(`/api/añadir/ingestas/${correo}`,

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Lista from "./Lista";
 import API from "../../constants/data";
 
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import { useContext } from "react";
+import { MyContext } from "../../context/MyContext";
 
 function SearchPage(props) { // def del componente SearchPage
   const [filtro, setFiltro] = useState(""); // Estado local para almacenar el valor del filtro de búsqueda
+ 
 
   const filtrar = () => {
     if (API.API_connection) { // Comprobación de la conexión a la API
