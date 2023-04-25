@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { MyContext } from "../context/MyContext";
 
 import iconAvatar from "../images/iconAvatar.png"
 
 export default function LogIn() {
 
-  const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
+  const { correo } = useContext(MyContext);
+  const {logInCorreo} = useContext(MyContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,8 +36,7 @@ export default function LogIn() {
         })
           .then((response) => {
             if (response.status === 200) {
-              sessionStorage.setItem('correo', correo);
-              navigate("/navbar");
+              navigate("/hoy");
             }else{
               alert("Login incorrecto")
             }
@@ -44,7 +46,7 @@ export default function LogIn() {
         }
       }
       const handleCorreo = (event) => {
-        setCorreo(event.target.value);
+        logInCorreo(event.target.value);
       };
       const handleContraseña = (event) => {
         setContraseña(event.target.value);

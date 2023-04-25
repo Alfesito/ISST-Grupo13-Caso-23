@@ -3,10 +3,12 @@ import Naavbar from "../Naavbar";
 import Table from "./Table";
 import { useState, useEffect } from "react";
 import Grafico from "./Grafico";
+import { useContext } from "react";
+import { MyContext } from "../../context/MyContext";
 
 export default function Hoy() {
   const [comidas, setComidas] = useState([]);
-  const [correo, setCorreo] = useState(sessionStorage.getItem("correo"));
+  const { correo } = useContext(MyContext);    
   const [totalKcal, setTotalKcal] = useState(0);
   const [totalProt, setTotalProt] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
@@ -15,8 +17,6 @@ export default function Hoy() {
   const objetivoKcal = 6000;
 
   async function obtenerComidas() {
-    const correoActual = sessionStorage.getItem("correo");
-    setCorreo(correoActual);
     //`/api/ingestas/${correo}`
     await fetch(`/api/ingestas/${correo}`)
       .then((response) => response.json())

@@ -1,16 +1,15 @@
 import { Button } from "react-bootstrap";
 import Naavbar from "./Naavbar";
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+import { MyContext } from "../context/MyContext";
 
 function Historial() {
 
     const [comidas, setComidas] = useState([]);
-    const [correo, setCorreo] = useState(sessionStorage.getItem('correo'));
-
+    const { correo } = useContext(MyContext);    
 
     async function obtenerComidas() {
-        const correoActual = sessionStorage.getItem('correo');
-        setCorreo(correoActual);
         //`/api/ingestas/${correo}`
         await fetch(`/api/ingestas/${correo}`)
             .then(response => response.json())
@@ -20,8 +19,6 @@ function Historial() {
 
     useEffect(() => {
         obtenerComidas();
-        console.log(correo)
-        console.log(comidas)
     }, []);
 
     async function eliminarIngesta(id) {

@@ -8,12 +8,20 @@ export default function ContextProvider({ children }) {
   const [alergia, setAlergia] = useState("");
   const [health, setHealth] = useState("");
   const [diet, setDiet] = useState("");
-  const [cuisine, setCuisine] = useState("");  
+  const [cuisine, setCuisine] = useState("");
+  const [correo, setCorreo] = useState("");
 
+
+  const logInCorreo = (email) => {
+    setCorreo(email);
+  }
+  const logOutCorreo = () => {
+    setCorreo("");
+  }
 
   const handleAlergiaProd = (product) => {
     console.log(typeof (alergia))
-    if (alergia.length !==0 && (product.toLowerCase().includes(alergia)) ){
+    if (alergia.length !== 0 && (product.toLowerCase().includes(alergia)) ){
       Swal.fire({
         title: "Este producto contiene " + alergia,
         text: "¿Quieres continuar?",
@@ -88,7 +96,11 @@ export default function ContextProvider({ children }) {
         diet,
         setDiet,
         cuisine,
-        setCuisine
+        setCuisine,
+        correo,
+        setCorreo,
+        logInCorreo,
+        logOutCorreo
       }}
     >
       {children}

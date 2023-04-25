@@ -5,15 +5,17 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Header from "./Header";
-
+import { useContext } from "react";
+import { MyContext } from "../context/MyContext";
 
 import { Link } from "react-router-dom";
 
 function Naavbar() {
 
-  function logout(){
-    sessionStorage.removeItem('correo');
-    console.log("onclick");
+  const {logOutCorreo} = useContext(MyContext);
+
+  function logOut(){
+    logOutCorreo();
   }
    
   return (
@@ -55,7 +57,7 @@ function Naavbar() {
               <Link to="/perfil" className="button">
                 Perfil
               </Link>
-              <Link to="/" className="button" onClick={logout}>
+              <Link to="/" className="button" onClick={logOut}>
                 Salir
               </Link>
             </div>
