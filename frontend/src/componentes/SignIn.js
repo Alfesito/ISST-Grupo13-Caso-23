@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
 import iconAvatar from "../images/iconAvatar.png"
 
+import Swal from "sweetalert2";
+
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [contraseña1, setContraseña1] = useState("");
@@ -25,25 +27,60 @@ export default function SignIn() {
   const handleVerify = async (e) => {
     e.preventDefault();
     if (username === "" || contraseña1 === "" || correo === "" || contraseña2 === "") {
-      alert("Campos obligatorios nulos")
+      // alert("Campos obligatorios nulos")
+      Swal.fire({
+        icon: 'error',
+        title: 'Vaya...',
+        text: 'Campos obligatorios nulos',
+      });
     } else if (username.length < 5 || contraseña1.length < 5 || contraseña2.length < 5) {
-      alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
+      // alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
+      Swal.fire({
+        icon: 'error',
+        title: 'Vaya...',
+        text: 'Nombre de usuario y contraseña deben tener al menos 5 caracteres',
+      });
       return;
     } else if (!/\S+@\S+\.\S+/.test(correo)) {
-      alert("Correo electrónico inválido");
+      // alert("Correo electrónico inválido");
+      Swal.fire({
+        icon: 'error',
+        title: 'Vaya...',
+        text: 'Correo electrónico inválido',
+      });
       return;
     } else if (contraseña1 !== contraseña2) {
-      alert("Las contraseñas no son iguales");
+      // alert("Las contraseñas no son iguales");
+      Swal.fire({
+        icon: 'error',
+        title: 'Vaya...',
+        text: 'Las contraseñas no son iguales',
+      });
       return;
     } else if (edad !== "" || peso !== "" || altura !== "") {
       if (isNaN(parseInt(edad) && edad !== "")) {
-        alert("La edad debe ser un número entero");
+        // alert("La edad debe ser un número entero");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'La edad debe ser un número entero',
+        });
         return;
       } else if (isNaN(parseFloat(peso)) && peso !== "") {
-        alert("El peso debe ser un número decimal");
+        // alert("El peso debe ser un número decimal");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'El peso debe ser un número decimal',
+        });
         return;
       } else if (isNaN(parseInt(altura)) && altura !== "") {
-        alert("La altura debe ser un número decimal");
+        // alert("La altura debe ser un número decimal");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'La altura debe ser un número decimal',
+        });
         return;
       } else{
         await handleSubmit(e)
