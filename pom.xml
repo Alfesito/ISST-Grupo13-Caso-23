@@ -166,7 +166,7 @@
         <node.version>v14.18.0</node.version>
         <yarn.version>v1.12.1</yarn.version>
         <spring-boot.version>2.4.4</spring-boot.version>
-        <spring-security.version>5.8.3</spring-security.version>
+        <spring-security.version>5.5.2</spring-security.version>
         <spring.version>5.3.27</spring.version>
     </properties>
 
