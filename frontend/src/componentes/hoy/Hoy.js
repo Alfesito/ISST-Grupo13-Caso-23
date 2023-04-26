@@ -62,6 +62,11 @@ export default function Hoy() {
       .catch((error) => console.error(error));
   }
 
+
+  const fechaHoy = new Date().toISOString().slice(0, 10);
+  const comidasHoy = comidas.filter(producto => producto.fecha === fechaHoy);
+
+
   useEffect(() => {
     obtenerComidas();
     obtenerUser();
@@ -110,7 +115,7 @@ export default function Hoy() {
           </div>
         </div>
         <div class="table-wrapper">
-          <Table comidas={comidas} />
+          <Table comidas={comidasHoy} />
         </div>
       </div>
     </div>
