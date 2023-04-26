@@ -8,10 +8,12 @@ RUN apt-get update && apt-get install -y openjdk-17-jdk maven
 # RUN git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
 
 # Set the working directory to the cloned repository
-WORKDIR /ISST-Grupo13-NutriApp
+# WORKDIR /ISST-Grupo13-NutriApp
 
 # Copy the source code into the Docker image
 COPY . .
+
+VOLUME ./data
 
 # Compile and run the application using Maven
 CMD ["./mvnw", "clean", "spring-boot:run", "-DskipTests=true"]
@@ -23,5 +25,5 @@ EXPOSE 8080
 #     $ docker build -t nutri-app .
 #     $ docker run -p 8080:8080 nutri-app
 
-# Eliminar la imagen:
+# Eliminar la imagen(es importante eliminar todos los contenedores creados, de otra forma puede que de problemas):
 #     $ docker rmi -f nutri-app
