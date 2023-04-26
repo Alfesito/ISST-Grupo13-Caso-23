@@ -7,11 +7,15 @@ import { Link } from "react-router-dom";
 
 import { useContext, useState, useEffect } from "react";
 import { MyContext } from "../../context/MyContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-function Lista(props) { // Devuelve una lista de productos
-  const { handleAlergiaProd } = useContext(MyContext);
+
+function Lista(props) {
+  // Devuelve una lista de productos
   const { correo } = useContext(MyContext);
+  const {getUsuario}= useContext(MyContext);
+  const {alergia} = useContext(MyContext);
   const navigate = useNavigate();
 
   // Cantidad de producto utilizada (por defecto 100g)
@@ -20,31 +24,72 @@ function Lista(props) { // Devuelve una lista de productos
       ? props.theparsed[0].quantity
       : 100;
 
-  const handleAñadir = (item) => { // manejar el evento de annadir un producto a la lista de alergias personalizada
-    handleAlergiaProd(item.food.label);
-    handleSubmit(item);
+  const handleAñadir = (item) => {
+    // manejar el evento de annadir un producto a la lista de alergias personalizada
+    handleAlergiaProdAndSubmit(item);
+    // handleSubmit(item);
+  };
+  
+  const handleAlergiaProdAndSubmit = async (item) => {
+    getUsuario();
+  
+    const confirm = async () => {
+      try {
+        await handleSubmit(item);
+        Swal.fire("Confirmado", "Producto añadido", "success");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    if (alergia.length !== 0 && item.food.label.toLowerCase().includes(alergia)) {
+      Swal.fire({
+        title: "Este producto contiene " + alergia,
+        text: "¿Quieres continuar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si,añadir",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await confirm();
+        }
+      });
+    } else {
+      await confirm();
+    }
   };
 
   const handleSubmit = async (item) => {
-    await fetch(`/api/añadir/ingestas/${correo}`,
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({"fecha":new Date(), "correo": correo, "comida": item.food.label, "kcal": (item.food.nutrients.ENERC_KCAL * qu) / 100, "proteina": (item.food.nutrients.PROCNT * qu) / 100, 
-        "grasa": (item.food.nutrients.FAT * qu) / 100, "carb": (item.food.nutrients.CHOCDF * qu) / 100, "fibra": (item.food.nutrients.FIBTG * qu) / 10 })
-      })
+    await fetch(`/api/añadir/ingestas/${correo}`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        fecha: new Date(),
+        correo: correo,
+        comida: item.food.label,
+        kcal: (item.food.nutrients.ENERC_KCAL * qu) / 100,
+        proteina: (item.food.nutrients.PROCNT * qu) / 100,
+        grasa: (item.food.nutrients.FAT * qu) / 100,
+        carb: (item.food.nutrients.CHOCDF * qu) / 100,
+        fibra: (item.food.nutrients.FIBTG * qu) / 10,
+      }),
+    })
       .then(function (res) {
         if (res.status === 200) {
           navigate("/alimentacion");
         } else {
-          alert('Algo ha salido mal')
+          alert("Algo ha salido mal");
         }
-        console.log(res)
+        console.log(res);
       })
-      .catch(function (res) { console.log(res) })
+      .catch(function (res) {
+        console.log(res);
+      });
   };
   return (
     //  Renderizado de la lista de productos
