@@ -83,7 +83,7 @@ export default function Hoy() {
               actual={totalKcal}
               maxValue={objetivoKcal}
               titulo={"Kcal"}
-              info={(objetivoKcal - totalKcal).toFixed(1) + " restantes"}
+              info={(objetivoKcal - totalKcal).toFixed(1) + " kcal restantes"}
             />
           </div>
           <div class="circle">
@@ -92,7 +92,7 @@ export default function Hoy() {
               actual={totalProt}
               maxValue={objetivoProt}
               titulo={"Proteinas"}
-              info={(objetivoProt - totalProt).toFixed(1) + " restantes"}
+              info={(objetivoProt - totalProt).toFixed(1) + " gramos restantes"}
             />
           </div>
           <div class="circle">
@@ -101,7 +101,7 @@ export default function Hoy() {
               actual={totalCarbs}
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
-              info={(objetivoCarbs - totalCarbs).toFixed(1) + " restantes"}
+              info={(objetivoCarbs - totalCarbs).toFixed(1) + " gramos restantes"}
             />
           </div>
           <div class="circle">
@@ -110,7 +110,7 @@ export default function Hoy() {
               actual={totalGrasas}
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
-              info={(objetivoGrasa - totalGrasas).toFixed(1) + " restantes"}
+              info={(objetivoGrasa - totalGrasas).toFixed(1) + " gramos restantes"}
             />
           </div>
         </div>

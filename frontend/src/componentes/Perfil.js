@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
 import Naavbar from "./Naavbar";
+import Swal from "sweetalert2";
 
 function Perfil() {
   const { correo } = useContext(MyContext);
@@ -63,13 +64,28 @@ function Perfil() {
   function verificarCambios() {
     if (edad !== "" || peso !== "" || altura !== "") {
       if (isNaN(parseInt(edad) && edad !== "")) {
-        alert("La edad debe ser un número entero");
+        //alert("La edad debe ser un número entero");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'La edad debe ser un número entero',
+        });
         return;
       } else if (isNaN(parseFloat(peso)) && peso !== "") {
-        alert("El peso debe ser un número decimal");
+        //alert("El peso debe ser un número decimal");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'El peso debe ser un número decimal',
+        });
         return;
       } else if (isNaN(parseInt(altura)) && altura !== "") {
-        alert("La altura debe ser un número decimal");
+        // alert("La altura debe ser un número decimal");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'La altura debe ser un número decimal',
+        });
         return;
       } else {
         guardarCambios();

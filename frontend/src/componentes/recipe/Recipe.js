@@ -44,7 +44,12 @@ function Recipe(props) {
         if (res.status === 200) {
           navigate("/recomendaciones");
         } else {
-          alert("Algo ha salido mal");
+          //alert("Algo ha salido mal");
+          Swal.fire({
+            icon: 'error',
+              title: 'Vaya...',
+              text: 'Algo ha salido mal',
+          })
         }
         console.log(res);
       })

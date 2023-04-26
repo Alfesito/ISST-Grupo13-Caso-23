@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
 import { useEffect } from "react";
+import Swal from 'sweetalert2';
 
 import iconAvatar from "../images/iconAvatar.png"
 
@@ -23,12 +24,29 @@ export default function LogIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
       if (correo === "" || contraseña === "") {
-        alert("Campos obligatorios nulos")
+        //alert("Campos obligatorios nulos")
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'Campos obligatorios nulos',
+        })
+        
       } else if (contraseña.length < 5) {
-        alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
+        //alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'Nombre de usuario y contraseña deben tener al menos 5 caracteres',
+        })
         return;
       } else if (!/\S+@\S+\.\S+/.test(correo)) {
-        alert("Correo electrónico inválido");
+        //alert("Correo electrónico inválido");
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya...',
+          text: 'Correo electrónico inválido',
+        })
+
         return;
       }else{
         // Aquí puedes hacer la solicitud POST al servidor con los datos del formulario
@@ -43,7 +61,12 @@ export default function LogIn() {
             if (response.status === 200) {
               navigate("/hoy");
             }else{
-              alert("Login incorrecto")
+              // alert("Login incorrecto")
+              Swal.fire({
+                icon: 'error',
+                title: 'Vaya...',
+                text: 'Login incorrecto',
+              })
             }
             console.log(response)
           })
