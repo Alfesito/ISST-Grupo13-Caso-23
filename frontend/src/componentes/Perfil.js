@@ -19,6 +19,7 @@ function Perfil() {
   const [health, setHealth] = useState("");
   const [diet, setDiet] = useState("");
   const [cuisine, setCuisine] = useState("");
+  const [actividad, setActividad] = useState("");
 
   useEffect(() => {
     getDatosUsuario();
@@ -26,39 +27,46 @@ function Perfil() {
 
   async function getDatosUsuario() {
     await fetch(`/api/perfil/${correo}`)
-      .then(response => response.json())
-      .then(data => setPerfil(data) || console.log(data))
-      .catch(error => console.error(error));
+      .then((response) => response.json())
+      .then((data) => setPerfil(data) || console.log(data))
+      .catch((error) => console.error(error));
   }
 
   function modificarPerfil() {
-    setAlergia(perfil.indeseado)
-    setAltura(perfil.altura)
-    setCuisine(perfil.cocina_fav)
-    setSexo(perfil.sexo)
-    setEdad(perfil.edad)
-    setHealth(perfil.alergia)
-    setDiet(perfil.dieta)
-    setPeso(perfil.peso)
+    setAlergia(perfil.indeseado);
+    setAltura(perfil.altura);
+    setCuisine(perfil.cocina_fav);
+    setSexo(perfil.sexo);
+    setEdad(perfil.edad);
+    setHealth(perfil.alergia);
+    setDiet(perfil.dieta);
+    setPeso(perfil.peso);
+    setActividad(perfil.actividad);
     setCambiar(true);
   }
 
-  async function guardarCambios(){
-    await fetch(`/api/modificar/perfil/${correo}`,
-          {
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            method: "PUT",
-            body: JSON.stringify({
-              "correo": correo, "edad": edad, "peso": peso, "altura":
-                altura, "indeseado": alergia, "alergia": health, "dieta": diet,
-              "cocina_fav": cuisine, "sexo": sexo
-            }),
-          })
-          .then(getDatosUsuario)
-          .catch(error => console.error(error));
+  async function guardarCambios() {
+    await fetch(`/api/modificar/perfil/${correo}`, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        correo: correo,
+        edad: edad,
+        peso: peso,
+        altura: altura,
+        indeseado: alergia,
+        alergia: health,
+        dieta: diet,
+        cocina_fav: cuisine,
+        sexo: sexo,
+        actividad: actividad,
+      }),
+    })
+      .then(getDatosUsuario)
+      .catch((error) => console.error(error));
   }
 
   function verificarCambios() {
@@ -66,31 +74,31 @@ function Perfil() {
       if (isNaN(parseInt(edad) && edad !== "")) {
         //alert("La edad debe ser un número entero");
         Swal.fire({
-          icon: 'error',
-          title: 'Vaya...',
-          text: 'La edad debe ser un número entero',
+          icon: "error",
+          title: "Vaya...",
+          text: "La edad debe ser un número entero",
         });
         return;
       } else if (isNaN(parseFloat(peso)) && peso !== "") {
         //alert("El peso debe ser un número decimal");
         Swal.fire({
-          icon: 'error',
-          title: 'Vaya...',
-          text: 'El peso debe ser un número decimal',
+          icon: "error",
+          title: "Vaya...",
+          text: "El peso debe ser un número decimal",
         });
         return;
       } else if (isNaN(parseInt(altura)) && altura !== "") {
         // alert("La altura debe ser un número decimal");
         Swal.fire({
-          icon: 'error',
-          title: 'Vaya...',
-          text: 'La altura debe ser un número decimal',
+          icon: "error",
+          title: "Vaya...",
+          text: "La altura debe ser un número decimal",
         });
         return;
       } else {
         guardarCambios();
       }
-    }else{
+    } else {
       guardarCambios();
     }
     setCambiar(false);
@@ -106,8 +114,8 @@ function Perfil() {
     setAltura(event.target.value);
   };
   const handleAlergia = (event) => {
-    setAlergia(event.target.value)
-  }
+    setAlergia(event.target.value);
+  };
   const handleSeleccionHealth = (event) => {
     setHealth(event.target.value);
   };
@@ -121,11 +129,16 @@ function Perfil() {
     setSexo(event.target.value);
   };
 
+  const handleSeleccionActividad = (event) => {
+    setActividad(event.target.value);
+  };
   return (
     <div>
       <Naavbar />
-      <h1><b>Nombre de usuario:</b></h1>
-      {cambiar ?
+      <h1>
+        <b>Nombre de usuario:</b>
+      </h1>
+      {cambiar ? (
         <div>
           <input
             type="text"
@@ -157,15 +170,36 @@ function Perfil() {
           ></input>
 
           <div>
-            <select defaultValue={sexo} onChange={handleSeleccionSexo} value={sexo}>
+            <select
+              defaultValue={sexo}
+              onChange={handleSeleccionSexo}
+              value={sexo}
+            >
               <option value="">Sexo</option>
               <option value="hombre">Hombre</option>
               <option value="mujer">Mujer</option>
             </select>
           </div>
+          <div>
+            <select
+              defaultValue={actividad}
+              onChange={handleSeleccionActividad}
+              value={actividad}
+            >
+              <option value="">Actividad</option>
+              <option value="baja">Baja</option>
+              <option value="normal">Normal</option>
+              <option value="moderada">Moderada</option>
+              <option value="alta">Alta</option>
+            </select>
+          </div>
 
           <div>
-            <select defaultValue={diet} onChange={handleSeleccionDiet} value={diet}>
+            <select
+              defaultValue={diet}
+              onChange={handleSeleccionDiet}
+              value={diet}
+            >
               <option value="">Estilo de dieta</option>
               <option value="balanced">Equilibrado</option>
               <option value="high-fiber">Alto en fibra</option>
@@ -178,7 +212,11 @@ function Perfil() {
 
           {/* Dropdown */}
           <div>
-            <select defaultValue={cuisine} onChange={handleSeleccionCuisine} value={cuisine}>
+            <select
+              defaultValue={cuisine}
+              onChange={handleSeleccionCuisine}
+              value={cuisine}
+            >
               <option value="cuisineType">Tipo de Cocina</option>
               <option value="American">Americana</option>
               <option value="Asian">Asiática</option>
@@ -201,7 +239,11 @@ function Perfil() {
             </select>
           </div>
           <div>
-            <select defaultValue={health} onChange={handleSeleccionHealth} value={health}>
+            <select
+              defaultValue={health}
+              onChange={handleSeleccionHealth}
+              value={health}
+            >
               <option value="">Alergias</option>
               <option value="alcohol-free">Sin alcohol</option>
               <option value="celery-free">Sin apio</option>
@@ -225,25 +267,25 @@ function Perfil() {
           {/* <input value="Guardar" onClick={guardarCambios}>Guardar</input> */}
           <button onClick={verificarCambios}>Guardar</button>
         </div>
-        :
+      ) : (
         <div>
           <p>Edad:{perfil.edad}</p>
           <p>Altura:{perfil.altura}</p>
           <p>Peso:{perfil.peso}</p>
           <p>Sexo:{perfil.sexo}</p>
+          <p>Actividad: {perfil.actividad}</p>
           <p>Producto no deseado:{perfil.indeseado}</p>
           <p>Estilo de dieta:{perfil.dieta}</p>
           <p>Tipo de cocina:{perfil.cocina_fav}</p>
           <p>Alergias:{perfil.alergia}</p>
           <button onClick={modificarPerfil}>Modificar perfil</button>
         </div>
-
-      }
+      )}
       {/* 
       <Link to={"/hoy"}>
         <Button variant="danger">Volver</Button>
       </Link> */}
-
     </div>
   );
-} export default Perfil;
+}
+export default Perfil;

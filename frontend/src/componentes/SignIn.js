@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 import { MyContext } from "../context/MyContext";
-import iconAvatar from "../images/iconAvatar.png"
+import iconAvatar from "../images/iconAvatar.png";
 
 import Swal from "sweetalert2";
 
@@ -17,98 +17,137 @@ export default function SignIn() {
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
   const [sexo, setSexo] = useState("");
+  const[actividad ,setActividad] = useState("")
+
   const { alergia, setAlergia } = useContext(MyContext);
   const { health, setHealth } = useContext(MyContext);
   const { diet, setDiet } = useContext(MyContext);
   const { cuisine, setCuisine } = useContext(MyContext);
   const navigate = useNavigate();
 
-
   const handleVerify = async (e) => {
     e.preventDefault();
-    if (username === "" || contraseña1 === "" || correo === "" || contraseña2 === "") {
+    if (
+      username === "" ||
+      contraseña1 === "" ||
+      correo === "" ||
+      contraseña2 === ""
+    ) {
       // alert("Campos obligatorios nulos")
       Swal.fire({
-        icon: 'error',
-        title: 'Vaya...',
-        text: 'Campos obligatorios nulos',
+        icon: "error",
+        title: "Vaya...",
+        text: "Campos obligatorios nulos",
       });
-    } else if (username.length < 5 || contraseña1.length < 5 || contraseña2.length < 5) {
+    } else if (
+      username.length < 5 ||
+      contraseña1.length < 5 ||
+      contraseña2.length < 5
+    ) {
       // alert("Nombre de usuario y contraseña deben tener al menos 5 caracteres");
       Swal.fire({
-        icon: 'error',
-        title: 'Vaya...',
-        text: 'Nombre de usuario y contraseña deben tener al menos 5 caracteres',
+        icon: "error",
+        title: "Vaya...",
+        text: "Nombre de usuario y contraseña deben tener al menos 5 caracteres",
       });
       return;
     } else if (!/\S+@\S+\.\S+/.test(correo)) {
       // alert("Correo electrónico inválido");
       Swal.fire({
-        icon: 'error',
-        title: 'Vaya...',
-        text: 'Correo electrónico inválido',
+        icon: "error",
+        title: "Vaya...",
+        text: "Correo electrónico inválido",
       });
       return;
     } else if (contraseña1 !== contraseña2) {
       // alert("Las contraseñas no son iguales");
       Swal.fire({
-        icon: 'error',
-        title: 'Vaya...',
-        text: 'Las contraseñas no son iguales',
+        icon: "error",
+        title: "Vaya...",
+        text: "Las contraseñas no son iguales",
       });
       return;
     } else if (edad !== "" || peso !== "" || altura !== "") {
       if (isNaN(parseInt(edad) && edad !== "")) {
         // alert("La edad debe ser un número entero");
         Swal.fire({
-          icon: 'error',
-          title: 'Vaya...',
-          text: 'La edad debe ser un número entero',
+          icon: "error",
+          title: "Vaya...",
+          text: "La edad debe ser un número entero",
         });
         return;
       } else if (isNaN(parseFloat(peso)) && peso !== "") {
         // alert("El peso debe ser un número decimal");
         Swal.fire({
-          icon: 'error',
-          title: 'Vaya...',
-          text: 'El peso debe ser un número decimal',
+          icon: "error",
+          title: "Vaya...",
+          text: "El peso debe ser un número decimal",
         });
         return;
       } else if (isNaN(parseInt(altura)) && altura !== "") {
         // alert("La altura debe ser un número decimal");
         Swal.fire({
-          icon: 'error',
-          title: 'Vaya...',
-          text: 'La altura debe ser un número decimal',
+          icon: "error",
+          title: "Vaya...",
+          text: "La altura debe ser un número decimal",
         });
         return;
-      } else{
-        await handleSubmit(e)
+      } else {
+        await handleSubmit(e);
       }
     } else {
-      await handleSubmit(e)
+      await handleSubmit(e);
     }
-  }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("/registrar/usuario",
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": parseInt(altura), "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString(), "sexo": sexo.toString() })
-      })
+    await fetch("/registrar/usuario", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        username: username.toString(),
+        contrasena: contraseña1.toString(),
+        correo: correo.toString(),
+        edad: parseInt(edad),
+        peso: peso,
+        altura: parseInt(altura),
+        indeseado: alergia.toString(),
+        alergia: health.toString(),
+        dieta: diet.toString(),
+        cocina_fav: cuisine.toString(),
+        sexo: sexo.toString(),
+        actividad : actividad.toString(),
+      }),
+    })
       .then(function (res) {
         if (res.status === 200) {
           navigate("/login");
         } else {
-          alert('Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados')
+          alert(
+            "Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados"
+          );
         }
-        console.log(JSON.stringify({ "username": username.toString(), "contrasena": contraseña1.toString(), "correo": correo.toString(), "edad": parseInt(edad), "peso": peso, "altura": altura, "indeseado": alergia.toString(), "alergia": health.toString(), "dieta": diet.toString(), "cocina_fav": cuisine.toString() }))
+        console.log(
+          JSON.stringify({
+            username: username.toString(),
+            contrasena: contraseña1.toString(),
+            correo: correo.toString(),
+            edad: parseInt(edad),
+            peso: peso,
+            altura: altura,
+            indeseado: alergia.toString(),
+            alergia: health.toString(),
+            dieta: diet.toString(),
+            cocina_fav: cuisine.toString(),
+          })
+        );
       })
-      .catch(function (res) { console.log(res) })
+      .catch(function (res) {
+        console.log(res);
+      });
   };
 
   const handleUsername = (event) => {
@@ -133,8 +172,8 @@ export default function SignIn() {
     setAltura(event.target.value);
   };
   const handleInputChange = (event) => {
-    setAlergia(event.target.value)
-  }
+    setAlergia(event.target.value);
+  };
   const handleSeleccionHealth = (event) => {
     setHealth(event.target.value);
   };
@@ -147,6 +186,9 @@ export default function SignIn() {
   const handleSeleccionSexo = (event) => {
     setSexo(event.target.value);
   };
+  const handleSeleccionActividad = (event) => {
+    setActividad(event.target.value);
+  };
 
   return (
     <div>
@@ -157,15 +199,11 @@ export default function SignIn() {
 
           {/* Icon */}
           <div class="fadeIn first">
-            <img
-              src={iconAvatar}
-              id="icon"
-              alt="imagen que queramos"
-            />
+            <img src={iconAvatar} id="icon" alt="imagen que queramos" />
           </div>
 
           {/* Sign Form */}
-          <form >
+          <form>
             <input
               type="text"
               id="username"
@@ -222,6 +260,8 @@ export default function SignIn() {
               value={altura}
               onChange={handleAltura}
             ></input>
+            
+           
             <input
               type="text"
               id="producto no deseado"
@@ -230,17 +270,38 @@ export default function SignIn() {
               value={alergia}
               onChange={handleInputChange}
             ></input>
+             <div class="fadeIn nineth">
+              <select
+                className="selectorActividad"
+                onChange={handleSeleccionActividad}
+                value={actividad}
+              >
+                <option value="">Actividad</option>
+                <option value="baja">Baja</option>
+                <option value="normal">Normal</option>
+                <option value="moderada">Moderada</option>
+                <option value="alta">Alta</option>
+              </select>
+            </div>
 
             <div class="fadeIn nineth">
-              <select className="selectorSexo" onChange={handleSeleccionSexo} value={sexo}>
+              <select
+                className="selectorSexo"
+                onChange={handleSeleccionSexo}
+                value={sexo}
+              >
                 <option value="">Sexo</option>
                 <option value="mujer">Mujer</option>
                 <option value="hombre">Hombre</option>
               </select>
             </div>
 
-            <div class="fadeIn nineth">
-              <select className="selectorRecetas" onChange={handleSeleccionDiet} value={diet}>
+            <div class="fadeIn tenth">
+              <select
+                className="selectorRecetas"
+                onChange={handleSeleccionDiet}
+                value={diet}
+              >
                 <option value="">Estilo de dieta</option>
                 <option value="balanced">Equilibrado</option>
                 <option value="high-fiber">Alto en fibra</option>
@@ -253,7 +314,11 @@ export default function SignIn() {
 
             {/* Dropdown */}
             <div class="fadeIn tenth">
-              <select className="selectorRecetas" onChange={handleSeleccionCuisine} value={cuisine}>
+              <select
+                className="selectorRecetas"
+                onChange={handleSeleccionCuisine}
+                value={cuisine}
+              >
                 <option value="cuisineType">Tipo de Cocina</option>
                 <option value="American">Americana</option>
                 <option value="Asian">Asiática</option>
@@ -276,7 +341,11 @@ export default function SignIn() {
               </select>
             </div>
             <div class="fadeIn eleventh">
-              <select className="selectorRecetas" onChange={handleSeleccionHealth} value={health}>
+              <select
+                className="selectorRecetas"
+                onChange={handleSeleccionHealth}
+                value={health}
+              >
                 <option value="">Alergias</option>
                 <option value="alcohol-free">Sin alcohol</option>
                 <option value="celery-free">Sin apio</option>
@@ -297,13 +366,20 @@ export default function SignIn() {
                 <option value="vegetarian">Vegetariano</option>
               </select>
             </div>
-              <input type="submit" class="fadeIn x" value="Regístrate" onClick={handleVerify}></input>
+            <input
+              type="submit"
+              class="fadeIn x"
+              value="Regístrate"
+              onClick={handleVerify}
+            ></input>
           </form>
         </div>
       </div>
       <div>
         <Link to="/">
-          <button id="volver" class="btn btn-danger">Volver</button>
+          <button id="volver" class="btn btn-danger">
+            Volver
+          </button>
         </Link>
       </div>
     </div>

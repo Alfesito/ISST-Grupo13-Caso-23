@@ -26,13 +26,16 @@ public class Usuarios{
     private String alergia;
     private String dieta;
     private String cocina_fav;
+    private String actividad;
 
     public Usuarios(){}
 
     
+   
+
     public Usuarios(@NotEmpty String username, @NotEmpty String contrasena, @NotEmpty @Email String correo, int edad,
-            Double peso, int altura, String sexo, String indeseado, String alergia, String dieta,
-            String cocina_fav) {
+            Double peso, int altura, String sexo, String indeseado, String alergia, String dieta, String cocina_fav,
+            String actividad) {
         this.username = username;
         this.contrasena = contrasena;
         this.correo = correo;
@@ -44,7 +47,11 @@ public class Usuarios{
         this.alergia = alergia;
         this.dieta = dieta;
         this.cocina_fav = cocina_fav;
+        this.actividad = actividad;
     }
+
+
+
 
 
     public String getUsername() {
@@ -110,12 +117,17 @@ public class Usuarios{
         this.altura = altura;
     }
 
+    
+
+
     @Override
     public String toString() {
-        return "Usuarios [username=" + username + ", contrasena=" + contrasena + ", correo=" + correo
-                + ", edad=" + edad + ", peso=" + peso + ", altura=" + altura + ", indeseado=" + indeseado + ", alergia="
-                + alergia + ", dieta=" + dieta + ", cocina_fav=" + cocina_fav + "]";
+        return "Usuarios [username=" + username + ", contrasena=" + contrasena + ", correo=" + correo + ", edad=" + edad
+                + ", peso=" + peso + ", altura=" + altura + ", sexo=" + sexo + ", indeseado=" + indeseado + ", alergia="
+                + alergia + ", dieta=" + dieta + ", cocina_fav=" + cocina_fav + ", actividad=" + actividad + "]";
     }
+
+
 
 
     public String getSexo() {
@@ -125,5 +137,19 @@ public class Usuarios{
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+
+
+
+    public String getActividad() {
+        return actividad;
+    }
+
+
+
+
+    public void setActividad(String actividad) {
+        this.actividad = actividad;
     }
 }
