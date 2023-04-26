@@ -9,25 +9,49 @@ import { MyContext } from "../../context/MyContext";
 export default function Hoy() {
   const [comidas, setComidas] = useState([]);
   const { correo } = useContext(MyContext);
+
   const [totalKcal, setTotalKcal] = useState(0);
   const [totalProt, setTotalProt] = useState(0);
   const [totalCarbs, setTotalCarbs] = useState(0);
   const [totalGrasas, setTotalGrasas] = useState(0);
 
-  const [edad, setEdad] = useState(null);
-  const [altura, setAltura] = useState(null);
-  const [peso, setPeso] = useState(null);
-  const [sexo, setSexo] = useState(null);
+  const [objetivoKcal, setobjetivoKcal] = useState(0);
+  const [objetivoProt, setObjetivoProt] = useState(0);
+  const [objetivoGrasa, setObjetivoGrasa] = useState(0);
+  const [objetivoCarbs, setObjetivoCarbs] = useState(0);
 
-  const TMBhombre = 10 * peso + 6.25 * altura - 5 * edad + 5;
-  const TMBmujer = 10 * peso + 6.25 * altura - 5 * edad - 161;
+  const actividadFisica = {
+    BAJA: "baja",
+    NORMAL: "normal",
+    MODERADA: " moderada",
+    ALTA: "alta",
+  };
 
-  const TDEE = null;
+  const objetivos = (edad, altura, peso, sexo, actividad) => {
+    let TMB;
+    if (sexo == "hombre") {
+      TMB = 10 * peso + 6.25 * altura - 5 * edad + 5;
+    } else {
+      TMB = 10 * peso + 6.25 * altura - 5 * edad - 161;
+    }
 
-  const objetivoKcal = 2000;
-  const objetivoProt = 0.8 * peso;
-  const objetivoGrasa = 0.3 * peso;
-  const objetivoCarbs = objetivoKcal - objetivoProt * 4 - objetivoGrasa * 9;
+    let TDEE;
+    if (actividad === actividadFisica.BAJA) {
+      TDEE = TMB * 1.55;
+    } else if (actividad === actividadFisica.NORMAL) {
+      TDEE = TMB * 1.85;
+    } else if (actividad === actividadFisica.MODERADA) {
+      TDEE = TMB * 2.2;
+    } else {
+      TDEE = TMB * 2.4;
+    }
+    console.log(TDEE, "TDEE");
+
+    setobjetivoKcal(TDEE);
+    setObjetivoProt(peso * 0.8);
+    setObjetivoGrasa(peso * 0.3);
+    setObjetivoCarbs(TDEE - objetivoProt * 4 - objetivoGrasa * 9);
+  };
 
   async function obtenerComidas() {
     //`/api/ingestas/${correo}`
@@ -54,24 +78,23 @@ export default function Hoy() {
     await fetch(`/api/perfil/${correo}`)
       .then((response) => response.json())
       .then((data) => {
-        setEdad(data.edad);
-        setAltura(data.altura);
-        setPeso(data.peso);
-        setSexo(data.sexo);
+        objetivos(data.edad, data.altura, data.peso, data.sexo, data.actividad);
       })
       .catch((error) => console.error(error));
   }
 
-
   const fechaHoy = new Date().toISOString().slice(0, 10);
-  const comidasHoy = comidas.filter(producto => producto.fecha === fechaHoy);
-
+  const comidasHoy = comidas.filter((producto) => producto.fecha === fechaHoy);
 
   useEffect(() => {
     obtenerComidas();
     obtenerUser();
   }, []);
 
+  console.log(objetivoKcal, " kcal");
+  console.log(objetivoProt, "prot");
+  console.log(objetivoGrasa, "grasa");
+  console.log(objetivoCarbs, "carbs");
   return (
     <div>
       <Naavbar />
@@ -101,7 +124,9 @@ export default function Hoy() {
               actual={totalCarbs}
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
-              info={(objetivoCarbs - totalCarbs).toFixed(1) + " gramos restantes"}
+              info={
+                (objetivoCarbs - totalCarbs).toFixed(1) + " gramos restantes"
+              }
             />
           </div>
           <div class="circle">
@@ -110,7 +135,9 @@ export default function Hoy() {
               actual={totalGrasas}
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
-              info={(objetivoGrasa - totalGrasas).toFixed(1) + " gramos restantes"}
+              info={
+                (objetivoGrasa - totalGrasas).toFixed(1) + " gramos restantes"
+              }
             />
           </div>
         </div>
