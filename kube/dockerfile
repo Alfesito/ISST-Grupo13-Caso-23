@@ -2,16 +2,16 @@
 FROM ubuntu:20.04
 
 # Update package list and install Java 17 and Maven
-RUN apt-get update && apt-get install -y openjdk-17-jdk maven
+RUN apt-get update && apt-get install -y openjdk-17-jdk maven && apt-get install git -y
 
 # Clone the GitHub repository (optional if you have the source code locally)
-# RUN git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
+RUN git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
 
 # Set the working directory to the cloned repository
-# WORKDIR /ISST-Grupo13-NutriApp
+WORKDIR /ISST-Grupo13-NutriApp
 
 # Copy the source code into the Docker image
-COPY . .
+# COPY . .
 
 VOLUME ./data
 

@@ -1,0 +1,39 @@
+# $ kubectl apply -f nutri-app.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nutri-app
+  labels:
+    app: nutri-app
+    service: nutri-app
+spec:
+  replicas: 3 # puedes ajustar el número de replicas según tus necesidades
+  selector:
+    matchLabels:
+      app: nutri-app
+  template:
+    metadata:
+      labels:
+        app: nutri-app
+    spec:
+      containers:
+        - name: nutri-app
+          image: alfesito/nutri-app:latest # utiliza la misma imagen base que el Dockerfile
+          ports:
+            - containerPort: 8080 # expone el puerto 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nutri-app
+  labels:
+    app: nutri-app
+    service: nutri-app
+spec:
+  selector:
+    app: nutri-app
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

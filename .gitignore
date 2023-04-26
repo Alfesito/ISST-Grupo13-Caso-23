@@ -36,4 +36,5 @@ yarn.lock
 .vscode/
 data/
 .db/
+.package-lock.json
 
