@@ -126,9 +126,14 @@ export default function SignIn() {
         if (res.status === 200) {
           navigate("/login");
         } else {
-          alert(
-            "Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados"
-          );
+          // alert(
+          //   "Algo ha salido mal. Puede que el correo o el usuario ya han sido registrados"
+          // );
+          Swal.fire({
+            icon: "error",
+            title: "Algo ha salido mal",
+            text: "Puede que el correo o el usuario ya han sido registrados",
+          });
         }
         console.log(
           JSON.stringify({
