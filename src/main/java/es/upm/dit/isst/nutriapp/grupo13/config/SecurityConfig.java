@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.*;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -14,21 +15,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .headers().frameOptions().disable()
+        http.authorizeRequests()
+                .antMatchers("/","/login","/signin").permitAll()
                 .and()
-            .authorizeRequests()
-                .antMatchers("/","/login","/signin").permitAll() // Permitir acceso a cualquier ruta sin necesidad de autenticación
+            .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
-            .formLogin() // Habilitar el formulario de inicio de sesión
-                .loginPage("/") // Especificar la página de inicio de sesión
-                .permitAll() // Permitir acceso a la página de inicio de sesión sin necesidad de autenticación
+            .logout()
+                .permitAll().and()
+            // .csrf()
+            //     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+            //     .ignoringAntMatchers("/h2/**")
+            //     .and()
+            .csrf().disable()
+            .headers()
+                .frameOptions()
+                .sameOrigin()
                 .and()
-            .logout().disable() // Disable logout
-            .csrf().disable() // Disable CSRF protection for simplicity, but you should enable it in production
-            .httpBasic().disable(); // Disable HTTP basic authentication
+            //  .requiresChannel().anyRequest().requiresSecure();
+            .httpBasic();
         return http.build();
-    }
+}
+
 
 
     @Bean
