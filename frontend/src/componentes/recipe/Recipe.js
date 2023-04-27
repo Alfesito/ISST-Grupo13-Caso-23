@@ -16,6 +16,7 @@ function Recipe(props) {
     props.theproducts &&
     props.theproducts.findIndex((el) => el.recipe.label === recipeId);
   let item = props.theproducts[id];
+  let servings = item.recipe.yield;//RACIONES - SERVINGS
 
   const { correo } = useContext(MyContext);
   const { getUsuario } = useContext(MyContext);
@@ -33,11 +34,11 @@ function Recipe(props) {
         fecha: new Date(),
         correo: correo,
         comida: item.recipe.label,
-        kcal: item.recipe.calories,
-        proteina: Math.round(item.recipe.totalNutrients.PROCNT.quantity),
-        grasa: Math.round(item.recipe.totalNutrients.FAT.quantity),
-        carb: Math.round(item.recipe.totalNutrients.CHOCDF.quantity),
-        fibra: Math.round(item.recipe.totalNutrients.FIBTG.quantity),
+        kcal: item.recipe.calories/servings,
+        proteina: Math.round(item.recipe.totalNutrients.PROCNT.quantity/servings),
+        grasa: Math.round(item.recipe.totalNutrients.FAT.quantity/servings),
+        carb: Math.round(item.recipe.totalNutrients.CHOCDF.quantity/servings),
+        fibra: Math.round(item.recipe.totalNutrients.FIBTG.quantity/servings),
       }),
     })
       .then(function (res) {
@@ -61,6 +62,7 @@ function Recipe(props) {
   const handleAlergiaRecipeAndSubmit = async (name, ingr, item) => {
     getUsuario();
 
+    // const jsonStringIngr = ingr.toLowerCase();
     const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
     const confirm = async () => {
       try {
@@ -95,8 +97,8 @@ function Recipe(props) {
   const handleAñadir = (item) => {
     // función manejadora de eventos
     handleAlergiaRecipeAndSubmit(
-      item.recipe.label,
-      item.recipe.ingredientLines,
+      item.label,
+      item.ingredientLines,
       item
     ); // agrega recetas a una lista de alergias DADO un determinado contexto
     // handleSubmit(item);
@@ -127,31 +129,31 @@ function Recipe(props) {
               </p>
               {/* Renderizar los valores nutricionales  */}
               <p className="price">
-                Valor nutricional <br />
+                Valor nutricional por porción<br />
               </p>
               <div className="nutrValue">
                 <ul>
                   <li>
-                    Energía: {Math.round(item.recipe.calories)} kcal
+                    Energía: {Math.round(item.recipe.calories/servings)} kcal
                     <br />
                   </li>
                   <li>
                     Proteína:{" "}
-                    {Math.round(item.recipe.totalNutrients.PROCNT.quantity)} g
+                    {Math.round(item.recipe.totalNutrients.PROCNT.quantity/servings)} g
                     <br />
                   </li>
                   <li>
-                    Grasa: {Math.round(item.recipe.totalNutrients.FAT.quantity)}{" "}
+                    Grasa: {Math.round(item.recipe.totalNutrients.FAT.quantity/servings)}{" "}
                     g<br />
                   </li>
                   <li>
                     Carbohidratos:{" "}
-                    {Math.round(item.recipe.totalNutrients.CHOCDF.quantity)} g
+                    {Math.round(item.recipe.totalNutrients.CHOCDF.quantity/servings)} g
                     <br />
                   </li>
                   <li>
                     Fibra:{" "}
-                    {Math.round(item.recipe.totalNutrients.FIBTG.quantity)} g
+                    {Math.round(item.recipe.totalNutrients.FIBTG.quantity/servings)} g
                     <br />
                     <br />
                   </li>

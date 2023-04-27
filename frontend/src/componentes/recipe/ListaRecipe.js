@@ -20,6 +20,30 @@ function ListaRecipe(props) {
   const navigate = useNavigate();
 
   const handleAñadir = (item) => {
+
+//   Swal.fire({
+  //     title: '¿Cuántas porciones quieres añadir?',
+  //     input: 'select',
+  //     html:
+  //   '<select id="porciones" name="porciones" class="swal2-input">' +
+  //   '<option value="1">1</option>' +
+  //   '<option value="2">2</option>' +
+  //   '<option value="3">3</option>' +
+  //   '<option value="4">4</option>' +
+  //   '<option value="5">5</option>' +
+  //   '</select>',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Añadir',
+  //     denyButtonText: `Don't save`,
+  //   }).then((result) => {
+  //   /* Read more about isConfirmed, isDenied below */
+  //   if (result.isConfirmed) {
+  //     Swal.fire('Receta añadida', '', 'success')
+  //   } else if (result.isDenied) {
+  //     Swal.fire('Cancelado', '', 'info')
+  // }
+  //   });
+
     // función manejadora de eventos
     handleAlergiaRecipeAndSubmit(
       item.recipe.label,

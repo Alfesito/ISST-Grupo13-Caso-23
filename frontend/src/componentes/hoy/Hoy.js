@@ -51,12 +51,6 @@ export default function Hoy() {
     setObjetivoProt((0.15 * TDEE) / 4);
     setObjetivoGrasa((0.3 * TDEE) / 9);
     setObjetivoCarbs(TDEE - (0.15 * TDEE)  - (0.3 * TDEE) );
-
-    console.log(TDEE);
-    console.log(objetivoKcal, " kcal");
-    console.log(objetivoProt, "prot");
-    console.log(objetivoGrasa, "grasa");
-    console.log(objetivoCarbs, "carbs");
   };
 
   async function obtenerComidas() {
@@ -119,7 +113,7 @@ export default function Hoy() {
               actual={totalProt}
               maxValue={objetivoProt}
               titulo={"Proteinas"}
-              info={(objetivoProt - totalProt).toFixed(1) + " gramos restantes"}
+              info={(objetivoProt - totalProt).toFixed(1) + " restantes"}
             />
           </div>
           <div class="circle">
@@ -128,7 +122,7 @@ export default function Hoy() {
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
               info={
-                (objetivoCarbs - totalCarbs).toFixed(1) + " gramos restantes"
+                (objetivoCarbs - totalCarbs).toFixed(1) + " restantes"
               }
             />
           </div>
@@ -138,7 +132,7 @@ export default function Hoy() {
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
               info={
-                (objetivoGrasa - totalGrasas).toFixed(1) + " gramos restantes"
+                (objetivoGrasa - totalGrasas).toFixed(1) + " restantes"
               }
             />
           </div>
