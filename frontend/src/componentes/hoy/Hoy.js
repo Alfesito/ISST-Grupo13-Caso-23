@@ -48,27 +48,38 @@ export default function Hoy() {
     console.log(TDEE, "TDEE");
 
     setobjetivoKcal(TDEE);
-    setObjetivoProt(peso * 0.8);
-    setObjetivoGrasa(peso * 0.3);
-    setObjetivoCarbs(TDEE - objetivoProt * 4 - objetivoGrasa * 9);
+    setObjetivoProt((0.15 * TDEE) / 4);
+    setObjetivoGrasa((0.3 * TDEE) / 9);
+    setObjetivoCarbs(TDEE - (0.15 * TDEE)  - (0.3 * TDEE) );
+
+    console.log(TDEE);
+    console.log(objetivoKcal, " kcal");
+    console.log(objetivoProt, "prot");
+    console.log(objetivoGrasa, "grasa");
+    console.log(objetivoCarbs, "carbs");
   };
 
   async function obtenerComidas() {
     //`/api/ingestas/${correo}`
+    const fechaHoy = new Date().toISOString().slice(0, 10);
+
     await fetch(`/api/ingestas/${correo}`)
       .then((response) => response.json())
       .then((data) => {
-        setComidas(data.reverse());
-        const kcalArray = data.map((product) => product.kcal);
+        
+        const filteredComidas = data.filter((producto) => producto.fecha === fechaHoy);
+        setComidas(filteredComidas.reverse());
+
+        const kcalArray = filteredComidas.map((product) => product.kcal);
         setTotalKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0).toFixed(2));
 
-        const protArray = data.map((product) => product.proteina);
+        const protArray = filteredComidas.map((product) => product.proteina);
         setTotalProt(protArray.reduce((acc, prot) => acc + prot, 0));
 
-        const carbsArray = data.map((product) => product.carb);
+        const carbsArray = filteredComidas.map((product) => product.carb);
         setTotalCarbs(carbsArray.reduce((acc, carb) => acc + carb, 0));
 
-        const grasasArray = data.map((product) => product.grasa);
+        const grasasArray = filteredComidas.map((product) => product.grasa);
         setTotalGrasas(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
       })
       .catch((error) => console.error(error));
@@ -83,18 +94,13 @@ export default function Hoy() {
       .catch((error) => console.error(error));
   }
 
-  const fechaHoy = new Date().toISOString().slice(0, 10);
-  const comidasHoy = comidas.filter((producto) => producto.fecha === fechaHoy);
+  
 
   useEffect(() => {
     obtenerComidas();
     obtenerUser();
   }, []);
 
-  console.log(objetivoKcal, " kcal");
-  console.log(objetivoProt, "prot");
-  console.log(objetivoGrasa, "grasa");
-  console.log(objetivoCarbs, "carbs");
   return (
     <div>
       <Naavbar />
@@ -102,7 +108,6 @@ export default function Hoy() {
         <div class="graficos-wrapper">
           <div class="circle">
             <Grafico
-              comidas={comidas}
               actual={totalKcal}
               maxValue={objetivoKcal}
               titulo={"Kcal"}
@@ -111,7 +116,6 @@ export default function Hoy() {
           </div>
           <div class="circle">
             <Grafico
-              comidas={comidas}
               actual={totalProt}
               maxValue={objetivoProt}
               titulo={"Proteinas"}
@@ -120,7 +124,6 @@ export default function Hoy() {
           </div>
           <div class="circle">
             <Grafico
-              comidas={comidas}
               actual={totalCarbs}
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
@@ -131,7 +134,6 @@ export default function Hoy() {
           </div>
           <div class="circle">
             <Grafico
-              comidas={comidas}
               actual={totalGrasas}
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
@@ -142,7 +144,7 @@ export default function Hoy() {
           </div>
         </div>
         <div class="table-wrapper">
-          <Table comidas={comidasHoy} />
+          <Table comidas={comidas} />
         </div>
       </div>
     </div>

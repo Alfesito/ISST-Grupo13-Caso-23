@@ -115,6 +115,7 @@ public class UsuariosController {
                         usuario.setDieta(newUsuario.getDieta());
                         usuario.setCocina_fav(newUsuario.getCocina_fav());
                         usuario.setSexo(newUsuario.getSexo());
+                        usuario.setActividad(newUsuario.getActividad());
 
                         usuariosRepository.save(usuario);
                         return ResponseEntity.ok().body("Usuario actualizado");
