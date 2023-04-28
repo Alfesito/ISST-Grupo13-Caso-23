@@ -16,14 +16,14 @@ function Recipe(props) {
     props.theproducts &&
     props.theproducts.findIndex((el) => el.recipe.label === recipeId);
   let item = props.theproducts[id];
-  let servings = item.recipe.yield;//RACIONES - SERVINGS
+  let servings = item.recipe.yield; //RACIONES - SERVINGS
 
   const { correo } = useContext(MyContext);
   const { getUsuario } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (item) => {
+  const handleSubmit = async (item, porcionesElegidas, numPorciones) => {
     await fetch(`/api/añadir/ingestas/${correo}`, {
       headers: {
         Accept: "application/json",
@@ -34,11 +34,21 @@ function Recipe(props) {
         fecha: new Date(),
         correo: correo,
         comida: item.recipe.label,
-        kcal: item.recipe.calories/servings,
-        proteina: Math.round(item.recipe.totalNutrients.PROCNT.quantity/servings),
-        grasa: Math.round(item.recipe.totalNutrients.FAT.quantity/servings),
-        carb: Math.round(item.recipe.totalNutrients.CHOCDF.quantity/servings),
-        fibra: Math.round(item.recipe.totalNutrients.FIBTG.quantity/servings),
+        kcal: (item.recipe.calories / numPorciones) * porcionesElegidas,
+        proteina:
+          Math.round(
+            item.recipe.totalNutrients.PROCNT.quantity / numPorciones
+          ) * porcionesElegidas,
+        grasa:
+          Math.round(item.recipe.totalNutrients.FAT.quantity / numPorciones) *
+          porcionesElegidas,
+        carb:
+          Math.round(
+            item.recipe.totalNutrients.CHOCDF.quantity / numPorciones
+          ) * porcionesElegidas,
+        fibra:
+          Math.round(item.recipe.totalNutrients.FIBTG.quantity / numPorciones) *
+          porcionesElegidas,
       }),
     })
       .then(function (res) {
@@ -47,10 +57,10 @@ function Recipe(props) {
         } else {
           //alert("Algo ha salido mal");
           Swal.fire({
-            icon: 'error',
-              title: 'Vaya...',
-              text: 'Algo ha salido mal',
-          })
+            icon: "error",
+            title: "Vaya...",
+            text: "Algo ha salido mal",
+          });
         }
         console.log(res);
       })
@@ -59,14 +69,18 @@ function Recipe(props) {
       });
   };
 
-  const handleAlergiaRecipeAndSubmit = async (name, ingr, item) => {
-    getUsuario();
-
+  const handleAlergiaRecipeAndSubmit = async (
+    name,
+    ingr,
+    item,
+    porcionesElegidas,
+    numPorciones
+  ) => {
     // const jsonStringIngr = ingr.toLowerCase();
     const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
     const confirm = async () => {
       try {
-        await handleSubmit(item);
+        await handleSubmit(item, porcionesElegidas, numPorciones);
         Swal.fire("Confirmado", "Producto añadido", "success");
       } catch (error) {
         console.log(error);
@@ -95,14 +109,41 @@ function Recipe(props) {
     }
   };
   const handleAñadir = (item) => {
-    // función manejadora de eventos
-    handleAlergiaRecipeAndSubmit(
-      item.label,
-      item.ingredientLines,
-      item
-    ); // agrega recetas a una lista de alergias DADO un determinado contexto
-    // handleSubmit(item);
+    const numPorciones = item.recipe.yield;
+
+    // Crear el HTML del select con opciones generadas dinámicamente
+    let optionsHtml = "";
+    for (let i = 1; i <= numPorciones; i++) {
+      optionsHtml += `<option value="${i}">${i}</option>`;
+    }
+
+    Swal.fire({
+      title: "¿Cuántas porciones quieres añadir?",
+      input: "select",
+      html:
+        '<select id="porciones" name="porciones" class="swal2-input">' +
+        optionsHtml +
+        "</select>",
+      showCancelButton: true,
+      confirmButtonText: "Añadir",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const porcionesElegidas = document.getElementById("porciones").value;
+        Swal.fire("Receta añadida", "", "success");
+        handleAlergiaRecipeAndSubmit(
+          item.recipe.label,
+          item.recipe.ingredientLines,
+          item,
+          porcionesElegidas,
+          numPorciones
+        );
+      } else if (result.isDenied) {
+        Swal.fire("Cancelado", "", "info");
+      }
+    });
   };
+
   return (
     // Renderizar el componente Recipe
     <div>
@@ -129,31 +170,44 @@ function Recipe(props) {
               </p>
               {/* Renderizar los valores nutricionales  */}
               <p className="price">
-                Valor nutricional por porción<br />
+                Valor nutricional por porción
+                <br />
               </p>
               <div className="nutrValue">
                 <ul>
                   <li>
-                    Energía: {Math.round(item.recipe.calories/servings)} kcal
+                    Energía: {Math.round(item.recipe.calories / servings)} kcal
                     <br />
                   </li>
                   <li>
                     Proteína:{" "}
-                    {Math.round(item.recipe.totalNutrients.PROCNT.quantity/servings)} g
+                    {Math.round(
+                      item.recipe.totalNutrients.PROCNT.quantity / servings
+                    )}{" "}
+                    g
                     <br />
                   </li>
                   <li>
-                    Grasa: {Math.round(item.recipe.totalNutrients.FAT.quantity/servings)}{" "}
+                    Grasa:{" "}
+                    {Math.round(
+                      item.recipe.totalNutrients.FAT.quantity / servings
+                    )}{" "}
                     g<br />
                   </li>
                   <li>
                     Carbohidratos:{" "}
-                    {Math.round(item.recipe.totalNutrients.CHOCDF.quantity/servings)} g
+                    {Math.round(
+                      item.recipe.totalNutrients.CHOCDF.quantity / servings
+                    )}{" "}
+                    g
                     <br />
                   </li>
                   <li>
                     Fibra:{" "}
-                    {Math.round(item.recipe.totalNutrients.FIBTG.quantity/servings)} g
+                    {Math.round(
+                      item.recipe.totalNutrients.FIBTG.quantity / servings
+                    )}{" "}
+                    g
                     <br />
                     <br />
                   </li>
@@ -183,9 +237,7 @@ function Recipe(props) {
               </Link>
               <Button
                 variant="success"
-                onClick={() =>
-                  handleAñadir(item.recipe.label, item.recipe.ingredientLines)
-                }
+                onClick={() => handleAñadir(item)}
                 style={{ float: "right" }}
               >
                 Añadir
