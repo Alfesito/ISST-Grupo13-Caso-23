@@ -774,6 +774,7 @@ input[type="text"]:placeholder {
 .buttons {
   display: flex;
   justify-content: flex-end;
+  ;
 }
 
 .perfil-button {

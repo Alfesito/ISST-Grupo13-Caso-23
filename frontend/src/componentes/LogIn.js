@@ -134,12 +134,6 @@ export default function LogIn() {
           Volver{" "}
         </Button>{" "}
       </Link>
-      <Link to="/navbar">
-        <Button id="volver" variant="danger">
-          {" "}
-          IR A NAVBAR{" "}
-        </Button>{" "}
-      </Link>
     </div>
   );
 }
