@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 export default function Grafico(props) {
   const percentage = (props.actual / props.maxValue).toFixed(2);
-  console.log(percentage)
+  
   return (
     <div className="container-circulo">
       <div className="circulo">
