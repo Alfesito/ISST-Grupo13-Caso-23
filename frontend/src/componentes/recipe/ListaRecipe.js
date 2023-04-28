@@ -17,8 +17,6 @@ function ListaRecipe(props) {
   const { getUsuario } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
 
-  
-
   const navigate = useNavigate();
 
   const handleAñadir = (item) => {
@@ -102,15 +100,19 @@ function ListaRecipe(props) {
         fecha: new Date(),
         correo: correo,
         comida: item.recipe.label,
-        kcal: (item.recipe.calories / servings)*porciones,
+        kcal: (item.recipe.calories / servings) * porciones,
         proteina: Math.round(
-          (item.recipe.totalNutrients.PROCNT.quantity / servings)*porciones
+          (item.recipe.totalNutrients.PROCNT.quantity / servings) * porciones
         ),
         grasa: Math.round(
           (item.recipe.totalNutrients.FAT.quantity / servings) * porciones
         ),
-        carb: Math.round((item.recipe.totalNutrients.CHOCDF.quantity / servings)*porciones),
-        fibra: Math.round((item.recipe.totalNutrients.FIBTG.quantity / servings)*porciones),
+        carb: Math.round(
+          (item.recipe.totalNutrients.CHOCDF.quantity / servings) * porciones
+        ),
+        fibra: Math.round(
+          (item.recipe.totalNutrients.FIBTG.quantity / servings) * porciones
+        ),
       }),
     })
       .then(function (res) {

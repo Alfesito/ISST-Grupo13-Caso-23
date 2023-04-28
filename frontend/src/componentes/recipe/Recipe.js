@@ -16,7 +16,7 @@ function Recipe(props) {
     props.theproducts &&
     props.theproducts.findIndex((el) => el.recipe.label === recipeId);
   let item = props.theproducts[id];
-  let servings = item.recipe.yield;//RACIONES - SERVINGS
+  let servings = item.recipe.yield; //RACIONES - SERVINGS
 
   const { correo } = useContext(MyContext);
   const { getUsuario } = useContext(MyContext);
@@ -35,15 +35,19 @@ function Recipe(props) {
         fecha: new Date(),
         correo: correo,
         comida: item.recipe.label,
-        kcal: (item.recipe.calories / servings)*porciones,
+        kcal: (item.recipe.calories / servings) * porciones,
         proteina: Math.round(
-          (item.recipe.totalNutrients.PROCNT.quantity / servings)*porciones
+          (item.recipe.totalNutrients.PROCNT.quantity / servings) * porciones
         ),
         grasa: Math.round(
           (item.recipe.totalNutrients.FAT.quantity / servings) * porciones
         ),
-        carb: Math.round((item.recipe.totalNutrients.CHOCDF.quantity / servings)*porciones),
-        fibra: Math.round((item.recipe.totalNutrients.FIBTG.quantity / servings)*porciones),
+        carb: Math.round(
+          (item.recipe.totalNutrients.CHOCDF.quantity / servings) * porciones
+        ),
+        fibra: Math.round(
+          (item.recipe.totalNutrients.FIBTG.quantity / servings) * porciones
+        ),
       }),
     })
       .then(function (res) {
@@ -157,31 +161,44 @@ function Recipe(props) {
               </p>
               {/* Renderizar los valores nutricionales  */}
               <p className="price">
-                Valor nutricional por porción<br />
+                Valor nutricional por porción
+                <br />
               </p>
               <div className="nutrValue">
                 <ul>
                   <li>
-                    Energía: {Math.round(item.recipe.calories/servings)} kcal
+                    Energía: {Math.round(item.recipe.calories / servings)} kcal
                     <br />
                   </li>
                   <li>
                     Proteína:{" "}
-                    {Math.round(item.recipe.totalNutrients.PROCNT.quantity/servings)} g
+                    {Math.round(
+                      item.recipe.totalNutrients.PROCNT.quantity / servings
+                    )}{" "}
+                    g
                     <br />
                   </li>
                   <li>
-                    Grasa: {Math.round(item.recipe.totalNutrients.FAT.quantity/servings)}{" "}
+                    Grasa:{" "}
+                    {Math.round(
+                      item.recipe.totalNutrients.FAT.quantity / servings
+                    )}{" "}
                     g<br />
                   </li>
                   <li>
                     Carbohidratos:{" "}
-                    {Math.round(item.recipe.totalNutrients.CHOCDF.quantity/servings)} g
+                    {Math.round(
+                      item.recipe.totalNutrients.CHOCDF.quantity / servings
+                    )}{" "}
+                    g
                     <br />
                   </li>
                   <li>
                     Fibra:{" "}
-                    {Math.round(item.recipe.totalNutrients.FIBTG.quantity/servings)} g
+                    {Math.round(
+                      item.recipe.totalNutrients.FIBTG.quantity / servings
+                    )}{" "}
+                    g
                     <br />
                     <br />
                   </li>
@@ -211,9 +228,7 @@ function Recipe(props) {
               </Link>
               <Button
                 variant="success"
-                onClick={() =>
-                  handleAñadir(item)
-                }
+                onClick={() => handleAñadir(item)}
                 style={{ float: "right" }}
               >
                 Añadir
