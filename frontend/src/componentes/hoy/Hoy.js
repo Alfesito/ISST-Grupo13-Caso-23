@@ -10,10 +10,10 @@ export default function Hoy() {
   const [comidas, setComidas] = useState([]);
   const { correo } = useContext(MyContext);
 
-  const [totalKcal, setTotalKcal] = useState(0);
-  const [totalProt, setTotalProt] = useState(0);
-  const [totalCarbs, setTotalCarbs] = useState(0);
-  const [totalGrasas, setTotalGrasas] = useState(0);
+  const [actualKcal, setActualKcal] = useState(0);
+  const [actualProt, setActualProt] = useState(0);
+  const [actualCarbs, setActualCarbs] = useState(0);
+  const [actualGrasas, setActualGrasas] = useState(0);
 
   const [objetivoKcal, setobjetivoKcal] = useState(0);
   const [objetivoProt, setObjetivoProt] = useState(0);
@@ -65,16 +65,16 @@ export default function Hoy() {
         setComidas(filteredComidas.reverse());
 
         const kcalArray = filteredComidas.map((product) => product.kcal);
-        setTotalKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0).toFixed(2));
+        setActualKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0).toFixed(2));
 
         const protArray = filteredComidas.map((product) => product.proteina);
-        setTotalProt(protArray.reduce((acc, prot) => acc + prot, 0));
+        setActualProt(protArray.reduce((acc, prot) => acc + prot, 0));
 
         const carbsArray = filteredComidas.map((product) => product.carb);
-        setTotalCarbs(carbsArray.reduce((acc, carb) => acc + carb, 0));
+        setActualCarbs(carbsArray.reduce((acc, carb) => acc + carb, 0));
 
         const grasasArray = filteredComidas.map((product) => product.grasa);
-        setTotalGrasas(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
+        setActualGrasas(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
       })
       .catch((error) => console.error(error));
   }
@@ -102,37 +102,37 @@ export default function Hoy() {
         <div class="graficos-wrapper">
           <div class="circle">
             <Grafico
-              actual={totalKcal}
+              actual={actualKcal}
               maxValue={objetivoKcal}
               titulo={"Kcal"}
-              info={(objetivoKcal - totalKcal).toFixed(1) + " kcal restantes"}
+              info={(objetivoKcal - actualKcal).toFixed(1) + " kcal restantes"}
             />
           </div>
           <div class="circle">
             <Grafico
-              actual={totalProt}
+              actual={actualProt}
               maxValue={objetivoProt}
               titulo={"Proteinas"}
-              info={(objetivoProt - totalProt).toFixed(1) + " restantes"}
+              info={(objetivoProt - actualProt).toFixed(1) + " restantes"}
             />
           </div>
           <div class="circle">
             <Grafico
-              actual={totalCarbs}
+              actual={actualCarbs}
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
               info={
-                (objetivoCarbs - totalCarbs).toFixed(1) + " restantes"
+                (objetivoCarbs - actualCarbs).toFixed(1) + " restantes"
               }
             />
           </div>
           <div class="circle">
             <Grafico
-              actual={totalGrasas}
+              actual={actualGrasas}
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
               info={
-                (objetivoGrasa - totalGrasas).toFixed(1) + " restantes"
+                (objetivoGrasa - actualGrasas).toFixed(1) + " restantes"
               }
             />
           </div>
