@@ -23,7 +23,8 @@ function Recipe(props) {
   const { alergia } = useContext(MyContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async (item) => {
+  const handleSubmit = async (item, porciones) => {
+    let servings = item.recipe.yield; //RACIONES - SERVINGS
     await fetch(`/api/añadir/ingestas/${correo}`, {
       headers: {
         Accept: "application/json",
@@ -34,11 +35,15 @@ function Recipe(props) {
         fecha: new Date(),
         correo: correo,
         comida: item.recipe.label,
-        kcal: item.recipe.calories/servings,
-        proteina: Math.round(item.recipe.totalNutrients.PROCNT.quantity/servings),
-        grasa: Math.round(item.recipe.totalNutrients.FAT.quantity/servings),
-        carb: Math.round(item.recipe.totalNutrients.CHOCDF.quantity/servings),
-        fibra: Math.round(item.recipe.totalNutrients.FIBTG.quantity/servings),
+        kcal: (item.recipe.calories / servings)*porciones,
+        proteina: Math.round(
+          (item.recipe.totalNutrients.PROCNT.quantity / servings)*porciones
+        ),
+        grasa: Math.round(
+          (item.recipe.totalNutrients.FAT.quantity / servings) * porciones
+        ),
+        carb: Math.round((item.recipe.totalNutrients.CHOCDF.quantity / servings)*porciones),
+        fibra: Math.round((item.recipe.totalNutrients.FIBTG.quantity / servings)*porciones),
       }),
     })
       .then(function (res) {
@@ -47,10 +52,10 @@ function Recipe(props) {
         } else {
           //alert("Algo ha salido mal");
           Swal.fire({
-            icon: 'error',
-              title: 'Vaya...',
-              text: 'Algo ha salido mal',
-          })
+            icon: "error",
+            title: "Vaya...",
+            text: "Algo ha salido mal",
+          });
         }
         console.log(res);
       })
@@ -59,14 +64,13 @@ function Recipe(props) {
       });
   };
 
-  const handleAlergiaRecipeAndSubmit = async (name, ingr, item) => {
+  const handleAlergiaRecipeAndSubmit = async (name, ingr, item, porciones) => {
     getUsuario();
 
-    // const jsonStringIngr = ingr.toLowerCase();
     const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
     const confirm = async () => {
       try {
-        await handleSubmit(item);
+        await handleSubmit(item, porciones);
         Swal.fire("Confirmado", "Producto añadido", "success");
       } catch (error) {
         console.log(error);
@@ -95,13 +99,37 @@ function Recipe(props) {
     }
   };
   const handleAñadir = (item) => {
-    // función manejadora de eventos
-    handleAlergiaRecipeAndSubmit(
-      item.label,
-      item.ingredientLines,
-      item
-    ); // agrega recetas a una lista de alergias DADO un determinado contexto
-    // handleSubmit(item);
+    const yields = item.recipe.yield;
+    let optionsHtml = "";
+    for (let i = 1; i <= yields; i++) {
+      optionsHtml += `<option value="${i}">${i}</option>`;
+    }
+
+    Swal.fire({
+      title: "¿Cuántas porciones quieres añadir?",
+      input: "select",
+      html:
+        '<select id="porciones" name="porciones" class="swal2-input">' +
+        optionsHtml +
+        "</select>",
+      showCancelButton: true,
+      confirmButtonText: "Añadir",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        const porciones = document.querySelector("#porciones").value;
+        handleAlergiaRecipeAndSubmit(
+          item.recipe.label,
+          item.recipe.ingredientLines,
+          item,
+          porciones
+        );
+        Swal.fire("Receta añadida", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Cancelado", "", "info");
+      }
+    });
   };
   return (
     // Renderizar el componente Recipe
@@ -184,7 +212,7 @@ function Recipe(props) {
               <Button
                 variant="success"
                 onClick={() =>
-                  handleAñadir(item.recipe.label, item.recipe.ingredientLines)
+                  handleAñadir(item)
                 }
                 style={{ float: "right" }}
               >
