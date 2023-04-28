@@ -133,7 +133,7 @@ function Perfil() {
     setActividad(event.target.value);
   };
   return (
-    <div>
+    <div className="navData">
       <Naavbar />
       <h1>
         <b>Nombre de usuario:</b>
@@ -268,7 +268,7 @@ function Perfil() {
           <button onClick={verificarCambios}>Guardar</button>
         </div>
       ) : (
-        <div>
+        <div className="datosPerfil">
           <p>Edad:{perfil.edad}</p>
           <p>Altura:{perfil.altura}</p>
           <p>Peso:{perfil.peso}</p>

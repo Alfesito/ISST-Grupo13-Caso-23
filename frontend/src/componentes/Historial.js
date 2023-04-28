@@ -41,7 +41,7 @@ function Historial() {
     return (
         <>
             <Naavbar />
-            <div>
+            <div className="tablaHistorial">
                 <table>
                     <thead>
                         <tr>

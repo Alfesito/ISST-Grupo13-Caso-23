@@ -26,7 +26,7 @@ function Naavbar() {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
-              className="me-auto my-2 my-lg-0"
+              className="NavBarcss"
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
@@ -54,10 +54,10 @@ function Naavbar() {
             </Nav>
 
             <div class="buttons">
-              <Link to="/perfil" className="button">
+              <Link to="/perfil" className="button perfil-button">
                 Perfil
               </Link>
-              <Link to="/" className="button" onClick={logOut}>
+              <Link to="/" className="button salir-button" onClick={logOut}>
                 Salir
               </Link>
             </div>

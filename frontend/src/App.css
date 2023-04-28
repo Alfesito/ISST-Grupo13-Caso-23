@@ -1,7 +1,6 @@
 #cabecera {
   background-color: #282c34;
-
-  min-height: 10vh;
+   min-height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -10,6 +9,189 @@
   color: white;
   margin-bottom: 2mm;
 }
+
+/* Estilo para el historial del usuario */
+
+.tablaHistorial {
+  margin: 20px;
+  padding: 20px;
+  background-color: #F2F2F2;
+  border-radius: 5px;
+}
+
+.tablaHistorial table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tablaHistorial th {
+  font-weight: bold;
+  color: #3B3B3B;
+  background-color: #E1EBF2;
+  border: 1px solid #C4C4C4;
+  padding: 10px;
+}
+
+.tablaHistorial td {
+  color: #3B3B3B;
+  background-color: #FFFFFF;
+  border: 1px solid #C4C4C4;
+  padding: 10px;
+}
+
+.tablaHistorial tbody tr:nth-child(even) td {
+  background-color: #F2F2F2;
+}
+
+.tablaHistorial td button {
+  color: white;
+  background-color: #008CBA;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tablaHistorial td button:hover {
+  background-color: #005F6B;
+}
+
+
+/* Estilo para la barra de directorios */
+.NavBarcss {
+  background-color: #E6F0FF; /* color de fondo */
+  border-radius: 10px; /* radio de borde */
+  padding: 10px; /* espacio interno */
+}
+
+.NavBarcss a {
+  color: #2D3E50; /* color de texto */
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 15px; /* espacio interno */
+  margin-right: 10px; /* espacio externo */
+  border-radius: 5px; /* radio de borde */
+  transition: all 0.3s ease;
+  background-color: #C5D5EA; /* color de fondo */
+  display: inline-block; /* para que cada enlace ocupe su propio rectángulo */
+}
+
+.NavBarcss a:hover {
+  background-color: #9FB4D4; /* color de fondo al pasar el mouse */
+  color: white; /* color de texto al pasar el mouse */
+}
+
+.NavBarcss .active {
+  background-color: #2D3E50; /* color de fondo cuando está activo */
+  color: white; /* color de texto cuando está activo */
+}
+
+@media (max-width: 768px) {
+  .NavBarcss {
+    padding: 0;
+  }
+
+  .NavBarcss a {
+    display: block;
+    padding: 10px;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .NavBarcss .active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+
+
+/* Estilo para el perfil del user */
+.navData {
+  background-color: #5f9acb;
+  padding: 20px;
+  color: white;
+}
+
+.navData h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.navData h1 b {
+  color: #03050b;
+  font-size: 32px;
+}
+
+
+.datosPerfil {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px);
+}
+
+.datosPerfil p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+  color: #555;
+}
+
+
+.datosPerfil p:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #145c97;
+  border-radius: 50%;
+}
+
+.datosPerfil h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #26669b;
+}
+
+
+.datosPerfil span {
+  font-weight: bold;
+  color: #2e7ebf;
+}
+
+.datosPerfil button {
+  background-color: #0f3656;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.datosPerfil button:hover {
+  background-color: #0d8bf2;
+}
+
+
+
 #linea {
   height: 10px;
   background-color: aquamarine;
@@ -105,7 +287,7 @@ h1 {
   margin-top: 5px;
   font-size: 35px;
   font-weight: bolder;
-  color: rgb(0, 0, 0);
+  color: rgb(27, 148, 209);
 }
 
 .description {
@@ -588,74 +770,42 @@ input[type="text"]:placeholder {
 }
 
 /* botones perfil */
+
 .buttons {
   display: flex;
-  width: 250px;
-  gap: 10px;
-  --b: 5px; /* the border thickness */
-  --h: 1.8em; /* the height */
+  justify-content: flex-end;
 }
 
-.buttons a {
-  --_c: #88c100;
-  flex: calc(1.25 + var(--_s, 0));
-  min-width: 0;
-  font-size: 24px;
-  font-weight: bold;
-  height: var(--h);
-  cursor: pointer;
-  color: var(--_c);
-  border: var(--b) solid var(--_c);
-  background: conic-gradient(
-      at calc(100% - 1.3 * var(--b)) 0,
-      var(--_c) 209deg,
-      #0000 211deg
-    )
-    border-box;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 0.577 * var(--h)) 100%, 0 100%);
-  padding: 0 calc(0.288 * var(--h)) 0 0;
-  margin: 0 calc(-0.288 * var(--h)) 0 0;
-  box-sizing: border-box;
-  transition: flex 0.4s;
-  text-decoration: none; /* add this to remove the underline */
+.perfil-button {
+  background-color: #4CAF50;
+  color: white;
 }
 
-.buttons a + a {
-  --_c: #ff003c;
-  flex: calc(0.9 + var(--_s, 0));
-  background: conic-gradient(
-      from -90deg at calc(1.3 * var(--b)) 100%,
-      var(--_c) 119deg,
-      #0000 121deg
-    )
-    border-box;
-  clip-path: polygon(calc(0.577 * var(--h)) 0, 100% 0, 100% 100%, 0 100%);
-  margin: 0 0 0 calc(-0.288 * var(--h));
-  padding: 0 0 0 calc(0.288 * var(--h));
+.salir-button {
+  background-color: #FF9800;
+  color: white;
 }
 
-.buttons a:focus-visible {
-  outline-offset: calc(-2 * var(--b));
-  outline: calc(var(--b) / 2) solid #000;
-  background: none;
-  clip-path: none;
-  margin: 0;
-  padding: 0;
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: all 0.3s ease;
 }
 
-.buttons a:focus-visible + a {
-  background: none;
-  clip-path: none;
-  margin: 0;
-  padding: 0;
+.button:hover {
+  opacity: 0.8;
 }
 
-.buttons a:has(+ a:focus-visible) {
-  background: none;
-  clip-path: none;
-  margin: 0;
-  padding: 0;
+.perfil-button:hover {
+  background-color: #3e8e41;
 }
+
+.salir-button:hover {
+  background-color: #e65100;
+}
+
 
 a:hover,
 a:active:not(:focus-visible) {
