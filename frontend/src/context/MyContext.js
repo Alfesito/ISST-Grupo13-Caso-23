@@ -11,6 +11,16 @@ export default function ContextProvider({ children }) {
   const [cuisine, setCuisine] = useState("");
   const [correo, setCorreo] = useState("");
 
+  const [actualKcal, setActualKcal] = useState(0);
+  const [actualProt, setActualProt] = useState(0);
+  const [actualCarbs, setActualCarbs] = useState(0);
+  const [actualGrasas, setActualGrasas] = useState(0);
+
+  const [objetivoKcal, setobjetivoKcal] = useState(0);
+  const [objetivoProt, setObjetivoProt] = useState(0);
+  const [objetivoGrasa, setObjetivoGrasa] = useState(0);
+  const [objetivoCarbs, setObjetivoCarbs] = useState(0);
+
   const logInCorreo = (email) => {
     setCorreo(email);
   };
@@ -30,12 +40,20 @@ export default function ContextProvider({ children }) {
       )
       .catch((error) => console.error(error));
   };
-
+ 
   return (
     <MyContext.Provider
       value={{
         alergia,
         setAlergia,
+        actualKcal, setActualKcal,
+        actualProt, setActualProt,
+        actualCarbs, setActualCarbs,
+        actualGrasas, setActualGrasas,
+        objetivoKcal, setobjetivoKcal,
+        objetivoProt, setObjetivoProt,
+        objetivoGrasa, setObjetivoGrasa,
+        objetivoCarbs, setObjetivoCarbs,
 
         health,
         setHealth,

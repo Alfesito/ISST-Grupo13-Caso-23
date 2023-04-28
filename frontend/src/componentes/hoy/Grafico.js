@@ -5,12 +5,13 @@ import { useState, useEffect } from "react";
 
 export default function Grafico(props) {
   const percentage = (props.actual / props.maxValue).toFixed(2);
+  console.log(percentage)
   return (
     <div className="container-circulo">
       <div className="circulo">
         <CircularProgressbar
           value={percentage * 100}
-          text={`${percentage * 100}%`}
+          text={`${(percentage * 100).toFixed(0)}%`}
           styles={buildStyles({
             // Rotation of path and trail, in number of turns (0-1)
             rotation: 0.75,

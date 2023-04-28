@@ -10,15 +10,15 @@ export default function Hoy() {
   const [comidas, setComidas] = useState([]);
   const { correo } = useContext(MyContext);
 
-  const [actualKcal, setActualKcal] = useState(0);
-  const [actualProt, setActualProt] = useState(0);
-  const [actualCarbs, setActualCarbs] = useState(0);
-  const [actualGrasas, setActualGrasas] = useState(0);
+  const { actualKcal, setActualKcal } = useContext(MyContext);
+  const { actualProt, setActualProt } = useContext(MyContext);
+  const { actualCarbs, setActualCarbs } = useContext(MyContext);
+  const { actualGrasas, setActualGrasas } = useContext(MyContext);
 
-  const [objetivoKcal, setobjetivoKcal] = useState(0);
-  const [objetivoProt, setObjetivoProt] = useState(0);
-  const [objetivoGrasa, setObjetivoGrasa] = useState(0);
-  const [objetivoCarbs, setObjetivoCarbs] = useState(0);
+  const { objetivoKcal, setobjetivoKcal } = useContext(MyContext);
+  const { objetivoProt, setObjetivoProt } = useContext(MyContext);
+  const { objetivoGrasa, setObjetivoGrasa } = useContext(MyContext);
+  const { objetivoCarbs, setObjetivoCarbs } = useContext(MyContext);
 
   const actividadFisica = {
     BAJA: "baja",
@@ -45,12 +45,11 @@ export default function Hoy() {
     } else {
       TDEE = TMB * 2.4;
     }
-    console.log(TDEE, "TDEE");
 
     setobjetivoKcal(TDEE);
     setObjetivoProt((0.15 * TDEE) / 4);
     setObjetivoGrasa((0.3 * TDEE) / 9);
-    setObjetivoCarbs(TDEE - (0.15 * TDEE)  - (0.3 * TDEE) );
+    setObjetivoCarbs(TDEE - 0.15 * TDEE - 0.3 * TDEE);
   };
 
   async function obtenerComidas() {
@@ -60,12 +59,15 @@ export default function Hoy() {
     await fetch(`/api/ingestas/${correo}`)
       .then((response) => response.json())
       .then((data) => {
-        
-        const filteredComidas = data.filter((producto) => producto.fecha === fechaHoy);
+        const filteredComidas = data.filter(
+          (producto) => producto.fecha === fechaHoy
+        );
         setComidas(filteredComidas.reverse());
 
         const kcalArray = filteredComidas.map((product) => product.kcal);
-        setActualKcal(kcalArray.reduce((acc, kcal) => acc + kcal, 0).toFixed(2));
+        setActualKcal(
+          kcalArray.reduce((acc, kcal) => acc + kcal, 0).toFixed(2)
+        );
 
         const protArray = filteredComidas.map((product) => product.proteina);
         setActualProt(protArray.reduce((acc, prot) => acc + prot, 0));
@@ -88,8 +90,6 @@ export default function Hoy() {
       .catch((error) => console.error(error));
   }
 
-  
-
   useEffect(() => {
     obtenerComidas();
     obtenerUser();
@@ -105,7 +105,7 @@ export default function Hoy() {
               actual={actualKcal}
               maxValue={objetivoKcal}
               titulo={"Kcal"}
-              info={(objetivoKcal - actualKcal).toFixed(1) + " kcal restantes"}
+              info={Math.round((objetivoKcal - actualKcal)) + " restantes"}
             />
           </div>
           <div class="circle">
@@ -113,7 +113,7 @@ export default function Hoy() {
               actual={actualProt}
               maxValue={objetivoProt}
               titulo={"Proteinas"}
-              info={(objetivoProt - actualProt).toFixed(1) + " restantes"}
+              info={Math.round((objetivoProt - actualProt)) + " g restantes".toLowerCase()}
             />
           </div>
           <div class="circle">
@@ -121,9 +121,7 @@ export default function Hoy() {
               actual={actualCarbs}
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
-              info={
-                (objetivoCarbs - actualCarbs).toFixed(1) + " restantes"
-              }
+              info={Math.round((objetivoCarbs - actualCarbs)) + " g restantes".toLowerCase()}
             />
           </div>
           <div class="circle">
@@ -131,9 +129,7 @@ export default function Hoy() {
               actual={actualGrasas}
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
-              info={
-                (objetivoGrasa - actualGrasas).toFixed(1) + " restantes"
-              }
+              info={Math.round((objetivoGrasa - actualGrasas)) + " g restantes".toLowerCase()}
             />
           </div>
         </div>
