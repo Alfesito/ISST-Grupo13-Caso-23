@@ -1,5 +1,9 @@
-# $ kubectl apply -f nutri-app.yaml
-# $ minikube service nutri-app --url
+# Definir el servicio
+  # $ kubectl apply -f nutri-app.yaml
+  # $ minikube service nutri-app --url
+# ELiminar el servicio
+  # $ kubectl delete -f nutri-app.yaml
+  # $ kubectl delete service nutri-app
 apiVersion: apps/v1
 kind: Deployment
 metadata:

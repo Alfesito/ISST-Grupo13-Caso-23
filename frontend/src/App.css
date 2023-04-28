@@ -774,8 +774,15 @@ input[type="text"]:placeholder {
 .buttons {
   display: flex;
   justify-content: flex-end;
+  margin-left: auto;
   ;
 }
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .perfil-button {
   background-color: #4CAF50;
