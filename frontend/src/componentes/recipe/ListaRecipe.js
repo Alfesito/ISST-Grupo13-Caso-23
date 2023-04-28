@@ -14,7 +14,6 @@ function ListaRecipe(props) {
   // declaracion del componente ListaRecipe como una función
 
   const { correo } = useContext(MyContext);
-  const { getUsuario } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -62,8 +61,7 @@ function ListaRecipe(props) {
     porcionesElegidas,
     numPorciones
   ) => {
-    getUsuario();
-
+   
     const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
     const confirm = async () => {
       try {
@@ -75,8 +73,9 @@ function ListaRecipe(props) {
     };
 
     if (
-      jsonStringIngr.toLowerCase().includes(alergia.toLowerCase()) ||
-      name.toLowerCase().includes(alergia.toLowerCase())
+      (jsonStringIngr.toLowerCase().includes(alergia.toLowerCase()) ||
+      name.toLowerCase().includes(alergia.toLowerCase())) &&
+      alergia !== ""
     ) {
       Swal.fire({
         title: "Este producto contiene " + alergia.toLowerCase(),

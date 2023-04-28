@@ -19,7 +19,6 @@ function Recipe(props) {
   let servings = item.recipe.yield; //RACIONES - SERVINGS
 
   const { correo } = useContext(MyContext);
-  const { getUsuario } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
   const navigate = useNavigate();
 
@@ -88,9 +87,10 @@ function Recipe(props) {
     };
 
     if (
-      jsonStringIngr.toLowerCase().includes(alergia.toLowerCase()) ||
-      name.toLowerCase().includes(alergia.toLowerCase())
-    ) {
+      (jsonStringIngr.toLowerCase().includes(alergia.toLowerCase()) ||
+      name.toLowerCase().includes(alergia.toLowerCase())) &&
+      alergia !== ""
+    )  {
       Swal.fire({
         title: "Este producto contiene " + alergia.toLowerCase(),
         text: "¿Quieres continuar?",
