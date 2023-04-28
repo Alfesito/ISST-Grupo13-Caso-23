@@ -20,46 +20,50 @@ function ListaRecipe(props) {
   const navigate = useNavigate();
 
   const handleAñadir = (item) => {
-
-//   Swal.fire({
-  //     title: '¿Cuántas porciones quieres añadir?',
-  //     input: 'select',
-  //     html:
-  //   '<select id="porciones" name="porciones" class="swal2-input">' +
-  //   '<option value="1">1</option>' +
-  //   '<option value="2">2</option>' +
-  //   '<option value="3">3</option>' +
-  //   '<option value="4">4</option>' +
-  //   '<option value="5">5</option>' +
-  //   '</select>',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Añadir',
-  //     denyButtonText: `Don't save`,
-  //   }).then((result) => {
-  //   /* Read more about isConfirmed, isDenied below */
-  //   if (result.isConfirmed) {
-  //     Swal.fire('Receta añadida', '', 'success')
-  //   } else if (result.isDenied) {
-  //     Swal.fire('Cancelado', '', 'info')
-  // }
-  //   });
-
-    // función manejadora de eventos
-    handleAlergiaRecipeAndSubmit(
-      item.recipe.label,
-      item.recipe.ingredientLines,
-      item
-    ); // agrega recetas a una lista de alergias DADO un determinado contexto
-    // handleSubmit(item);
+    const numPorciones = item.recipe.yield;
+  
+    // Crear el HTML del select con opciones generadas dinámicamente
+    let optionsHtml = '';
+    for (let i = 1; i <= numPorciones; i++) {
+      optionsHtml += `<option value="${i}">${i}</option>`;
+    }
+  
+    Swal.fire({
+      title: '¿Cuántas porciones quieres añadir?',
+      input: 'select',
+      html:
+        '<select id="porciones" name="porciones" class="swal2-input">' +
+        optionsHtml +
+        '</select>',
+      showCancelButton: true,
+      confirmButtonText: 'Añadir',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const porcionesElegidas = document.getElementById('porciones').value;
+        Swal.fire('Receta añadida', '', 'success');
+        handleAlergiaRecipeAndSubmit(
+          item.recipe.label,
+          item.recipe.ingredientLines,
+          item,
+          porcionesElegidas,
+          numPorciones,
+        );
+      } else if (result.isDenied) {
+        Swal.fire('Cancelado', '', 'info');
+      }
+    });
   };
+  
 
-  const handleAlergiaRecipeAndSubmit = async (name, ingr, item) => {
+  const handleAlergiaRecipeAndSubmit = async (name, ingr, item,porcionesElegidas,numPorciones) => {
     getUsuario();
+    
 
     const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
     const confirm = async () => {
       try {
-        await handleSubmit(item);
+        await handleSubmit(item,porcionesElegidas,numPorciones);
         Swal.fire("Confirmado", "Producto añadido", "success");
       } catch (error) {
         console.log(error);
@@ -88,7 +92,10 @@ function ListaRecipe(props) {
     }
   };
 
-  const handleSubmit = async (item) => {
+  const handleSubmit = async (item,porcionesElegidas,numPorciones) => {
+    console.log("🚀 ~ file: ListaRecipe.js:96 ~ handleSubmit ~ numPorciones:", numPorciones)
+    console.log("🚀 ~ file: ListaRecipe.js:96 ~ handleSubmit ~ porcionesElegidas:", porcionesElegidas)
+    
     await fetch(`/api/añadir/ingestas/${correo}`, {
       headers: {
         Accept: "application/json",
@@ -99,11 +106,11 @@ function ListaRecipe(props) {
         fecha: new Date(),
         correo: correo,
         comida: item.recipe.label,
-        kcal: item.recipe.calories,
-        proteina: Math.round(item.recipe.totalNutrients.PROCNT.quantity),
-        grasa: Math.round(item.recipe.totalNutrients.FAT.quantity),
-        carb: Math.round(item.recipe.totalNutrients.CHOCDF.quantity),
-        fibra: Math.round(item.recipe.totalNutrients.FIBTG.quantity),
+        kcal: (item.recipe.calories/numPorciones)* porcionesElegidas,
+        proteina: Math.round(item.recipe.totalNutrients.PROCNT.quantity/numPorciones)* porcionesElegidas,
+        grasa: Math.round(item.recipe.totalNutrients.FAT.quantity/numPorciones)* porcionesElegidas,
+        carb: Math.round(item.recipe.totalNutrients.CHOCDF.quantity/numPorciones)*porcionesElegidas,
+        fibra: Math.round(item.recipe.totalNutrients.FIBTG.quantity/numPorciones)*porcionesElegidas,
       }),
     })
       .then(function (res) {
