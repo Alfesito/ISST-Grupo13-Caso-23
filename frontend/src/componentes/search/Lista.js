@@ -16,6 +16,8 @@ function Lista(props) {
   const { correo } = useContext(MyContext);
   const {getUsuario}= useContext(MyContext);
   const {alergia} = useContext(MyContext);
+  const {calculateNutriScore}= useContext(MyContext);
+
   const navigate = useNavigate();
 
   // Cantidad de producto utilizada (por defecto 100g)
@@ -25,6 +27,12 @@ function Lista(props) {
       : 100;
 
   const handleAñadir = (item) => {
+    const nutriScore = calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF);
+    if (nutriScore === "E" || nutriScore === "D"){
+      alert("Bajo Nutri Score")
+    }
+    console.log(nutriScore)
+    
     // manejar el evento de annadir un producto a la lista de alergias personalizada
     handleAlergiaProdAndSubmit(item);
     // handleSubmit(item);
@@ -77,6 +85,7 @@ function Lista(props) {
         grasa: (item.food.nutrients.FAT * qu) / 100,
         carb: (item.food.nutrients.CHOCDF * qu) / 100,
         fibra: (item.food.nutrients.FIBTG * qu) / 10,
+        nutriscore: calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF)
       }),
     })
       .then(function (res) {
@@ -115,6 +124,9 @@ function Lista(props) {
                   <Card.Text>
                     {item.quantity ? item.quantity + "g" : "100g"}
                   </Card.Text>
+                  <Card.Text>
+                    NutriScore: {calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF)}
+                  </Card.Text>
 
                   <Link to={"/products/" + id}>
                     <Button variant="info">Ver</Button>
@@ -152,6 +164,9 @@ function Lista(props) {
                 <Card.Body>
                   <Card.Title>{item.food.label}</Card.Title>
                   <Card.Text>{item.food.category}</Card.Text>
+                  <Card.Text>
+                    NutriScore: {calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF)}
+                  </Card.Text>
 
                   <Link to={"/products/" + id}>
                     <Button variant="info">Ver</Button>

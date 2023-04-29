@@ -119,11 +119,9 @@ function Recipe(props) {
 
     Swal.fire({
       title: "¿Cuántas porciones quieres añadir?",
-      input: "select",
       html:
         '<select id="porciones" name="porciones" class="swal2-input">' +
-        optionsHtml +
-        "</select>",
+        optionsHtml,
       showCancelButton: true,
       confirmButtonText: "Añadir",
       denyButtonText: `Don't save`,

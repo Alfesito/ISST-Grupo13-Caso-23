@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 function Producto(props) {
   let { productId } = useParams();
 
+
   let id = props.theproducts.findIndex((el) => el.food.foodId === productId);
   let item = props.theproducts[id];
   // Cantidad de producto utilizada (por defecto 100g)
@@ -24,10 +25,17 @@ function Producto(props) {
   const { alergia } = useContext(MyContext);
   const { correo } = useContext(MyContext);
   const { getUsuario } = useContext(MyContext);
+  const {calculateNutriScore}= useContext(MyContext);
+
 
   const navigate = useNavigate();
 
   const handleAñadir = (item) => {
+    const nutriScore = calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF);
+    if (nutriScore === "E" || nutriScore === "D"){
+      alert("Bajo Nutri Score")
+    }
+    console.log(nutriScore);
     handleAlergiaProdAndSubmit(item);
     // handleSubmit();
   };
@@ -137,6 +145,10 @@ function Producto(props) {
                   </li>
                   <li>
                     Fibra: {(item.food.nutrients.FIBTG * qu) / 100} g<br />
+                    <br />
+                  </li>
+                  <li>
+                    NutriScore: {calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF)} <br />
                     <br />
                   </li>
                 </ul>

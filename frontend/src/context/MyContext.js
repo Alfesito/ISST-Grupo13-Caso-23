@@ -40,6 +40,47 @@ export default function ContextProvider({ children }) {
       )
       .catch((error) => console.error(error));
   };
+
+  function calculateNutriScore(energy, fat, fiber, protein, carbs) {
+    // Valor de referencia para cada componente por cada 100g
+    const refEnergy = 335; // kJ
+    const refFat = 1; // g
+    const refFiber = 3; // g
+    const refProtein = 0.5; // g
+    const refCarbs = 5; // g
+  
+    // Calcula el valor de cada componente por cada 100g
+    const energyValue = energy / refEnergy;
+    const fatValue = fat / refFat;
+    const fiberValue = fiber / refFiber;
+    const proteinValue = protein / refProtein;
+    const carbsValue = carbs / refCarbs;
+  
+    // Calcula la puntuación de cada componente
+    const energyPoints = Math.min(Math.floor(energyValue * 2.5), 10);
+    const fatPoints = Math.min(Math.floor(fatValue * 10), 10);
+    const fiberPoints = Math.floor(fiberValue * 2);
+    const proteinPoints = Math.floor(proteinValue * 5);
+    const carbsPoints = Math.min(Math.floor(carbsValue * 5), 10);
+  
+    // Calcula la puntuación total
+    const totalPoints = energyPoints + fatPoints - fiberPoints - proteinPoints - carbsPoints;
+  
+    // Asigna la letra y el color correspondiente según la puntuación total
+    if (totalPoints <= -1) {
+      return "A";
+    } else if (totalPoints <= 2) {
+      return "B";
+    } else if (totalPoints <= 10) {
+      return "C";
+    } else if (totalPoints <= 18) {
+      return "D";
+    } else {
+      return "E";
+    }
+}
+
+  
  
   return (
     <MyContext.Provider
@@ -66,6 +107,7 @@ export default function ContextProvider({ children }) {
         logInCorreo,
         logOutCorreo,
         getUsuario,
+        calculateNutriScore,
       }}
     >
       {children}

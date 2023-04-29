@@ -29,11 +29,11 @@ function ListaRecipe(props) {
 
     Swal.fire({
       title: "¿Cuántas porciones quieres añadir?",
-      input: "select",
+
       html:
         '<select id="porciones" name="porciones" class="swal2-input">' +
-        optionsHtml +
-        "</select>",
+        optionsHtml,
+
       showCancelButton: true,
       confirmButtonText: "Añadir",
       denyButtonText: `Don't save`,
@@ -61,7 +61,6 @@ function ListaRecipe(props) {
     porcionesElegidas,
     numPorciones
   ) => {
-   
     const jsonStringIngr = JSON.stringify(ingr).toLowerCase();
     const confirm = async () => {
       try {
@@ -74,7 +73,7 @@ function ListaRecipe(props) {
 
     if (
       (jsonStringIngr.toLowerCase().includes(alergia.toLowerCase()) ||
-      name.toLowerCase().includes(alergia.toLowerCase())) &&
+        name.toLowerCase().includes(alergia.toLowerCase())) &&
       alergia !== ""
     ) {
       Swal.fire({

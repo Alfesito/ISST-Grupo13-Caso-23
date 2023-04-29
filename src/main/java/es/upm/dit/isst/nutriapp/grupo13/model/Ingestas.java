@@ -25,11 +25,12 @@ public class Ingestas {
     private Double carb;
     private Double grasa;
     private Double fibra;
+    private String nutriscore;
 
     public Ingestas(){}
 
     public Ingestas(@NotEmpty Long id, @NotEmpty @Email String correo, LocalDate fecha, String comida, Double kcal,
-            Double proteina, Double carb, Double grasa, Double fibra) {
+            Double proteina, Double carb, Double grasa, Double fibra, String nutriscore) {
         this.id = id;
         this.correo = correo;
         this.fecha = fecha;
@@ -39,10 +40,8 @@ public class Ingestas {
         this.carb = carb;
         this.grasa = grasa;
         this.fibra = fibra;
+        this.nutriscore = nutriscore;
     }
-
-
-
 
     public Long getId() {
         return id;
@@ -118,6 +117,14 @@ public class Ingestas {
 
     public Object map(Object object) {
         return null;
+    }
+
+    public String getNutriscore() {
+        return nutriscore;
+    }
+
+    public void setNutriscore(String nutriscore) {
+        this.nutriscore = nutriscore;
     }
 
     

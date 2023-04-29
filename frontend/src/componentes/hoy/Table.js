@@ -3,6 +3,7 @@ import React from "react";
 function Table(props) {
 
   const comidas = props.comidas;
+  const nutriscore = props.nutriscore;
   
   return (
     <div>
@@ -13,6 +14,7 @@ function Table(props) {
         <thead>
           <tr>
             <th class="primera-fila">Producto</th>
+            <th class="primera-fila">NutriScore</th>
             <th class="primera-fila">KCal</th>
             <th class="primera-fila">Proteinas</th>
             <th class="primera-fila">Grasas</th>
@@ -24,11 +26,12 @@ function Table(props) {
           {comidas.map(producto => (
             <tr>
             <td class="text-left">{producto.comida}</td>
+            <td class="text-left">{nutriscore}</td>
             <td class="text-left">{producto.kcal.toFixed(2)}</td>
             <td class="text-left">{producto.proteina.toFixed(2)}</td>
             <td class="text-left">{producto.grasa.toFixed(2)}</td>
             <td class="text-left">{producto.carb.toFixed(2)}</td>
-            <td class="text-left">{producto.fibra.toFixed(2)}</td>
+            <td class="text-left">{producto.fibra === null ? 0 : producto.fibra.toFixed(2)}</td>
           </tr>
           ))
           }

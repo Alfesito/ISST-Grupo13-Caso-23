@@ -46,6 +46,7 @@ function Historial() {
                     <thead>
                         <tr>
                             <th>Comida</th>
+                            <th>NutriScore</th>
                             <th>Kcal</th>
                             <th>Proteina</th>
                             <th>Carb</th>
@@ -59,11 +60,12 @@ function Historial() {
                         {comidas && comidas.map(ingesta => (
                             <tr key={ingesta.id}>
                                 <td>{ingesta.comida}</td>
+                                <td>{ingesta.nutriscore}</td>
                                 <td>{ingesta.kcal.toFixed(2)}</td>
                                 <td>{ingesta.proteina.toFixed(2)}</td>
                                 <td>{ingesta.carb.toFixed(2)}</td>
                                 <td>{ingesta.grasa.toFixed(2)}</td>
-                                <td>{ingesta.fibra.toFixed(2)}</td>
+                                <td>{ingesta.fibra === null ? 0 : ingesta.fibra.toFixed(2)}</td>
                                 <td>{ingesta.fecha}</td>
                                 <td><Button id={ingesta.id} variant="danger" onClick={() => eliminarIngesta(ingesta.id)}>Eliminar</Button></td>
                             </tr>
