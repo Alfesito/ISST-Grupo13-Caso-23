@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 
 import Button from "react-bootstrap/Button";
@@ -15,11 +15,22 @@ function ListaRecipe(props) {
 
   const { correo } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
+  const {calculateNutriScore}= useContext(MyContext);
 
   const navigate = useNavigate();
 
   const handleAñadir = (item) => {
     const numPorciones = item.recipe.yield;
+
+    const nutriScore = calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL.quantity/ numPorciones, 
+                item.recipe.totalNutrients.FAT.quantity/ numPorciones, 
+                item.recipe.totalNutrients.FIBTG.quantity/ numPorciones, 
+                item.recipe.totalNutrients.PROCNT.quantity/ numPorciones, 
+                item.recipe.totalNutrients.CHOCDF.quantity/ numPorciones
+                );
+    if (nutriScore === "E" || nutriScore === "D"){
+      alert("Bajo Nutri Score")
+    }
 
     // Crear el HTML del select con opciones generadas dinámicamente
     let optionsHtml = "";
@@ -120,11 +131,19 @@ function ListaRecipe(props) {
         fibra:
           Math.round(item.recipe.totalNutrients.FIBTG.quantity / numPorciones) *
           porcionesElegidas,
+        nutriscore: calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL / numPorciones, 
+                item.recipe.totalNutrients.FAT.quantity / numPorciones, 
+                item.recipe.totalNutrients.FIBTG.quantity / numPorciones, 
+                item.recipe.totalNutrients.PROCNT.quantity / numPorciones, 
+                item.recipe.totalNutrients.CHOCDF.quantity / numPorciones,
+                )
+
       }),
     })
       .then(function (res) {
         if (res.status === 200) {
           navigate("/recomendaciones");
+          console.log(res)
         } else {
           //alert("Algo ha salido mal");
           Swal.fire({
@@ -156,6 +175,15 @@ function ListaRecipe(props) {
                 <Card.Body>
                   <Card.Title>{item.recipe.label}</Card.Title>
                   <Card.Text>{item.recipe.source}</Card.Text>
+                  <Card.Text>
+                    NutriScore: {calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL, 
+                                  item.recipe.totalNutrients.FAT.quantity/item.recipe.yield, 
+                                  item.recipe.totalNutrients.FIBTG.quantity/item.recipe.yield, 
+                                  item.recipe.totalNutrients.PROCNT.quantity/item.recipe.yield, 
+                                  item.recipe.totalNutrients.SUGAR.quantity/item.recipe.yield,
+                                  item.recipe.totalNutrients.CHOCDF.quantity/item.recipe.yield)
+                                }
+                  </Card.Text>
 
                   <Link to={"/recipe/" + id}>
                     {/* anadir vista de la receta */}

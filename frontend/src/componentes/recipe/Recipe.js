@@ -20,6 +20,7 @@ function Recipe(props) {
 
   const { correo } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
+  const {calculateNutriScore}= useContext(MyContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (item, porcionesElegidas, numPorciones) => {
@@ -48,6 +49,12 @@ function Recipe(props) {
         fibra:
           Math.round(item.recipe.totalNutrients.FIBTG.quantity / numPorciones) *
           porcionesElegidas,
+        nutriscore: calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL / numPorciones, 
+          item.recipe.totalNutrients.FAT.quantity / numPorciones, 
+          item.recipe.totalNutrients.FIBTG.quantity / numPorciones, 
+          item.recipe.totalNutrients.PROCNT.quantity / numPorciones, 
+          item.recipe.totalNutrients.CHOCDF.quantity / numPorciones,
+          )
       }),
     })
       .then(function (res) {
@@ -110,6 +117,17 @@ function Recipe(props) {
   };
   const handleAñadir = (item) => {
     const numPorciones = item.recipe.yield;
+
+    const nutriScore = calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL, 
+      item.recipe.totalNutrients.FAT.quantity/item.recipe.yield, 
+      item.recipe.totalNutrients.FIBTG.quantity/item.recipe.yield, 
+      item.recipe.totalNutrients.PROCNT.quantity/item.recipe.yield, 
+      item.recipe.totalNutrients.SUGAR.quantity/item.recipe.yield,
+      item.recipe.totalNutrients.CHOCDF.quantity/item.recipe.yield)
+
+      if (nutriScore === "E" || nutriScore === "D"){
+        alert("Bajo Nutri Score")
+      }
 
     // Crear el HTML del select con opciones generadas dinámicamente
     let optionsHtml = "";
@@ -209,8 +227,21 @@ function Recipe(props) {
                     <br />
                     <br />
                   </li>
+                  <li>
+                    NutriScore:{" "}
+                    {calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL, 
+                                  item.recipe.totalNutrients.FAT.quantity/item.recipe.yield, 
+                                  item.recipe.totalNutrients.FIBTG.quantity/item.recipe.yield, 
+                                  item.recipe.totalNutrients.PROCNT.quantity/item.recipe.yield, 
+                                  item.recipe.totalNutrients.SUGAR.quantity/item.recipe.yield,
+                                  item.recipe.totalNutrients.CHOCDF.quantity/item.recipe.yield)
+                    }{" "}
+                    <br />
+                    <br />
+                  </li>
                 </ul>
               </div>
+              
               {/* Renderizar el enlace a la receta completa  */}
               {item.recipe &&
                 item.recipe.url &&
