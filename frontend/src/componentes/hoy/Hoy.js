@@ -20,6 +20,8 @@ export default function Hoy() {
   const { objetivoGrasa, setObjetivoGrasa } = useContext(MyContext);
   const { objetivoCarbs, setObjetivoCarbs } = useContext(MyContext);
 
+  const [nutriScoreArray, setNutriscoreArray] = useState([])
+
   const [ nutriscore, setNutriscore] = useState("")
 
   const actividadFisica = {
@@ -81,11 +83,8 @@ export default function Hoy() {
         setActualGrasas(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
 
         const nutriScoreArray = filteredComidas.map((product) => product.nutriscore);
-        setNutriscore(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
-
-        
-
-
+        setNutriscoreArray(nutriScoreArray); // Aquí se imprimirá el array con los valores de nutriscore de cada producto.
+  
       })
       .catch((error) => console.error(error));
   }
@@ -143,7 +142,7 @@ export default function Hoy() {
           </div>
         </div>
         <div class="table-wrapper">
-          <Table comidas={comidas} nutriscore ={nutriscore} />
+          <Table comidas={comidas} nutriscorearray ={nutriScoreArray} />
         </div>
       </div>
     </div>
