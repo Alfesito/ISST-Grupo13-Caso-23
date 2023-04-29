@@ -24,17 +24,17 @@ public class SecurityConfig {
                 .and()
             .logout()
                 .permitAll().and()
-            // .csrf()
-            //     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-            //     .ignoringAntMatchers("/h2/**")
-            //     .and()
+            .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .ignoringAntMatchers("/h2/**")
+                .and()
             .csrf().disable()
             .headers()
                 .frameOptions()
                 .sameOrigin()
                 .and()
-            //  .requiresChannel().anyRequest().requiresSecure();
-            .httpBasic();
+             .requiresChannel().anyRequest().requiresSecure();
+            // .httpBasic();
         return http.build();
 }
 
