@@ -127,7 +127,7 @@ export default function ContextProvider({ children }) {
     } else {
       nutriScoreLetter = 'E';
     }  
-    console.log(energyScore , sugarScore , saturatedFatScore , fruitsVegetablesScore)
+    // console.log(energyScore , sugarScore , saturatedFatScore , fruitsVegetablesScore)
     return nutriScoreLetter;
   }
   
