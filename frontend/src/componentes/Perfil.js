@@ -136,7 +136,7 @@ function Perfil() {
     <div className="navData">
       <Naavbar />
       <h1>
-        <b>Nombre de usuario:</b>
+        <b>Nombre de usuario: {perfil.username}</b>
       </h1>
       {cambiar ? (
         <div>
