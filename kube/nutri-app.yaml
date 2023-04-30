@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: nutri-app
-          image: equipo32/nutri-app:latest # utiliza la misma imagen base que el Dockerfile
+          image: alfesito/nutri-app:latest # utiliza la misma imagen base que el Dockerfile
           ports:
             - containerPort: 8443 # expone el puerto 8443
 ---
@@ -40,5 +40,5 @@ spec:
   type: LoadBalancer
   ports:
     - name: https
-      port: 443
+      port: 8443
       targetPort: 8443
