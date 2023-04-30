@@ -18,10 +18,10 @@ ENV JAVA_OPTS="-Djavax.net.ssl.trustStore=/ISST-Grupo13-NutriApp/src/main/resour
 WORKDIR /ISST-Grupo13-NutriApp
 
 # Copy the source code into the Docker image
-# COPY . .
+# COPY ~/data ./data
 
 # Create a volume for the data directory
-VOLUME /data
+# VOLUME /data
 
 # Copy the entrypoint script
 COPY entrypoint.sh /
@@ -37,7 +37,7 @@ EXPOSE 8443
 
 # Pasos para contruir la imagen un ejecutar el contenedor:
 #     $ docker build -t nutri-app .     ó       $ docker pull alfesito/nutri-app
-#     $ docker run -d -p 8443:8443 nutri-app
+#     $ docker run -d -p 8443:8443 -v ~/data:/data alfesito/nutri-app
 #     $ docker stop [ID]
 
 # Eliminar la imagen(es importante eliminar todos los contenedores creados, de otra forma puede que de problemas):
