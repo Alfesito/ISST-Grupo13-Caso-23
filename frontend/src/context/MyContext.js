@@ -86,7 +86,7 @@ export default function ContextProvider({ children }) {
     // Calculate the score for fruits and vegetables
     let fruitsVegetablesScore;
     if (fiber < 1.2) {
-      fruitsVegetablesScore = 1;
+      fruitsVegetablesScore = 0;
     } else if (fiber >= 1.2 && fiber < 1.9) {
       fruitsVegetablesScore = 2;
     } else if (fiber >= 1.9 && fiber < 2.8) {
@@ -98,18 +98,18 @@ export default function ContextProvider({ children }) {
     // Calculate the energy score per 100g of product
     const energyPer100g = energy / (fat + carbs + protein);
     let energyScore;
-    if (energyPer100g <= 235) {
+    if (energyPer100g <= 250) {
       energyScore = 0;
-    } else if (energyPer100g > 235 && energyPer100g <= 570) {
-      energyScore = 1;
-    } else if (energyPer100g > 570 && energyPer100g <= 805) {
+    } else if (energyPer100g > 250 && energyPer100g <= 570) {
       energyScore = 2;
-    } else if ( energyPer100g > 705 && energyPer100g <= 1140) {
+    } else if (energyPer100g > 570 && energyPer100g <= 805) {
       energyScore = 3;
-    } else if (energyPer100g > 1140 && energyPer100g <= 1375) {
+    } else if ( energyPer100g > 705 && energyPer100g <= 1140) {
       energyScore = 4;
-    } else {
+    } else if (energyPer100g > 1140 && energyPer100g <= 1375) {
       energyScore = 5;
+    } else {
+      energyScore = 6;
     }
   
     // Calculate the final NutriScore
@@ -118,11 +118,11 @@ export default function ContextProvider({ children }) {
     let nutriScoreLetter;
     if (nutriScore <= 1) {
       nutriScoreLetter = 'A';
-    } else if (nutriScore <= 3) {
+    } else if (nutriScore <= 2) {
       nutriScoreLetter = 'B';
-    } else if (nutriScore <= 7) {
+    } else if (nutriScore <= 6) {
       nutriScoreLetter = 'C';
-    } else if (nutriScore <= 12) {
+    } else if (nutriScore <= 9) {
       nutriScoreLetter = 'D';
     } else {
       nutriScoreLetter = 'E';
