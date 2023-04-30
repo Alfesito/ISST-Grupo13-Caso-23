@@ -4,9 +4,11 @@ FROM ubuntu:20.04
 # Update package list and install Java 17 and Maven
 RUN apt-get update && apt-get install -y openjdk-17-jdk maven
 RUN apt install git -y
+RUN apt-get install -y ca-certificates && update-ca-certificates
 
 # Clone the GitHub repository (optional if you have the source code locally)
 RUN git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
+ENV JAVA_OPTS="-Djavax.net.ssl.trustStore=/ISST-Grupo13-NutriApp/src/main/resources/keystore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.keyStore=/ISST-Grupo13-NutriApp/src/main/resources/keystore.p12 -Djavax.net.ssl.keyStorePassword=changeit"
 
 # Set the working directory to the cloned repository
 WORKDIR /ISST-Grupo13-NutriApp
@@ -26,12 +28,12 @@ RUN chmod +x /entrypoint.sh
 # Set the entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Expose port 8080 (change the number if your application uses a different port)
+# Expose port 8443 (change the number if your application uses a different port)
 EXPOSE 8443
 
 # Pasos para contruir la imagen un ejecutar el contenedor:
 #     $ docker build -t nutri-app .     ó       $ docker pull alfesito/nutri-app
-#     $ docker run -d -p 8080:8080 nutri-app
+#     $ docker run -d -p 8443:8443 nutri-app
 #     $ docker stop [ID]
 
 # Eliminar la imagen(es importante eliminar todos los contenedores creados, de otra forma puede que de problemas):
