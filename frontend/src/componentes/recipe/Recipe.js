@@ -7,6 +7,11 @@ import { useContext, useState } from "react";
 import { MyContext } from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import nutriA from "../../images/nutriScore/nutriA.png";
+import nutriB from "../../images/nutriScore/nutriB.png";
+import nutriC from "../../images/nutriScore/nutriC.png";
+import nutriD from "../../images/nutriScore/nutriD.png";
+import nutriE from "../../images/nutriScore/nutriE.png";
 
 function Recipe(props) {
   // Definicion del componente Recipe
@@ -115,49 +120,142 @@ function Recipe(props) {
       await confirm();
     }
   };
+  
   const handleAñadir = (item) => {
     const numPorciones = item.recipe.yield;
 
-    const nutriScore = calculateNutriScore(item.recipe.totalNutrients.ENERC_KCAL, 
-      item.recipe.totalNutrients.FAT.quantity/item.recipe.yield, 
-      item.recipe.totalNutrients.FIBTG.quantity/item.recipe.yield, 
-      item.recipe.totalNutrients.PROCNT.quantity/item.recipe.yield, 
-      item.recipe.totalNutrients.SUGAR.quantity/item.recipe.yield,
-      item.recipe.totalNutrients.CHOCDF.quantity/item.recipe.yield)
+    const nutriScore = calculateNutriScore(
+      item.recipe.totalNutrients.ENERC_KCAL.quantity / numPorciones,
+      item.recipe.totalNutrients.FAT.quantity / numPorciones,
+      item.recipe.totalNutrients.FIBTG.quantity / numPorciones,
+      item.recipe.totalNutrients.PROCNT.quantity / numPorciones,
+      item.recipe.totalNutrients.CHOCDF.quantity / numPorciones
+    );
+    
 
-      if (nutriScore === "E" || nutriScore === "D"){
-        alert("Bajo Nutri Score")
+    if (nutriScore === "D") {
+      Swal.fire({
+        title: "¿Quieres continuar?",
+        imageUrl: nutriD,
+        imageWidth: 300,
+        imageHeight: 163,
+        imageAlt: "Nuriscore D",
+        confirmButtonText: "Añadir",
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          let optionsHtml = "";
+          for (let i = 1; i <= numPorciones; i++) {
+            optionsHtml += `<option value="${i}">${i}</option>`;
+          }
+      
+          Swal.fire({
+            title: "¿Cuántas porciones quieres añadir?",
+      
+            html:
+              '<select id="porciones" name="porciones" class="swal2-input">' +
+              optionsHtml,
+      
+            showCancelButton: true,
+            confirmButtonText: "Añadir",
+            denyButtonText: `Don't save`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const porcionesElegidas = document.getElementById("porciones").value;
+              Swal.fire("Receta añadida", "", "success");
+              handleAlergiaRecipeAndSubmit(
+                item.recipe.label,
+                item.recipe.ingredientLines,
+                item,
+                porcionesElegidas,
+                numPorciones
+              );
+            } else if (result.isDenied) {
+              Swal.fire("Cancelado", "", "info");
+            }
+          });
+
+        }
+      });
+    } else if (nutriScore === "E") {
+      Swal.fire({
+        title: "¿Quieres continuar?",
+        imageUrl: nutriE,
+        imageWidth: 300,
+        imageHeight: 163,
+        imageAlt: "Nuriscore E",
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          let optionsHtml = "";
+          for (let i = 1; i <= numPorciones; i++) {
+            optionsHtml += `<option value="${i}">${i}</option>`;
+          }
+      
+          Swal.fire({
+            title: "¿Cuántas porciones quieres añadir?",
+      
+            html:
+              '<select id="porciones" name="porciones" class="swal2-input">' +
+              optionsHtml,
+      
+            showCancelButton: true,
+            confirmButtonText: "Añadir",
+            denyButtonText: `Don't save`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const porcionesElegidas = document.getElementById("porciones").value;
+              Swal.fire("Receta añadida", "", "success");
+              handleAlergiaRecipeAndSubmit(
+                item.recipe.label,
+                item.recipe.ingredientLines,
+                item,
+                porcionesElegidas,
+                numPorciones
+              );
+            } else if (result.isDenied) {
+              Swal.fire("Cancelado", "", "info");
+            }
+          });
+          
+        }
+      });
+    }
+    else{
+      let optionsHtml = "";
+      for (let i = 1; i <= numPorciones; i++) {
+        optionsHtml += `<option value="${i}">${i}</option>`;
       }
-
-    // Crear el HTML del select con opciones generadas dinámicamente
-    let optionsHtml = "";
-    for (let i = 1; i <= numPorciones; i++) {
-      optionsHtml += `<option value="${i}">${i}</option>`;
+  
+      Swal.fire({
+        title: "¿Cuántas porciones quieres añadir?",
+  
+        html:
+          '<select id="porciones" name="porciones" class="swal2-input">' +
+          optionsHtml,
+  
+        showCancelButton: true,
+        confirmButtonText: "Añadir",
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const porcionesElegidas = document.getElementById("porciones").value;
+          Swal.fire("Receta añadida", "", "success");
+          handleAlergiaRecipeAndSubmit(
+            item.recipe.label,
+            item.recipe.ingredientLines,
+            item,
+            porcionesElegidas,
+            numPorciones
+          );
+        } else if (result.isDenied) {
+          Swal.fire("Cancelado", "", "info");
+        }
+      });
     }
 
-    Swal.fire({
-      title: "¿Cuántas porciones quieres añadir?",
-      html:
-        '<select id="porciones" name="porciones" class="swal2-input">' +
-        optionsHtml,
-      showCancelButton: true,
-      confirmButtonText: "Añadir",
-      denyButtonText: `Don't save`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const porcionesElegidas = document.getElementById("porciones").value;
-        Swal.fire("Receta añadida", "", "success");
-        handleAlergiaRecipeAndSubmit(
-          item.recipe.label,
-          item.recipe.ingredientLines,
-          item,
-          porcionesElegidas,
-          numPorciones
-        );
-      } else if (result.isDenied) {
-        Swal.fire("Cancelado", "", "info");
-      }
-    });
+    // Crear el HTML del select con opciones generadas dinámicamente
+    
   };
 
   return (

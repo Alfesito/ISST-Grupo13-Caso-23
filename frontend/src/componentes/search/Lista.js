@@ -9,6 +9,11 @@ import { useContext, useState, useEffect } from "react";
 import { MyContext } from "../../context/MyContext";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import nutriA from "../../images/nutriScore/nutriA.png";
+import nutriB from "../../images/nutriScore/nutriB.png";
+import nutriC from "../../images/nutriScore/nutriC.png";
+import nutriD from "../../images/nutriScore/nutriD.png";
+import nutriE from "../../images/nutriScore/nutriE.png";
 
 
 function Lista(props) {
@@ -26,17 +31,49 @@ function Lista(props) {
       ? props.theparsed[0].quantity
       : 100;
 
-  const handleAñadir = (item) => {
-    const nutriScore = calculateNutriScore(item.food.nutrients.ENERC_KCAL, item.food.nutrients.FAT, item.food.nutrients.FIBTG, item.food.nutrients.PROCNT, item.food.nutrients.CHOCDF);
-    if (nutriScore === "E" || nutriScore === "D"){
-      alert("Bajo Nutri Score")
-    }
-    console.log(nutriScore)
+      const handleAñadir = (item) => {
+        const nutriScore = calculateNutriScore(
+          item.food.nutrients.ENERC_KCAL,
+          item.food.nutrients.FAT,
+          item.food.nutrients.FIBTG,
+          item.food.nutrients.PROCNT,
+          item.food.nutrients.CHOCDF
+        );
     
-    // manejar el evento de annadir un producto a la lista de alergias personalizada
-    handleAlergiaProdAndSubmit(item);
-    // handleSubmit(item);
-  };
+        if (nutriScore == "D") {
+          Swal.fire({
+            title: "¿Quieres continuar?",
+            imageUrl: nutriD,
+            imageWidth: 300,
+            imageHeight: 163,
+            imageAlt: "Nuriscore D",
+            confirmButtonText: "Continuar",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              handleAlergiaProdAndSubmit(item);
+            }
+          });
+        } else if (nutriScore == "E"){
+        
+          Swal.fire({
+            title: "¿Quieres continuar?",
+            imageUrl: nutriE,
+            imageWidth: 300,
+            imageHeight: 163,
+            imageAlt: "Nuriscore E",
+            confirmButtonText: "Continuar",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              handleAlergiaProdAndSubmit(item);
+            }
+          });
+        
+        } else {
+          handleAlergiaProdAndSubmit(item);
+        }
+    
+        // handleSubmit();
+      };
   
   const handleAlergiaProdAndSubmit = async (item) => {
     getUsuario();
