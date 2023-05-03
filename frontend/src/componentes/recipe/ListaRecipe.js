@@ -28,11 +28,11 @@ function ListaRecipe(props) {
     const numPorciones = item.recipe.yield;
 
     const nutriScore = calculateNutriScore(
-      item.recipe.totalNutrients.ENERC_KCAL.quantity / numPorciones,
-      item.recipe.totalNutrients.FAT.quantity / numPorciones,
-      item.recipe.totalNutrients.FIBTG.quantity / numPorciones,
-      item.recipe.totalNutrients.PROCNT.quantity / numPorciones,
-      item.recipe.totalNutrients.CHOCDF.quantity / numPorciones
+      item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
+      item.recipe.totalNutrients.FAT.quantity / item.recipe.yield,
+      item.recipe.totalNutrients.FIBTG.quantity / item.recipe.yield,
+      item.recipe.totalNutrients.PROCNT.quantity / item.recipe.yield,
+      item.recipe.totalNutrients.CHOCDF.quantity / item.recipe.yield
     );
     
 
@@ -228,11 +228,11 @@ function ListaRecipe(props) {
           Math.round(item.recipe.totalNutrients.FIBTG.quantity / numPorciones) *
           porcionesElegidas,
         nutriscore: calculateNutriScore(
-          item.recipe.totalNutrients.ENERC_KCAL / numPorciones,
-          item.recipe.totalNutrients.FAT.quantity / numPorciones,
-          item.recipe.totalNutrients.FIBTG.quantity / numPorciones,
-          item.recipe.totalNutrients.PROCNT.quantity / numPorciones,
-          item.recipe.totalNutrients.CHOCDF.quantity / numPorciones
+          item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
+          item.recipe.totalNutrients.FAT.quantity / item.recipe.yield,
+          item.recipe.totalNutrients.FIBTG.quantity / item.recipe.yield,
+          item.recipe.totalNutrients.PROCNT.quantity / item.recipe.yield,
+          item.recipe.totalNutrients.CHOCDF.quantity / item.recipe.yield
         ),
       }),
     })
@@ -274,17 +274,11 @@ function ListaRecipe(props) {
                   <Card.Text>
                     NutriScore:{" "}
                     {calculateNutriScore(
-                      item.recipe.totalNutrients.ENERC_KCAL,
-                      item.recipe.totalNutrients.FAT.quantity /
-                        item.recipe.yield,
-                      item.recipe.totalNutrients.FIBTG.quantity /
-                        item.recipe.yield,
-                      item.recipe.totalNutrients.PROCNT.quantity /
-                        item.recipe.yield,
-                      item.recipe.totalNutrients.SUGAR.quantity /
-                        item.recipe.yield,
-                      item.recipe.totalNutrients.CHOCDF.quantity /
-                        item.recipe.yield
+                      item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
+                      item.recipe.totalNutrients.FAT.quantity / item.recipe.yield,
+                      item.recipe.totalNutrients.FIBTG.quantity / item.recipe.yield,
+                      item.recipe.totalNutrients.PROCNT.quantity / item.recipe.yield,
+                      item.recipe.totalNutrients.CHOCDF.quantity / item.recipe.yield
                     )}
                   </Card.Text>
 

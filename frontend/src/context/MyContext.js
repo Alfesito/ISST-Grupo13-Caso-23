@@ -1,7 +1,6 @@
 import React from "react";
 import { createContext } from "react";
 import { useState } from "react";
-import Swal from "sweetalert2";
 export const MyContext = createContext();
 
 export default function ContextProvider({ children }) {
