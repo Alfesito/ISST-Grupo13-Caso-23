@@ -269,15 +269,15 @@ function Perfil() {
         </div>
       ) : (
         <div className="datosPerfil">
-          <p>Edad:{perfil.edad}</p>
-          <p>Altura:{perfil.altura}</p>
-          <p>Peso:{perfil.peso}</p>
-          <p>Sexo:{perfil.sexo}</p>
+          <p>Edad: {perfil.edad} años</p>
+          <p>Altura: {perfil.altura} cm</p>
+          <p>Peso: {perfil.peso} kg</p>
+          <p>Sexo: {perfil.sexo}</p>
           <p>Actividad: {perfil.actividad}</p>
-          <p>Producto no deseado:{perfil.indeseado}</p>
-          <p>Estilo de dieta:{perfil.dieta}</p>
-          <p>Tipo de cocina:{perfil.cocina_fav}</p>
-          <p>Alergias:{perfil.alergia}</p>
+          <p>Producto no deseado: {perfil.indeseado}</p>
+          <p>Estilo de dieta: {perfil.dieta}</p>
+          <p>Tipo de cocina: {perfil.cocina_fav}</p>
+          <p>Alergias: {perfil.alergia}</p>
           <button onClick={modificarPerfil}>Modificar perfil</button>
         </div>
       )}
