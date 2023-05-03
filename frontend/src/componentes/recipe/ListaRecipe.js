@@ -29,7 +29,7 @@ function ListaRecipe(props) {
 
     const nutriScore = calculateNutriScore(
       item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
-      item.recipe.totalNutrients.FAT.quantity / item.recipe.yield,
+      item.recipe.totalNutrients.FASAT.quantity / item.recipe.yield,
       item.recipe.totalNutrients.FIBTG.quantity / item.recipe.yield,
       item.recipe.totalNutrients.PROCNT.quantity / item.recipe.yield,
       item.recipe.totalNutrients.CHOCDF.quantity / item.recipe.yield
@@ -229,7 +229,7 @@ function ListaRecipe(props) {
           porcionesElegidas,
         nutriscore: calculateNutriScore(
           item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
-          item.recipe.totalNutrients.FAT.quantity / item.recipe.yield,
+          item.recipe.totalNutrients.FASAT.quantity / item.recipe.yield,
           item.recipe.totalNutrients.FIBTG.quantity / item.recipe.yield,
           item.recipe.totalNutrients.PROCNT.quantity / item.recipe.yield,
           item.recipe.totalNutrients.CHOCDF.quantity / item.recipe.yield
@@ -275,7 +275,7 @@ function ListaRecipe(props) {
                     NutriScore:{" "}
                     {calculateNutriScore(
                       item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
-                      item.recipe.totalNutrients.FAT.quantity / item.recipe.yield,
+                      item.recipe.totalNutrients.FASAT.quantity / item.recipe.yield,
                       item.recipe.totalNutrients.FIBTG.quantity / item.recipe.yield,
                       item.recipe.totalNutrients.PROCNT.quantity / item.recipe.yield,
                       item.recipe.totalNutrients.CHOCDF.quantity / item.recipe.yield
