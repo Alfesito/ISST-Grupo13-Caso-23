@@ -1,8 +1,8 @@
-# Use a base image of Ubuntu 20.04 for amd64 platform
-FROM ubuntu:20.04@sha256:693bd11718ed308581d423b9bb106a7b64dfc575989a7cd0e2e20b8c27e9a18d
+# Use a base image of Ubuntu Focal
+FROM ubuntu:focal
 
-# Update package list and install Java 17 and Maven
-RUN apt-get update && apt-get install -y openjdk-17-jdk maven
+# Update package list and install Java and Maven
+RUN apt-get update && apt-get install -y default-jdk maven
 RUN apt install git -y
 RUN apt-get install -y ca-certificates && update-ca-certificates
 RUN apt-get install -y ufw
