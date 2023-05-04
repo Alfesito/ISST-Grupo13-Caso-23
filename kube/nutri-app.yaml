@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: nutri-app
-          image: equipo32/nutri-app # utiliza la misma imagen base que el Dockerfile
+          image: alfesito/nutri-app # utiliza la misma imagen base que el Dockerfile
           ports:
             - containerPort: 443 # expone el puerto 443
 ---
