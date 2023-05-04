@@ -2,12 +2,14 @@
 FROM ubuntu:20.04
 
 # Update package list and install Java and Maven
-RUN apt-get update && apt-get install -y default-jdk maven
-RUN apt install git -y
-RUN apt-get install -y ca-certificates && update-ca-certificates
-RUN apt-get install -y ufw
-RUN ufw allow 443/tcp
-RUN ufw reload
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:openjdk-r/ppa && \
+    apt-get update && \
+    apt-get install -y openjdk-11-jdk maven git ca-certificates ufw && \
+    update-ca-certificates && \
+    ufw allow 443/tcp && \
+    ufw reload
 
 # Clone the GitHub repository (optional if you have the source code locally)
 RUN git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
@@ -34,4 +36,3 @@ EXPOSE 443
 #     $ docker stop [ID]
 
 # Eliminar la imagen(es importante eliminar todos los contenedores creados, de otra forma puede que de problemas):
-#     $ docker rmi -f nutri-app
