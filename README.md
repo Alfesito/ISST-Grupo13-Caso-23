@@ -1,7 +1,6 @@
 # Url con HTTPS en firefox:
-[GoogleCloud](https://146.148.71.70/)
 
-[Local](https://localhost:443/)
+[https://localhost:443/](https://localhost:443/)
 
 # Comando para correr Spring Boot
     - MAC: 
@@ -31,4 +30,4 @@
 # Uso de springdoc-openapi-ui  
 
 Esta biblioteca genera documentación sobre su API-REST automáticamente, en la dirección:
-        http://localhost:8080/swagger-ui.html
+        https://localhost/swagger-ui/index.html
