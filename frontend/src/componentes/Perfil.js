@@ -175,6 +175,7 @@ function Perfil() {
             value={alergia}
             onChange={handleAlergia}
           ></input>
+          <br/>
           <select
             defaultValue={sexo}
             onChange={handleSeleccionSexo}
@@ -259,7 +260,7 @@ function Perfil() {
             <option value="vegan">Vegano</option>
             <option value="vegetarian">Vegetariano</option>
           </select>
-          {/* <input value="Guardar" onClick={guardarCambios}>Guardar</input> */}
+          <br />
           <button onClick={verificarCambios}>Guardar</button>
         </div>
       ) : (
