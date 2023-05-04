@@ -2,7 +2,7 @@
 set -e
 
 # Change directory to the application directory
-cd /ISST-Grupo13-NutriApp
+cd ~/ISST-Grupo13-NutriApp
 
 # Perform git pull to update the source code
 git pull
