@@ -140,7 +140,7 @@ function Perfil() {
       </h1>
       {cambiar ? (
         <div>
-          Edad(años):
+          <br />Edad(años):<br />
           <input
             type="text"
             id="edad"
@@ -148,8 +148,8 @@ function Perfil() {
             value={edad}
             onChange={handleEdad}
           ></input>
-          <br/>
-          Peso(kg):
+          <br />
+          Peso(kg):<br />
           <input
             type="text"
             id="weight"
@@ -157,8 +157,8 @@ function Perfil() {
             value={peso}
             onChange={handlePeso}
           ></input>
-          <br/>
-          Altura(cm):
+          <br />
+          Altura(cm):<br />
           <input
             type="text"
             id="height"
@@ -166,8 +166,8 @@ function Perfil() {
             value={altura}
             onChange={handleAltura}
           ></input>
-          <br/>
-          Alergía(alimento):
+          <br />
+          Alergía(alimento):<br />
           <input
             type="text"
             id="producto no deseado"
@@ -175,101 +175,90 @@ function Perfil() {
             value={alergia}
             onChange={handleAlergia}
           ></input>
-          <div>
-            <select
-              defaultValue={sexo}
-              onChange={handleSeleccionSexo}
-              value={sexo}
-            >
-              <option value="">Sexo</option>
-              <option value="hombre">Hombre</option>
-              <option value="mujer">Mujer</option>
-            </select>
-          </div>
-          <div>
-            <select
-              defaultValue={actividad}
-              onChange={handleSeleccionActividad}
-              value={actividad}
-            >
-              <option value="">Actividad</option>
-              <option value="baja">Baja</option>
-              <option value="normal">Normal</option>
-              <option value="moderada">Moderada</option>
-              <option value="alta">Alta</option>
-            </select>
-          </div>
+          <select
+            defaultValue={sexo}
+            onChange={handleSeleccionSexo}
+            value={sexo}
+          >
+            <option value="">Sexo</option>
+            <option value="hombre">Hombre</option>
+            <option value="mujer">Mujer</option>
+          </select>
+          <select
+            defaultValue={actividad}
+            onChange={handleSeleccionActividad}
+            value={actividad}
+          >
+            <option value="">Actividad</option>
+            <option value="baja">Baja</option>
+            <option value="normal">Normal</option>
+            <option value="moderada">Moderada</option>
+            <option value="alta">Alta</option>
+          </select>
 
-          <div>
-            <select
-              defaultValue={diet}
-              onChange={handleSeleccionDiet}
-              value={diet}
-            >
-              <option value="">Estilo de dieta</option>
-              <option value="balanced">Equilibrado</option>
-              <option value="high-fiber">Alto en fibra</option>
-              <option value="high-protein">Alto en proteínas</option>
-              <option value="low-carb">Bajo en carbohidratos</option>
-              <option value="low-fat">Bajo en grasas</option>
-              <option value="low-sodium">Bajo en sodio</option>
-            </select>
-          </div>
-
+          <select
+            defaultValue={diet}
+            onChange={handleSeleccionDiet}
+            value={diet}
+          >
+            <option value="">Estilo de dieta</option>
+            <option value="balanced">Equilibrado</option>
+            <option value="high-fiber">Alto en fibra</option>
+            <option value="high-protein">Alto en proteínas</option>
+            <option value="low-carb">Bajo en carbohidratos</option>
+            <option value="low-fat">Bajo en grasas</option>
+            <option value="low-sodium">Bajo en sodio</option>
+          </select>
           {/* Dropdown */}
-          <div>
-            <select
-              defaultValue={cuisine}
-              onChange={handleSeleccionCuisine}
-              value={cuisine}
-            >
-              <option value="cuisineType">Tipo de Cocina</option>
-              <option value="American">Americana</option>
-              <option value="Asian">Asiática</option>
-              <option value="British">Británica</option>
-              <option value="Caribbean">Caribeña</option>
-              <option value="Central Europe">Europa Central</option>
-              <option value="Chinese">China</option>
-              <option value="Eastern Europe">Europa del Este</option>
-              <option value="French">Francesa</option>
-              <option value="Indian">India</option>
-              <option value="Italian">Italiana</option>
-              <option value="Japanese">Japonesa</option>
-              <option value="Kosher">Cocina Kosher</option>
-              <option value="Mediterranean">Mediterránea</option>
-              <option value="Mexican">Mexicana</option>
-              <option value="Middle Eastern">Medio Oriente</option>
-              <option value="Nordic">Nórdica</option>
-              <option value="South American">Sudamericana</option>
-              <option value="South East Asian">Sudeste Asiático</option>
-            </select>
-          </div>
-          <div>
-            <select
-              defaultValue={health}
-              onChange={handleSeleccionHealth}
-              value={health}
-            >
-              <option value="">Alergias</option>
-              <option value="alcohol-free">Sin alcohol</option>
-              <option value="celery-free">Sin apio</option>
-              <option value="crustacean-free">Sin crustáceos</option>
-              <option value="dairy-free">Sin lácteos</option>
-              <option value="egg-free">Sin huevos</option>
-              <option value="fish-free">Sin pescado</option>
-              <option value="gluten-free">Sin gluten</option>
-              <option value="low-fat-abs">Bajo en grasas saturadas</option>
-              <option value="low-potassium">Bajo en potasio</option>
-              <option value="low-sugar">Bajo en azúcar</option>
-              <option value="mollusk-free">Sin moluscos</option>
-              <option value="mustard-free">Sin mostaza</option>
-              <option value="peanut-free">Sin cacahuetes</option>
-              <option value="pork-free">Sin cerdo</option>
-              <option value="red-meat-free">Sin carne roja</option>
-              <option value="vegan">Vegano</option>
-              <option value="vegetarian">Vegetariano</option>
-            </select>
-          </div>
+          <select
+            defaultValue={cuisine}
+            onChange={handleSeleccionCuisine}
+            value={cuisine}
+          >
+            <option value="cuisineType">Tipo de Cocina</option>
+            <option value="American">Americana</option>
+            <option value="Asian">Asiática</option>
+            <option value="British">Británica</option>
+            <option value="Caribbean">Caribeña</option>
+            <option value="Central Europe">Europa Central</option>
+            <option value="Chinese">China</option>
+            <option value="Eastern Europe">Europa del Este</option>
+            <option value="French">Francesa</option>
+            <option value="Indian">India</option>
+            <option value="Italian">Italiana</option>
+            <option value="Japanese">Japonesa</option>
+            <option value="Kosher">Cocina Kosher</option>
+            <option value="Mediterranean">Mediterránea</option>
+            <option value="Mexican">Mexicana</option>
+            <option value="Middle Eastern">Medio Oriente</option>
+            <option value="Nordic">Nórdica</option>
+            <option value="South American">Sudamericana</option>
+            <option value="South East Asian">Sudeste Asiático</option>
+          </select>
+          <select
+            defaultValue={health}
+            onChange={handleSeleccionHealth}
+            value={health}
+          >
+            <option value="">Alergias</option>
+            <option value="alcohol-free">Sin alcohol</option>
+            <option value="celery-free">Sin apio</option>
+            <option value="crustacean-free">Sin crustáceos</option>
+            <option value="dairy-free">Sin lácteos</option>
+            <option value="egg-free">Sin huevos</option>
+            <option value="fish-free">Sin pescado</option>
+            <option value="gluten-free">Sin gluten</option>
+            <option value="low-fat-abs">Bajo en grasas saturadas</option>
+            <option value="low-potassium">Bajo en potasio</option>
+            <option value="low-sugar">Bajo en azúcar</option>
+            <option value="mollusk-free">Sin moluscos</option>
+            <option value="mustard-free">Sin mostaza</option>
+            <option value="peanut-free">Sin cacahuetes</option>
+            <option value="pork-free">Sin cerdo</option>
+            <option value="red-meat-free">Sin carne roja</option>
+            <option value="vegan">Vegano</option>
+            <option value="vegetarian">Vegetariano</option>
+          </select>
           {/* <input value="Guardar" onClick={guardarCambios}>Guardar</input> */}
           <button onClick={verificarCambios}>Guardar</button>
         </div>
@@ -284,14 +273,15 @@ function Perfil() {
           <p>Estilo de dieta: {perfil.dieta}</p>
           <p>Tipo de cocina: {perfil.cocina_fav}</p>
           <p>Alergias: {perfil.alergia}</p>
-          <button onClick={modificarPerfil}>Modificar perfil</button>
+          <button ctype="button" class="btn btn-warning" onClick={modificarPerfil}>Modificar perfil</button>
         </div>
-      )}
+      )
+      }
       {/* 
       <Link to={"/hoy"}>
         <Button variant="danger">Volver</Button>
       </Link> */}
-    </div>
+    </div >
   );
 }
 export default Perfil;

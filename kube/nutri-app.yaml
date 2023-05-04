@@ -12,7 +12,7 @@ metadata:
     app: nutri-app
     service: nutri-app
 spec:
-  replicas: 3 # puedes ajustar el número de replicas según tus necesidades
+  replicas: 3
   selector:
     matchLabels:
       app: nutri-app
@@ -23,9 +23,9 @@ spec:
     spec:
       containers:
         - name: nutri-app
-          image: alfesito/nutri-app:latest # utiliza la misma imagen base que el Dockerfile
+          image: equipo32/nutri-app:latest # utiliza la misma imagen base que el Dockerfile
           ports:
-            - containerPort: 8443 # expone el puerto 8443
+            - containerPort: 443 # expone el puerto 443
 ---
 apiVersion: v1
 kind: Service
@@ -40,5 +40,5 @@ spec:
   type: LoadBalancer
   ports:
     - name: https
-      port: 8443
-      targetPort: 8443
+      port: 443
+      targetPort: 443
