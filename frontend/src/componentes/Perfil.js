@@ -148,6 +148,7 @@ function Perfil() {
             value={edad}
             onChange={handleEdad}
           ></input>
+          <br/>
           Peso(kg):
           <input
             type="text"
@@ -156,6 +157,7 @@ function Perfil() {
             value={peso}
             onChange={handlePeso}
           ></input>
+          <br/>
           Altura(cm):
           <input
             type="text"
@@ -164,6 +166,7 @@ function Perfil() {
             value={altura}
             onChange={handleAltura}
           ></input>
+          <br/>
           Alergía(alimento):
           <input
             type="text"

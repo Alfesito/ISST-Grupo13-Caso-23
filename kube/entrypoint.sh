@@ -5,7 +5,7 @@ set -e
 cd /ISST-Grupo13-NutriApp
 
 # Perform git pull to update the source code
-git pull
+sudo git pull
 
 # Compile and run the application using Maven
-./mvnw clean spring-boot:run -DskipTests=true
+sudo ./mvnw clean spring-boot:run -DskipTests=true
