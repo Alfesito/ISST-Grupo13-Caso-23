@@ -1,5 +1,5 @@
-# Use a base image of Ubuntu 20.04
-FROM ubuntu:20.04
+# Use a base image of Ubuntu 20.04 for amd64 platform
+FROM ubuntu:20.04@sha256:693bd11718ed308581d423b9bb106a7b64dfc575989a7cd0e2e20b8c27e9a18d
 
 # Update package list and install Java 17 and Maven
 RUN apt-get update && apt-get install -y openjdk-17-jdk maven
@@ -9,19 +9,12 @@ RUN apt-get install -y ufw
 RUN ufw allow 443/tcp
 RUN ufw reload
 
-
 # Clone the GitHub repository (optional if you have the source code locally)
 RUN git clone https://github.com/Alfesito/ISST-Grupo13-NutriApp.git
 ENV JAVA_OPTS="-Djavax.net.ssl.trustStore=/ISST-Grupo13-NutriApp/src/main/resources/keystore.p12 -Djavax.net.ssl.trustStorePassword=changeit -Djavax.net.ssl.keyStore=/ISST-Grupo13-NutriApp/src/main/resources/keystore.p12 -Djavax.net.ssl.keyStorePassword=changeit"
 
 # Set the working directory to the cloned repository
 WORKDIR /ISST-Grupo13-NutriApp
-
-# Copy the source code into the Docker image
-# COPY ~/data ./data
-
-# Create a volume for the data directory
-# VOLUME /data
 
 # Copy the entrypoint script
 COPY entrypoint.sh /
