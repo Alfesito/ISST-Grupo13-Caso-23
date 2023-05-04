@@ -140,6 +140,7 @@ function Perfil() {
       </h1>
       {cambiar ? (
         <div>
+          Edad(años):
           <input
             type="text"
             id="edad"
@@ -147,6 +148,7 @@ function Perfil() {
             value={edad}
             onChange={handleEdad}
           ></input>
+          Peso(kg):
           <input
             type="text"
             id="weight"
@@ -154,6 +156,7 @@ function Perfil() {
             value={peso}
             onChange={handlePeso}
           ></input>
+          Altura(cm):
           <input
             type="text"
             id="height"
@@ -161,6 +164,7 @@ function Perfil() {
             value={altura}
             onChange={handleAltura}
           ></input>
+          Alergía(alimento):
           <input
             type="text"
             id="producto no deseado"
@@ -168,7 +172,6 @@ function Perfil() {
             value={alergia}
             onChange={handleAlergia}
           ></input>
-
           <div>
             <select
               defaultValue={sexo}

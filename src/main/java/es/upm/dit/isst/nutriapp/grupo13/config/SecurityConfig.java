@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .permitAll().and()
             .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .ignoringAntMatchers("/h2/**")
+                .ignoringAntMatchers("/h2/**","/login","signin")
                 .and()
             .csrf().disable()
             .headers()
