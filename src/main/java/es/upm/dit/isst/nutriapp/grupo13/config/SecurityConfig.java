@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .ignoringAntMatchers("/h2/**","/login","signin")
                 .and()
-            .csrf().disable()
+            // .csrf().disable()
             .headers()
                 .frameOptions()
                 .sameOrigin()
