@@ -45,7 +45,7 @@ public class UsuariosController {
         }
 
         @PostMapping("/registrar/usuario")
-        public ResponseEntity<String> registrar(@RequestBody @Validated Usuarios usuario, BindingResult result) {
+        public ResponseEntity<String> registrar(@RequestBody @Validated Usuarios usuario) {
                 try {
                         // Verificar si el correo ya existe en la base de datos
                         if (service.existeCorreo(usuario.getCorreo())) {

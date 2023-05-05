@@ -40,7 +40,7 @@ public class IngestasController {
         }
 
         @PostMapping("/api/añadir/ingestas/{correo}")
-        public ResponseEntity<String> añadirIngesta(@RequestBody Ingestas ingesta, BindingResult result) {
+        public ResponseEntity<String> añadirIngesta(@RequestBody Ingestas ingesta) {
                 try {
                         service.save(ingesta);
                         return ResponseEntity.ok("Alimento registrado exitosamente.");
