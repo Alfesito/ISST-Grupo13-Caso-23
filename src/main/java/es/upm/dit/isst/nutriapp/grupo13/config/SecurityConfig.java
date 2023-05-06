@@ -1,11 +1,15 @@
 package es.upm.dit.isst.nutriapp.grupo13.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.*;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
@@ -14,9 +18,10 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/","/login","/signin").permitAll()
+                // .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
@@ -36,8 +41,17 @@ public class SecurityConfig {
              .requiresChannel().anyRequest().requiresSecure();
             // .httpBasic();
         return http.build();
-}
+    }
 
+    @Bean
+    protected UserDetailsService jdbUserDetailsService(DataSource dataSource) {
+        String userByUsernameQuery = "select correo, contrasena, enabled from users where contrasena=?";
+
+        JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
+        users.setUsersByUsernameQuery(userByUsernameQuery);
+
+        return users;
+    }
 
 
     @Bean
