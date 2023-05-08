@@ -40,8 +40,13 @@ public class IngestasControllerTest {
                 55.0, 44.0, "A");
         ingestasRepository.save(ingesta);
 
-        Assertions.assertEquals(ingestasController.readAllIngestas("mail@example.com"),
+        Assertions.assertEquals(ingestasController.readAllIngestas("email@example.com"),
+                (List<Ingestas>) ingestasRepository.findAllByCorreo("email@example.com"));
+        
+        Assertions.assertNotEquals(ingestasController.readAllIngestas("mail@example.com"),
                 (List<Ingestas>) ingestasRepository.findAllByCorreo("mail@example.com"));
+        
+        //meter asserNull
 
         usuariosRepository.delete(usuario);
         ingestasRepository.delete(ingesta);
@@ -63,7 +68,7 @@ public class IngestasControllerTest {
 
         // Comprobar que el mensaje de la respuesta es correcto
         // Assertions.assertEquals(ingestasController.añadirIngesta(null), ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar el alimento."));
-
+        
         usuariosRepository.delete(usuario);
         ingestasRepository.delete(ingesta);
     }

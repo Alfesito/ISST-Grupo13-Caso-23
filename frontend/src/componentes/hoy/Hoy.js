@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Grafico from "./Grafico";
 import { useContext } from "react";
 import { MyContext } from "../../context/MyContext";
+import Swal from "sweetalert2";
 
 export default function Hoy() {
   const [comidas, setComidas] = useState([]);
@@ -54,8 +55,13 @@ export default function Hoy() {
     setObjetivoProt((0.15 * TDEE) / 4);
     setObjetivoGrasa((0.3 * TDEE) / 9);
     setObjetivoCarbs(TDEE - 0.15 * TDEE - 0.3 * TDEE);
+
+    
+
   };
 
+
+  
   async function obtenerComidas() {
     //`/api/ingestas/${correo}`
     const fechaHoy = new Date().toISOString().slice(0, 10);
@@ -94,13 +100,16 @@ export default function Hoy() {
       .then((response) => response.json())
       .then((data) => {
         objetivos(data.edad, data.altura, data.peso, data.sexo, data.actividad);
+        
       })
+      
       .catch((error) => console.error(error));
   }
 
   useEffect(() => {
     obtenerComidas();
     obtenerUser();
+    
   }, []);
 
   return (
