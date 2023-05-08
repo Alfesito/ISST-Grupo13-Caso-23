@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "2260b601-7779-4a89-bef2-f9a26609b9db",
+		"name": "ISST-NutriApp-PostMan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27248619"
+	},
+	"item": [
+		{
+			"name": "usuarios-controller",
+			"item": [
+				{
+					"name": "http://localhost/api/modificar/perfil/fer@fer.fer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"correo\": \"fer@fer.fer\",\r\n  \"edad\": \"26\",\r\n  \"peso\": \"96\",\r\n  \"altura\": \"178\",\r\n  \"indeseado\": \"tomate\",\r\n  \"alergia\": \"gluten-free\",\r\n  \"dieta\": \"balanced\",\r\n  \"cocina_fav\": \"Italian\",\r\n  \"sexo\": \"hombre\",\r\n  \"actividad\": \"moderada\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/api/modificar/perfil/fer@fer.fer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"modificar",
+								"perfil",
+								"fer@fer.fer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost/api/modificar/perfil/and@a.a-ERROR pesoNaN",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"correo\": \"and@a.a\",\r\n  \"edad\": \"23\",\r\n  \"peso\": \"75\",\r\n  \"altura\": \"196\",\r\n  \"indeseado\": \"apio\",\r\n  \"alergia\": \"gluten-free\",\r\n  \"dieta\": \"balanced\",\r\n  \"cocina_fav\": \"Italian\",\r\n  \"sexo\": \"hombre\",\r\n  \"actividad\": \"\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/api/modificar/perfil/and@a.a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"modificar",
+								"perfil",
+								"and@a.a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost/registrar/usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"andres1\",\r\n  \"contrasena\": \"andres1\",\r\n  \"correo\": \"a@b.a\",\r\n  \"edad\": 23,\r\n  \"peso\": 67,\r\n  \"altura\": 176,\r\n  \"sexo\": \"hombre\",\r\n  \"indeseado\": \"\",\r\n  \"alergia\": \"\",\r\n  \"dieta\": \"\",\r\n  \"cocina_fav\": \"\",\r\n  \"actividad\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/registrar/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"registrar",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost/login/usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"correo\": \"fer@fer.fer\",\r\n  \"contraseña\": \"patata\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/login/usuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"login",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost/api/usuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"username\": \"fernandoget\",\r\n    \"contrasena\": \"fernandogetget\",\r\n    \"correo\": \"f@f.get\",\r\n    \"edad\": 30,\r\n    \"peso\": 100,\r\n    \"altura\": 200,\r\n    \"sexo\": \"hombre\",\r\n    \"indeseado\": \"\",\r\n    \"alergia\": \"\",\r\n    \"dieta\": \"\",\r\n    \"cocina_fav\": \"\",\r\n    \"actividad\": \"moderada\"\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost/api/perfil/f@f.f",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/perfil/f@f.f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"perfil",
+								"f@f.f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ingestas-controller",
+			"item": [
+				{
+					"name": "http://localhost/api/añadir/ingestas/fer@fer.fer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"correo\": \"fer@fer.fer\",\r\n  \"fecha\": \"2023-05-06\",\r\n  \"comida\": \"pimientos\",\r\n  \"kcal\": 100,\r\n  \"proteina\": 20,\r\n  \"carb\": 10,\r\n  \"grasa\": 30,\r\n  \"fibra\": 10,\r\n  \"nutriscore\": \"A\"\r\n}\r\n\r\n{\r\n  \"id\": 1,\r\n  \"correo\": \"fer@fer.fer\",\r\n  \"fecha\": \"2023-05-06\",\r\n  \"comida\": \"tomate\",\r\n  \"kcal\": 19,\r\n  \"proteina\": 2.0,\r\n  \"carb\": 0.1,\r\n  \"grasa\": 0.1,\r\n  \"fibra\": 0.2,\r\n  \"nutriscore\": \"A\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/añadir/ingestas/fer@fer.fer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"añadir",
+								"ingestas",
+								"fer@fer.fer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost//api/ingestas/fer@fer.fer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n{\r\n  \"id\": 0,\r\n  \"correo\": \"fer@fer.fer\",\r\n  \"fecha\": \"2023-05-06\",\r\n  \"comida\": \"pimientos\",\r\n  \"kcal\": 100,\r\n  \"proteina\": 20,\r\n  \"carb\": 10,\r\n  \"grasa\": 30,\r\n  \"fibra\": 10,\r\n  \"nutriscore\": \"A\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/ingestas/fer@fer.fer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"ingestas",
+								"fer@fer.fer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost/api/eliminar/ingestas/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/eliminar/ingestas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"eliminar",
+								"ingestas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
