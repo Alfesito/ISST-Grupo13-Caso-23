@@ -45,7 +45,7 @@ public class UsuariosController {
         }
 
         @PostMapping("/registrar/usuario")
-        public ResponseEntity<String> registrar(@RequestBody @Validated Usuarios usuario) {
+        public ResponseEntity<String> registrar(@RequestBody @Validated Usuarios usuario, BindingResult result) {
                 try {
                         // Verificar si el correo ya existe en la base de datos
                         if (service.existeCorreo(usuario.getCorreo())) {
@@ -76,9 +76,7 @@ public class UsuariosController {
                 String contraseña = loginRequest.getContraseña();
 
                 // Consultar el usuario registrado en la base de datos
-                Usuarios usuario = usuariosRepository.findByCorreo(correo); // Suponiendo que tienes un método
-                                                                            // findByCorreo() en tu repositorio para
-                                                                            // buscar un usuario por correo electrónico
+                Usuarios usuario = usuariosRepository.findByCorreo(correo);
 
                 // Validar las credenciales del usuario
                 if (usuario != null && passwordEncoder.matches(contraseña, usuario.getContrasena())) {
