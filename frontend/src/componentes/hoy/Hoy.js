@@ -63,16 +63,16 @@ export default function Hoy() {
     console.log("🚀 ~ file: Hoy.js:65 ~ alerta ~ limite:", limite);
 
     if (limite) {
-      if (actualKcal >= objetivoKcal) {
+      if (actualKcal && objetivoKcal && actualKcal >= objetivoKcal) {
         setLimite(false);
         Swal.fire("Te has pasado de kcal");
-      } else if (actualProt >= objetivoProt) {
+      } else if (actualProt && objetivoProt&& actualProt >= objetivoProt) {
         setLimite(false);
         Swal.fire("Te has pasado de prto");
-      } else if (actualCarbs >= objetivoCarbs) {
+      } else if (actualCarbs && objetivoCarbs&& actualCarbs >= objetivoCarbs) {
         setLimite(false);
         Swal.fire("Te has pasado de carbs");
-      } else if (actualGrasas >= objetivoGrasa) {
+      } else if (actualGrasas && objetivoGrasa && actualGrasas >= objetivoGrasa) {
         setLimite(false);
         Swal.fire("Te has pasado de grasa");
       } else {
@@ -134,7 +134,7 @@ export default function Hoy() {
   useEffect(() => {
    
     alerta(); // se llama a la función alerta después de actualizar los nutrientes
-  }, [actualKcal, actualProt, actualCarbs, actualGrasas.objetivoKcal,objetivoProt,objetivoCarbs,objetivoGrasa]); // se establece la dependencia de las variables de nutrientes para que se ejecute cuando cambien
+  }, [actualKcal, actualProt, actualCarbs, actualGrasas,objetivoKcal,objetivoProt,objetivoCarbs,objetivoGrasa]); // se establece la dependencia de las variables de nutrientes para que se ejecute cuando cambien
   
   
   
