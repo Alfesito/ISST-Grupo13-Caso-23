@@ -14,6 +14,7 @@ import nutriD from "../../images/nutriScore/nutriD.png";
 import nutriE from "../../images/nutriScore/nutriE.png";
 
 function Recipe(props) {
+
   // Definicion del componente Recipe
   let { recipeId } = useParams(); // Obtener el parámetro recipeId de la URL mediante el hook useParams de react-router-dom
 
@@ -27,6 +28,9 @@ function Recipe(props) {
   const { alergia } = useContext(MyContext);
   const {calculateNutriScore}= useContext(MyContext);
   const navigate = useNavigate();
+
+  const { setLimite } = useContext(MyContext);
+
 
   const handleSubmit = async (item, porcionesElegidas, numPorciones) => {
     await fetch(`/api/añadir/ingestas/${correo}`, {
@@ -123,6 +127,7 @@ function Recipe(props) {
   
   const handleAñadir = (item) => {
     const numPorciones = item.recipe.yield;
+    
 
     const nutriScore = calculateNutriScore(
       item.recipe.totalNutrients.ENERC_KCAL.quantity / item.recipe.yield,
@@ -143,6 +148,7 @@ function Recipe(props) {
         confirmButtonText: "Añadir",
       }).then((result) => {
         if (result.isConfirmed) {
+          
 
           let optionsHtml = "";
           for (let i = 1; i <= numPorciones; i++) {
@@ -161,6 +167,7 @@ function Recipe(props) {
             denyButtonText: `Don't save`,
           }).then((result) => {
             if (result.isConfirmed) {
+              setLimite(true)
               const porcionesElegidas = document.getElementById("porciones").value;
               Swal.fire("Receta añadida", "", "success");
               handleAlergiaRecipeAndSubmit(
@@ -204,6 +211,7 @@ function Recipe(props) {
             denyButtonText: `Don't save`,
           }).then((result) => {
             if (result.isConfirmed) {
+              setLimite(true)
               const porcionesElegidas = document.getElementById("porciones").value;
               Swal.fire("Receta añadida", "", "success");
               handleAlergiaRecipeAndSubmit(
@@ -239,6 +247,7 @@ function Recipe(props) {
         denyButtonText: `Don't save`,
       }).then((result) => {
         if (result.isConfirmed) {
+          setLimite(true)
           const porcionesElegidas = document.getElementById("porciones").value;
           Swal.fire("Receta añadida", "", "success");
           handleAlergiaRecipeAndSubmit(

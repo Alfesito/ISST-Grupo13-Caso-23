@@ -29,6 +29,8 @@ function Producto(props) {
   const { correo } = useContext(MyContext);
   const { getUsuario } = useContext(MyContext);
   const { calculateNutriScore } = useContext(MyContext);
+  const { limite, setLimite } = useContext(MyContext);
+
 
   const navigate = useNavigate();
 
@@ -51,6 +53,7 @@ function Producto(props) {
         confirmButtonText: "Continuar",
       }).then((result) => {
         if (result.isConfirmed) {
+          
           handleAlergiaProdAndSubmit(item);
         }
       });
@@ -82,6 +85,7 @@ function Producto(props) {
     const confirm = async () => {
       try {
         await handleSubmit(item);
+        setLimite(true)
         Swal.fire("Confirmado", "Producto añadido", "success");
       } catch (error) {
         console.log(error);

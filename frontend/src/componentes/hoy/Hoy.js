@@ -21,9 +21,11 @@ export default function Hoy() {
   const { objetivoGrasa, setObjetivoGrasa } = useContext(MyContext);
   const { objetivoCarbs, setObjetivoCarbs } = useContext(MyContext);
 
-  const [nutriScoreArray, setNutriscoreArray] = useState([])
+  const [nutriScoreArray, setNutriscoreArray] = useState([]);
 
-  const [ nutriscore, setNutriscore] = useState("")
+  const [nutriscore, setNutriscore] = useState("");
+
+  const { limite, setLimite } = useContext(MyContext);
 
   const actividadFisica = {
     BAJA: "baja",
@@ -55,13 +57,29 @@ export default function Hoy() {
     setObjetivoProt((0.15 * TDEE) / 4);
     setObjetivoGrasa((0.3 * TDEE) / 9);
     setObjetivoCarbs(TDEE - 0.15 * TDEE - 0.3 * TDEE);
-
-    
-
   };
 
+  const alerta = () => {
+    console.log("🚀 ~ file: Hoy.js:65 ~ alerta ~ limite:", limite);
 
-  
+    if (limite) {
+      if (actualKcal >= objetivoKcal) {
+        setLimite(false);
+        Swal.fire("Te has pasado de kcal");
+      } else if (actualProt >= objetivoProt) {
+        setLimite(false);
+        Swal.fire("Te has pasado de prto");
+      } else if (actualCarbs >= objetivoCarbs) {
+        setLimite(false);
+        Swal.fire("Te has pasado de carbs");
+      } else if (actualGrasas >= objetivoGrasa) {
+        setLimite(false);
+        Swal.fire("Te has pasado de grasa");
+      } else {
+      }
+    }
+  };
+
   async function obtenerComidas() {
     //`/api/ingestas/${correo}`
     const fechaHoy = new Date().toISOString().slice(0, 10);
@@ -88,10 +106,12 @@ export default function Hoy() {
         const grasasArray = filteredComidas.map((product) => product.grasa);
         setActualGrasas(grasasArray.reduce((acc, grasa) => acc + grasa, 0));
 
-        const nutriScoreArray = filteredComidas.map((product) => product.nutriscore);
-        setNutriscoreArray(nutriScoreArray); // Aquí se imprimirá el array con los valores de nutriscore de cada producto.
-  
+        const nutriScoreArray = filteredComidas.map(
+          (product) => product.nutriscore
+        );
+        setNutriscoreArray(nutriScoreArray);
       })
+
       .catch((error) => console.error(error));
   }
 
@@ -100,18 +120,24 @@ export default function Hoy() {
       .then((response) => response.json())
       .then((data) => {
         objetivos(data.edad, data.altura, data.peso, data.sexo, data.actividad);
-        
       })
-      
+
       .catch((error) => console.error(error));
   }
 
   useEffect(() => {
     obtenerComidas();
     obtenerUser();
-    
-  }, []);
-
+  }, []); // se establece la dependencia de las variables de nutrientes para que se ejecute cuando cambien
+  
+  
+  useEffect(() => {
+   
+    alerta(); // se llama a la función alerta después de actualizar los nutrientes
+  }, [actualKcal, actualProt, actualCarbs, actualGrasas.objetivoKcal,objetivoProt,objetivoCarbs,objetivoGrasa]); // se establece la dependencia de las variables de nutrientes para que se ejecute cuando cambien
+  
+  
+  
   return (
     <div>
       <Naavbar />
@@ -122,7 +148,7 @@ export default function Hoy() {
               actual={actualKcal}
               maxValue={objetivoKcal}
               titulo={"Kcal"}
-              info={Math.round((objetivoKcal - actualKcal)) + " restantes"}
+              info={Math.round(objetivoKcal - actualKcal) + " restantes"}
             />
           </div>
           <div class="circle">
@@ -130,7 +156,10 @@ export default function Hoy() {
               actual={actualProt}
               maxValue={objetivoProt}
               titulo={"Proteinas"}
-              info={Math.round((objetivoProt - actualProt)) + " g restantes".toLowerCase()}
+              info={
+                Math.round(objetivoProt - actualProt) +
+                " g restantes".toLowerCase()
+              }
             />
           </div>
           <div class="circle">
@@ -138,7 +167,10 @@ export default function Hoy() {
               actual={actualCarbs}
               maxValue={objetivoCarbs}
               titulo={"Carbohidratos"}
-              info={Math.round((objetivoCarbs - actualCarbs)) + " g restantes".toLowerCase()}
+              info={
+                Math.round(objetivoCarbs - actualCarbs) +
+                " g restantes".toLowerCase()
+              }
             />
           </div>
           <div class="circle">
@@ -146,12 +178,15 @@ export default function Hoy() {
               actual={actualGrasas}
               maxValue={objetivoGrasa}
               titulo={"Grasas"}
-              info={Math.round((objetivoGrasa - actualGrasas)) + " g restantes".toLowerCase()}
+              info={
+                Math.round(objetivoGrasa - actualGrasas) +
+                " g restantes".toLowerCase()
+              }
             />
           </div>
         </div>
         <div class="table-wrapper">
-          <Table comidas={comidas} nutriscorearray ={nutriScoreArray} />
+          <Table comidas={comidas} nutriscorearray={nutriScoreArray} />
         </div>
       </div>
     </div>

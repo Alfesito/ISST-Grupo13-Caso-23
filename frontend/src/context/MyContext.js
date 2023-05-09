@@ -20,6 +20,8 @@ export default function ContextProvider({ children }) {
   const [objetivoGrasa, setObjetivoGrasa] = useState(0);
   const [objetivoCarbs, setObjetivoCarbs] = useState(0);
 
+  const[ limite, setLimite] = useState(true);
+
   const logInCorreo = (email) => {
     setCorreo(email);
   };
@@ -159,6 +161,8 @@ export default function ContextProvider({ children }) {
         logOutCorreo,
         getUsuario,
         calculateNutriScore,
+        limite,
+        setLimite
       }}
     >
       {children}

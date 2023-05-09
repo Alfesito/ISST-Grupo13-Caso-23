@@ -2,21 +2,23 @@ import React from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Swal from "sweetalert2";
-import { useState, useEffect } from "react";
+
+import { MyContext } from "../../context/MyContext";
+import { useContext } from "react";
 
 export default function Grafico(props) {
 
-
-
   const percentage = (props.actual / props.maxValue).toFixed(2);
-  if((props.actual  >= props.maxValue) && (props.actual != 0)&& (props.maxValue !=0) ){
-    console.log("🚀 ~ file: Grafico.js:13 ~ Grafico ~ props.maxValue:", props.maxValue)
-    console.log("🚀 ~ file: Grafico.js:13 ~ Grafico ~ props.actual:", props.actual)
-    Swal.fire('Te has pasado')
-  }
+  // if (
+  //   limite &&
+  //   props.actual >= props.maxValue &&
+  //   props.actual != 0 &&
+  //   props.maxValue != 0
+  // ) {
+  //   setLimite(false);
+  //   Swal.fire("Te has pasado");
+  // }
 
- 
-  
   return (
     <div className="container-circulo">
       <div className="circulo">

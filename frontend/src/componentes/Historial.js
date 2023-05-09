@@ -7,7 +7,9 @@ import { MyContext } from "../context/MyContext";
 function Historial() {
 
     const [comidas, setComidas] = useState([]);
-    const { correo } = useContext(MyContext);    
+    const { correo } = useContext(MyContext);  
+    const { setLimite } = useContext(MyContext);
+
 
     async function obtenerComidas() {
         await fetch(`/api/ingestas/${correo}`)
@@ -21,6 +23,8 @@ function Historial() {
     }, []);
 
     async function eliminarIngesta(id) {
+
+        setLimite(true)
         await fetch(`/api/eliminar/ingestas/${id}`,
         {
           headers: {

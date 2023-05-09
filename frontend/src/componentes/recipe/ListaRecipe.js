@@ -21,7 +21,7 @@ function ListaRecipe(props) {
   const { correo } = useContext(MyContext);
   const { alergia } = useContext(MyContext);
   const { calculateNutriScore } = useContext(MyContext);
-
+  const { setLimite } = useContext(MyContext);
   const navigate = useNavigate();
 
   const handleAñadir = (item) => {
@@ -64,6 +64,7 @@ function ListaRecipe(props) {
             denyButtonText: `Don't save`,
           }).then((result) => {
             if (result.isConfirmed) {
+              setLimite(true)
               const porcionesElegidas = document.getElementById("porciones").value;
               Swal.fire("Receta añadida", "", "success");
               handleAlergiaRecipeAndSubmit(
@@ -107,6 +108,7 @@ function ListaRecipe(props) {
             denyButtonText: `Don't save`,
           }).then((result) => {
             if (result.isConfirmed) {
+              setLimite(true)
               const porcionesElegidas = document.getElementById("porciones").value;
               Swal.fire("Receta añadida", "", "success");
               handleAlergiaRecipeAndSubmit(
@@ -142,6 +144,7 @@ function ListaRecipe(props) {
         denyButtonText: `Don't save`,
       }).then((result) => {
         if (result.isConfirmed) {
+          setLimite(true)
           const porcionesElegidas = document.getElementById("porciones").value;
           Swal.fire("Receta añadida", "", "success");
           handleAlergiaRecipeAndSubmit(

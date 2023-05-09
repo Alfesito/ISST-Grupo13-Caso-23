@@ -22,6 +22,8 @@ function Lista(props) {
   const {getUsuario}= useContext(MyContext);
   const {alergia} = useContext(MyContext);
   const {calculateNutriScore}= useContext(MyContext);
+  const { limite, setLimite } = useContext(MyContext);
+
 
   const navigate = useNavigate();
 
@@ -50,6 +52,7 @@ function Lista(props) {
             confirmButtonText: "Continuar",
           }).then((result) => {
             if (result.isConfirmed) {
+              
               handleAlergiaProdAndSubmit(item);
             }
           });
@@ -81,6 +84,7 @@ function Lista(props) {
     const confirm = async () => {
       try {
         await handleSubmit(item);
+        setLimite(true)
         Swal.fire("Confirmado", "Producto añadido", "success");
       } catch (error) {
         console.log(error);
