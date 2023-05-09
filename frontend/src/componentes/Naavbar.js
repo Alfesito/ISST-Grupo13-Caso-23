@@ -42,15 +42,6 @@ function Naavbar() {
               <Nav.Link as={Link} to="/recomendaciones">
                 Recomendaciones
               </Nav.Link>
-              
-
-              <NavDropdown title="Créditos" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="/prueba">Ana Clara</NavDropdown.Item>
-                <NavDropdown.Item href="/prueba">Fernando</NavDropdown.Item>
-                <NavDropdown.Item href="/prueba">Andrés</NavDropdown.Item>
-                <NavDropdown.Item href="/prueba">Alberto</NavDropdown.Item>
-                <NavDropdown.Item href="/prueba">Guillermo</NavDropdown.Item>
-              </NavDropdown>
             </Nav>
 
             <div class="buttons">
