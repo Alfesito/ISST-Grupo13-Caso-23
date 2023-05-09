@@ -115,6 +115,7 @@ export default function Hoy() {
       .catch((error) => console.error(error));
   }
 
+  
   async function obtenerUser() {
     await fetch(`/api/perfil/${correo}`)
       .then((response) => response.json())
