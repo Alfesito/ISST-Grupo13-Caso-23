@@ -1,4 +1,4 @@
-# Url con HTTPS en firefox:
+# Url con HTTPS en firefox en local:
 
 [https://localhost:443/](https://localhost:443/)
 
@@ -9,7 +9,7 @@
 
     - Windows:
         
-        $ .\mvnw clean install spring-boot:run
+        $ .\mvnw clean install spring-boot:run -DskipTests=true
 
 # Pasos para clonar el repositorio con la rama master:
 
