@@ -21,7 +21,7 @@ public class SecurityConfig {
     protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/","/login","/signin").permitAll()
-                // .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login")
@@ -29,11 +29,11 @@ public class SecurityConfig {
                 .and()
             .logout()
                 .permitAll().and()
-            // .csrf()
-            //     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                // .ignoringAntMatchers("/h2/**","/login","signin")
-                // .and()
-            .csrf().disable()
+            .csrf()
+                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                 .ignoringAntMatchers("/h2/**")
+                 .and()
+            //.csrf().disable()
             .headers()
                 .frameOptions()
                 .sameOrigin()
@@ -43,15 +43,15 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // @Bean
-    // protected UserDetailsService jdbUserDetailsService(DataSource dataSource) {
-    //     String userByUsernameQuery = "select correo, contrasena, enabled from users where contrasena=?";
+    @Bean
+    protected UserDetailsService jdbUserDetailsService(DataSource dataSource) {
+         String userByUsernameQuery = "select correo, contrasena, enabled from users where contrasena=?";
 
-    //     JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-    //     users.setUsersByUsernameQuery(userByUsernameQuery);
+         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
+         users.setUsersByUsernameQuery(userByUsernameQuery);
 
-    //     return users;
-    // }
+         return users;
+    }
 
 
     @Bean
